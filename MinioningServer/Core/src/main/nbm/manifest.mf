@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Install: minioning/core/Installer.class
+OpenIDE-Module-Localizing-Bundle: minioning/core/Bundle.properties
+

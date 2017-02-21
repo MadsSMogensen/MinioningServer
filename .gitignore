@@ -1,2 +1,5 @@
 /MinioningServer/branding/target/
 /MinioningServer/application/target/
+/MinioningServer/Common/target/
+/MinioningServer/Core/target/
+/MinioningServer/Unit/target/
