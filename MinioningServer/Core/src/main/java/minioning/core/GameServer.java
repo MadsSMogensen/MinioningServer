@@ -7,6 +7,7 @@ import minioning.common.data.Entity;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import static minioning.common.data.Events.CREATEPLAYER;
+import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.Lookup;
@@ -48,6 +49,12 @@ public class GameServer implements Runnable {
             }
         }
     }
+    
+    public void updateConnection(){
+        for(IConnectionService processor : getIConnectionServices()){
+            processor.process(EventBus.getInstance());
+        }
+    }
 
     public void create() {
 //      Process using all entity processing services
@@ -62,6 +69,10 @@ public class GameServer implements Runnable {
 
     private Collection<? extends IEntityCreatorService> getIEntityCreatorServices() {
         return lookup.lookupAll(IEntityCreatorService.class);
+    }
+    
+    private Collection<? extends IConnectionService> getIConnectionServices() {
+        return lookup.lookupAll(IConnectionService.class);
     }
 
     /*
@@ -99,6 +110,7 @@ public class GameServer implements Runnable {
                 lastTime = currentTime;
                 create();
                 update();
+                updateConnection();
             }
         }
     }

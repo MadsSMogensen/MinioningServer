@@ -7,5 +7,6 @@ import java.io.Serializable;
  * @author Mogensen
  */
 public enum Events implements Serializable{
-    CREATEPLAYER
+    CREATEPLAYER,
+    FALSEEVENT
 }

@@ -16,10 +16,10 @@ public class Installer extends ModuleInstall /*implements Runnable */ {
 
     @Override
     public void restored() {
-        String[] data = new String[1];
-        data[0] = "LeonErConHombres";
-        getInstance().putEvent(Events.CREATEPLAYER, data);
-        System.out.println("CreatePlayer event added");
+////        String[] data = new String[1];
+////        data[0] = "LeonErConHombres";
+////        getInstance().putEvent(Events.CREATEPLAYER, data);
+////        System.out.println("CreatePlayer event added");
         new Thread(new GameServer()).start();
         
 //        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();

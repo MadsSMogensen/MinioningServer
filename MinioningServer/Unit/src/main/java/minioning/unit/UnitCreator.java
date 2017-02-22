@@ -28,6 +28,7 @@ public class UnitCreator implements IEntityCreatorService{
                 Entity newEntity = new Entity(data[0]);
                 entities.put(UUID.randomUUID(), newEntity);
                 events.getBus().remove(key);
+                System.out.println("Player created!");
             }
         }
     }
