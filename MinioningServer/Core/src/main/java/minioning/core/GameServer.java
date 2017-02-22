@@ -4,7 +4,9 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
+import minioning.common.data.Event;
 import minioning.common.data.EventBus;
+import static minioning.common.data.Events.CREATEPLAYER;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.Lookup;
@@ -39,8 +41,7 @@ public class GameServer implements Runnable {
     }
      */
     public void update() {
-//         Process using all entity processing services
-System.out.println("running update()");
+//      Process using all entity processing services
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
             for (Entity e : world.values()) {
                 processor.process(EventBus.getInstance(), world, e);
@@ -49,7 +50,7 @@ System.out.println("running update()");
     }
 
     public void create() {
-//         Process using all entity processing services
+//      Process using all entity processing services
         for (IEntityCreatorService creator : getIEntityCreatorServices()) {
             creator.createNew(EventBus.getInstance(), world);
         }

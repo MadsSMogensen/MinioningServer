@@ -2,6 +2,8 @@ package minioning.core;
 
 //import java.util.concurrent.Executors;
 //import java.util.concurrent.ScheduledExecutorService;
+import static minioning.common.data.EventBus.getInstance;
+import minioning.common.data.Events;
 import org.openide.modules.ModuleInstall;
 
 /**
@@ -14,6 +16,10 @@ public class Installer extends ModuleInstall /*implements Runnable */ {
 
     @Override
     public void restored() {
+        String[] data = new String[1];
+        data[0] = "LeonErConHombres";
+        getInstance().putEvent(Events.CREATEPLAYER, data);
+        System.out.println("CreatePlayer event added");
         new Thread(new GameServer()).start();
         
 //        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
