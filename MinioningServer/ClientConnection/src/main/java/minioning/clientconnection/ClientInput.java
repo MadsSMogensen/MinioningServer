@@ -1,5 +1,6 @@
 package minioning.clientconnection;
 
+import static minioning.clientconnection.Installer.clearTempData;
 import static minioning.clientconnection.Installer.getTempData;
 import minioning.common.data.EventBus;
 import minioning.common.data.Events;
@@ -20,9 +21,19 @@ public class ClientInput implements IConnectionService {
         for (String[] data : getTempData()) {
             if (data != null && data.length > 1) {
                 Events eventType;
-                switch (data[0]) {
+                switch (data[1]) {
                     case "CREATEPLAYER":
                         eventType = CREATEPLAYER;
+                        System.out.println("putting event: " + eventType.toString());
+                        eventBus.putEvent(eventType, data);
+                        break;
+                    case "LOGIN":
+                        eventType = LOGIN;
+                        System.out.println("putting event: " + eventType.toString());
+                        eventBus.putEvent(eventType, data);
+                        break;
+                    case "CREATELOGIN":
+                        eventType = CREATELOGIN;
                         System.out.println("putting event: " + eventType.toString());
                         eventBus.putEvent(eventType, data);
                         break;
@@ -33,6 +44,6 @@ public class ClientInput implements IConnectionService {
                 }
             }
         }
-        getTempData().clear();
+        clearTempData();
     }
 }

@@ -7,6 +7,7 @@ package minioning.clientconnection;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +25,20 @@ public class Installer extends ModuleInstall {
         if(tempData == null){
             tempData = Collections.synchronizedList(new ArrayList<String[]>());
         }
+        List<String[]> copyOfTempData = tempData;
+        
+        return copyOfTempData;
+    }
+    
+    public static List<String[]> getActualTempData() {
+        if(tempData == null){
+            tempData = Collections.synchronizedList(new ArrayList<String[]>());
+        }
         return tempData;
+    }
+    
+    public static void clearTempData(){
+        tempData.clear();
     }
 
     @Override
@@ -59,12 +73,17 @@ public class Installer extends ModuleInstall {
                     String simpleData = new String(receivePacket.getData());
                     System.out.println("RECEIVED: " + simpleData);
                     String[] data = simpleData.split(";");
-                    getTempData().add(data);
+                    String[] uniqueData = new String[data.length + 1];
+                    InetAddress IPAddress = receivePacket.getAddress();
+                    uniqueData[0] = IPAddress.toString();
+                    for(int i = 1; i <= data.length; i++){
+                        uniqueData[i] = data[i-1];
+                    }
+                    getActualTempData().add(uniqueData);
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
-
     }
 }

@@ -8,5 +8,8 @@ import java.io.Serializable;
  */
 public enum Events implements Serializable{
     CREATEPLAYER,
+    LOGIN,
+    CREATELOGIN,
     FALSEEVENT
+    
 }
