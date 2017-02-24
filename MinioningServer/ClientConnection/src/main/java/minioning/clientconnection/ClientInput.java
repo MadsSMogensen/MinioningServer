@@ -21,7 +21,7 @@ public class ClientInput implements IConnectionService {
         for (String[] data : getTempData()) {
             if (data != null && data.length > 1) {
                 Events eventType;
-                switch (data[1]) {
+                switch (data[2]) {
                     case "CREATEPLAYER":
                         eventType = CREATEPLAYER;
                         System.out.println("putting event: " + eventType.toString());

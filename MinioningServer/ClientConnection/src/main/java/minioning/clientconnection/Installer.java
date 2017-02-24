@@ -18,26 +18,38 @@ import org.openide.modules.ModuleInstall;
  * @author Jakob
  */
 public class Installer extends ModuleInstall {
-
+    
+    private static DatagramSocket serverSocket;
     private static List<String[]> tempData;
 
     public static List<String[]> getTempData() {
-        if(tempData == null){
+        if (tempData == null) {
             tempData = Collections.synchronizedList(new ArrayList<String[]>());
         }
         List<String[]> copyOfTempData = tempData;
-        
+
         return copyOfTempData;
     }
     
+    public static DatagramSocket getServerSocket(){
+        if(serverSocket == null){
+            try {
+                serverSocket = new DatagramSocket(9876);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        return serverSocket;
+    }
+
     public static List<String[]> getActualTempData() {
-        if(tempData == null){
+        if (tempData == null) {
             tempData = Collections.synchronizedList(new ArrayList<String[]>());
         }
         return tempData;
     }
-    
-    public static void clearTempData(){
+
+    public static void clearTempData() {
         tempData.clear();
     }
 
@@ -47,8 +59,7 @@ public class Installer extends ModuleInstall {
         //The temporary data is then handled for errors in ClientInput
         
         new Thread(new ConnectionThread()).start();
-        
-        
+
 //        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 //        executor.scheduleAtFixedRate(gameServer.run(), initialDelay, period, TimeUnit.MILLISECONDS);
     }
@@ -64,7 +75,7 @@ public class Installer extends ModuleInstall {
         @Override
         public void run() {
             try {
-                DatagramSocket serverSocket = new DatagramSocket(9876);
+                DatagramSocket serverSocket = getServerSocket();
                 System.out.println("Server running!");
                 while (true) {
                     byte[] receiveData = new byte[1024];
@@ -73,11 +84,13 @@ public class Installer extends ModuleInstall {
                     String simpleData = new String(receivePacket.getData());
                     System.out.println("RECEIVED: " + simpleData);
                     String[] data = simpleData.split(";");
-                    String[] uniqueData = new String[data.length + 1];
+                    String[] uniqueData = new String[data.length + 2];
                     InetAddress IPAddress = receivePacket.getAddress();
+                    int port = receivePacket.getPort();
                     uniqueData[0] = IPAddress.toString();
-                    for(int i = 1; i <= data.length; i++){
-                        uniqueData[i] = data[i-1];
+                    uniqueData[1] = Integer.toString(port);
+                    for (int i = 1; i <= data.length; i++) { //Ryd op i det her for loop!
+                        uniqueData[i + 1] = data[i - 1];
                     }
                     getActualTempData().add(uniqueData);
                 }

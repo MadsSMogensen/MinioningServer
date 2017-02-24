@@ -10,6 +10,8 @@ public enum Events implements Serializable{
     CREATEPLAYER,
     LOGIN,
     CREATELOGIN,
+    LOGINSUCCESS,
+    LOGINFAILED,
     FALSEEVENT
     
 }

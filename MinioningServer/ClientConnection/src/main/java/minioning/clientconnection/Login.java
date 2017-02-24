@@ -41,8 +41,10 @@ public class Login implements IConnectionService {
 //                System.out.println(ex);
 //            }
         }
+//        System.out.println(eventBus.size());
+//        System.out.println(eventBus.getBus().entrySet().size());
         for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
-
+            
             UUID key = entry.getKey();
             Event value = entry.getValue();
 
@@ -69,8 +71,8 @@ public class Login implements IConnectionService {
             }
 
             if (value.getType().equals(LOGIN)) {
-                String attemptUserName = value.getData()[2];
-                String attemptPassword = value.getData()[3];
+                String attemptUserName = value.getData()[3];
+                String attemptPassword = value.getData()[4];
 
                 Map<String, String> accounts = new ConcurrentHashMap<String, String>();
                 try {
@@ -94,13 +96,26 @@ public class Login implements IConnectionService {
                     String password = accountEntry.getValue();
                     if (userName.equals(attemptUserName)) {
                         //Username found
-                        System.out.println("Username Found");
                         if (password.trim().equals(attemptPassword.trim())) {
                             //Password matching
                             System.out.println("Password matching");
+                            String[] data = new String[4];
+                            data[0] = value.getData()[0];
+                            data[1] = value.getData()[1];
+                            data[2] = LOGINSUCCESS.toString();
+                            data[3] = UUID.randomUUID().toString();
+                            Event success = new Event(LOGINSUCCESS, data);
+                            eventBus.getBus().put(UUID.randomUUID(), success);
                         } else {
                             //Wrong password
                             System.out.println("Wrong password");
+                            String[] data = new String[2];
+                            data[0] = value.getData()[0];
+                            data[1] = "Wrong Password!";
+                            Event wrongPass = new Event(LOGINFAILED, data);
+                            eventBus.getBus().put(UUID.randomUUID(), wrongPass);
+                            
+                            
                         }
                     } else {
                         //Username not found
