@@ -35,12 +35,12 @@ public class Login implements IConnectionService {
     public void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
         if (file == null) {
             file = Paths.get("testMinioningFileCreation.txt");
-//            try {
-//                file.toFile().createNewFile();
-//                System.out.println("file created");
-//            } catch (IOException ex) {
-//                System.out.println(ex);
-//            }
+            try {
+                file.toFile().createNewFile();
+                System.out.println("file created");
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
         }
 //        System.out.println(eventBus.size());
 //        System.out.println(eventBus.getBus().entrySet().size());
@@ -48,7 +48,6 @@ public class Login implements IConnectionService {
             
             UUID key = entry.getKey();
             Event value = entry.getValue();
-
             if (value.getType().equals(CREATELOGIN)) {
                 String[] data = value.getData();
                 String userName = data[2];
@@ -70,7 +69,6 @@ public class Login implements IConnectionService {
 
                 eventBus.getBus().remove(key);
             }
-
             if (value.getType().equals(LOGIN)) {
                 String attemptUserName = value.getData()[3];
                 String attemptPassword = value.getData()[4];
