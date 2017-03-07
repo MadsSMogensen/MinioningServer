@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import minioning.common.data.Entity;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import static minioning.common.data.Events.*;
@@ -31,7 +32,7 @@ public class Login implements IConnectionService {
     private static Path file;
 
     @Override
-    public void process(EventBus eventBus) {
+    public void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
         if (file == null) {
             file = Paths.get("testMinioningFileCreation.txt");
 //            try {

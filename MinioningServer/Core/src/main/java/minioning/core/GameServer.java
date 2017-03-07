@@ -4,9 +4,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.Event;
 import minioning.common.data.EventBus;
-import static minioning.common.data.Events.CREATEPLAYER;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -19,9 +17,8 @@ public class GameServer implements Runnable {
     long lastTime = System.nanoTime();
 
     // Internal & game data
-    private ConcurrentHashMap<UUID, Entity> world = new ConcurrentHashMap();
+    private ConcurrentHashMap<UUID, Entity> world = new ConcurrentHashMap(); //burde vi have singleton på den her liste??
     private final Lookup lookup = Lookup.getDefault();
-
 
     /*
     private void loadGamePlugins() {
@@ -41,6 +38,7 @@ public class GameServer implements Runnable {
         }
     }
      */
+    
     public void update() {
 //      Process using all entity processing services
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
@@ -52,7 +50,7 @@ public class GameServer implements Runnable {
     
     public void updateConnection(){
         for(IConnectionService processor : getIConnectionServices()){
-            processor.process(EventBus.getInstance());
+            processor.process(EventBus.getInstance(), world);
         }
     }
 
@@ -70,7 +68,7 @@ public class GameServer implements Runnable {
     private Collection<? extends IEntityCreatorService> getIEntityCreatorServices() {
         return lookup.lookupAll(IEntityCreatorService.class);
     }
-    
+
     private Collection<? extends IConnectionService> getIConnectionServices() {
         return lookup.lookupAll(IConnectionService.class);
     }
@@ -100,6 +98,7 @@ public class GameServer implements Runnable {
         }
     };
      */
+    
     @Override
     public void run() {
         while (true) {
@@ -108,9 +107,9 @@ public class GameServer implements Runnable {
 
             if (elapsedTime >= timeStep) {
                 lastTime = currentTime;
+                updateConnection();
                 create();
                 update();
-                updateConnection();
             }
         }
     }

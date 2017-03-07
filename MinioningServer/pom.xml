@@ -63,6 +63,7 @@
         <module>Common</module>
         <module>ClientConnection</module>
         <module>Unit</module>
+        <module>Movement</module>
     </modules>
 
     <properties>

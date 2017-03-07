@@ -1,7 +1,10 @@
 package minioning.clientconnection;
 
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import static minioning.clientconnection.Installer.clearTempData;
 import static minioning.clientconnection.Installer.getTempData;
+import minioning.common.data.Entity;
 import minioning.common.data.EventBus;
 import minioning.common.data.Events;
 import static minioning.common.data.Events.*;
@@ -16,7 +19,7 @@ import org.openide.util.lookup.ServiceProvider;
 public class ClientInput implements IConnectionService {
 
     @Override
-    public void process(EventBus eventBus) {
+    public void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
         //Check the temporary data for errors, put into real eventbus
         for (String[] data : getTempData()) {
             if (data != null && data.length > 1) {
