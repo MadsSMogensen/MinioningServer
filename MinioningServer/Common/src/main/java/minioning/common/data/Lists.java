@@ -75,8 +75,9 @@ public class Lists {
         }
     }
     
-    public static void connectUser(String IPAddress, int port, String name){
+    public static void connectUser(String IPAddress, int port, String name, UUID ID){
         getConnectedUsers().put(IPAddress, name);
         getPortList().put(IPAddress, port);
+        getPlayingUsers().put(ID, name);
     }
 }

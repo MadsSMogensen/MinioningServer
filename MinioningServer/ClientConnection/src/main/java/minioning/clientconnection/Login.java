@@ -18,6 +18,9 @@ import minioning.common.data.Entity;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import static minioning.common.data.Events.*;
+import static minioning.common.data.Lists.connectUser;
+import static minioning.common.data.Lists.getPlayingUsers;
+import static minioning.common.data.Lists.newPlayer;
 import minioning.common.services.IConnectionService;
 import org.openide.util.Exceptions;
 import org.openide.util.lookup.ServiceProvider;
@@ -48,10 +51,12 @@ public class Login implements IConnectionService {
             
             UUID key = entry.getKey();
             Event value = entry.getValue();
-            if (value.getType().equals(CREATELOGIN)) {
+            if (value.getType().equals(CREATEACCOUNT)) {
                 String[] data = value.getData();
-                String userName = data[2];
-                String password = data[3];
+                String userName = data[4];
+                System.out.println("user: " + userName);
+                String password = data[5];
+                System.out.println("pass: " + password);
 //                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 //                        new FileOutputStream("testMinioningFileCreation.txt"), "utf-8"))) {
 //                    writer.append(userName + ";" + password);
@@ -70,8 +75,8 @@ public class Login implements IConnectionService {
                 eventBus.getBus().remove(key);
             }
             if (value.getType().equals(LOGIN)) {
-                String attemptUserName = value.getData()[3];
-                String attemptPassword = value.getData()[4];
+                String attemptUserName = value.getData()[4];
+                String attemptPassword = value.getData()[5];
 
                 Map<String, String> accounts = new ConcurrentHashMap<String, String>();
                 try {
@@ -91,10 +96,11 @@ public class Login implements IConnectionService {
                     System.out.println(ex);
                 }
                 for (Map.Entry<String, String> accountEntry : accounts.entrySet()) {
-                    String userName = accountEntry.getKey();
+                    String username = accountEntry.getKey();
                     String password = accountEntry.getValue();
-                    if (userName.equals(attemptUserName)) {
+                    if (username.equals(attemptUserName)) {
                         //Username found
+                        System.out.println("username matching");
                         if (password.trim().equals(attemptPassword.trim())) {
                             //Password matching
                             System.out.println("Password matching");
@@ -105,6 +111,15 @@ public class Login implements IConnectionService {
                             data[3] = UUID.randomUUID().toString();
                             Event success = new Event(LOGINSUCCESS, data);
                             eventBus.getBus().put(UUID.randomUUID(), success);
+                            System.out.println("putting event LOGINSUCCESS");
+                            
+                            String IPAddress = value.getData()[0];
+                            IPAddress = IPAddress.replace("/", "");
+                            int port = Integer.parseInt(value.getData()[1]);
+                            String name = username;
+                            System.out.println("putting connectUser");
+                            connectUser(IPAddress, port, name, UUID.fromString(data[3]));
+                            
                         } else {
                             //Wrong password
                             System.out.println("Wrong password");

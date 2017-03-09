@@ -25,7 +25,9 @@ public class UnitCreator implements IEntityCreatorService{
             Event value = entry.getValue();
             if(value.getType().equals(CREATEPLAYER)){
                 String[] data = value.getData();
-                Entity newEntity = new Entity(data[0]);
+                UUID owner = UUID.fromString(data[0]);
+                String name = data[1];
+                Entity newEntity = new Entity(owner, name);
                 entities.put(UUID.randomUUID(), newEntity);
                 events.getBus().remove(key);
                 System.out.println("Player created!");

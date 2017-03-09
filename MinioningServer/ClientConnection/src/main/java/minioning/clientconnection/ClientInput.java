@@ -24,7 +24,7 @@ public class ClientInput implements IConnectionService {
         for (String[] data : getTempData()) {
             if (data != null && data.length > 1) {
                 Events eventType;
-                switch (data[2]) {
+                switch (data[3]) {
                     case "CREATEPLAYER":
                         eventType = CREATEPLAYER;
                         System.out.println("putting event: " + eventType.toString());
@@ -35,8 +35,13 @@ public class ClientInput implements IConnectionService {
                         System.out.println("putting event: " + eventType.toString());
                         eventBus.putEvent(eventType, data);
                         break;
-                    case "CREATELOGIN":
-                        eventType = CREATELOGIN;
+                    case "CREATEACCOUNT":
+                        eventType = CREATEACCOUNT;
+                        System.out.println("putting event: " + eventType.toString());
+                        eventBus.putEvent(eventType, data);
+                        break;
+                    case "MOVEMENT":
+                        eventType = MOVEMENT;
                         System.out.println("putting event: " + eventType.toString());
                         eventBus.putEvent(eventType, data);
                         break;

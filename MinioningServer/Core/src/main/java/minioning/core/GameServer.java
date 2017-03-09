@@ -18,6 +18,7 @@ public class GameServer implements Runnable {
 
     // Internal & game data
     private ConcurrentHashMap<UUID, Entity> world = new ConcurrentHashMap(); //burde vi have singleton på den her liste??
+
     private final Lookup lookup = Lookup.getDefault();
 
     /*
@@ -38,18 +39,24 @@ public class GameServer implements Runnable {
         }
     }
      */
-    
+    private int i = 0;
+
     public void update() {
 //      Process using all entity processing services
+        if (i == 0) {
+            Entity test = new Entity(UUID.randomUUID(), "TEST");
+            world.put(UUID.randomUUID(), test);
+            i++;
+        }
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
             for (Entity e : world.values()) {
                 processor.process(EventBus.getInstance(), world, e);
             }
         }
     }
-    
-    public void updateConnection(){
-        for(IConnectionService processor : getIConnectionServices()){
+
+    public void updateConnection() {
+        for (IConnectionService processor : getIConnectionServices()) {
             processor.process(EventBus.getInstance(), world);
         }
     }
@@ -98,7 +105,6 @@ public class GameServer implements Runnable {
         }
     };
      */
-    
     @Override
     public void run() {
         while (true) {

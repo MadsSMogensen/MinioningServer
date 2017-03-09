@@ -9,15 +9,25 @@ import java.util.UUID;
 public class Entity {
 
     private final UUID ID = UUID.randomUUID();
+    private UUID owner;
     private String name;
     private float x = 0;
     private float y = 0;
     private float dx;
     private float dy;
-    private float speed;
+    private float speed = 100;
 
-    public Entity(String name) {
+    public Entity(UUID owner, String name) {
+        this.owner = owner;
         this.name = name;
+    }
+
+    public UUID getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UUID owner) {
+        this.owner = owner;
     }
 
     public float getDx() {

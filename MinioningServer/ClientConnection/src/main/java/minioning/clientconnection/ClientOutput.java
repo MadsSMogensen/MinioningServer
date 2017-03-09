@@ -25,12 +25,12 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = IConnectionService.class)
 public class ClientOutput implements IConnectionService {
-    
+
     @Override
     public void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
         //Find the World in the eventbus, send it to all clients
         for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
-            
+
             UUID key = entry.getKey();
             Event event = entry.getValue();
             switch (event.getType()) {
@@ -43,14 +43,12 @@ public class ClientOutput implements IConnectionService {
                         String IPAddressString = data[0].split("/")[1];
                         InetAddress IPAddress = InetAddress.getByName(IPAddressString);
                         int port = Integer.parseInt(data[1]);
-                        System.out.println("before address already in use");
                         DatagramSocket serverSocket = getServerSocket();
                         DatagramPacket sendDataPacket
                                 = new DatagramPacket(sendData, sendData.length, IPAddress, port);
                         serverSocket.send(sendDataPacket);
                         System.out.println("datapacket sent!");
                         System.out.println(resultPackage);
-                        connectUser(IPAddressString, port, "Insert userName here");
                     } catch (Exception e) {
                         System.out.println(e);
                     }
@@ -60,33 +58,56 @@ public class ClientOutput implements IConnectionService {
         }
         //outside the for eventbus
         ConcurrentHashMap<String, String> connectedUsers = getConnectedUsers();
+//        if (getConnectedUsers().size() > 0) {     //for printing amount of connected users > 0
+//            System.out.println("connectedUsers: " + getConnectedUsers().size());
+//        }
         for (Map.Entry<String, String> user : connectedUsers.entrySet()) {
             try {
                 String IPAddressString = user.getKey();
+                IPAddressString = IPAddressString.replace("/", "");
                 InetAddress IPAddress = InetAddress.getByName(IPAddressString);
                 String name = user.getValue();
                 int port = getPort(IPAddressString);
-                if (getPlayingUsers().containsValue(name)) {
-                    byte[] sendData = new byte[256];
-                    try {
-                        ByteArrayOutputStream out = new ByteArrayOutputStream();
-                        ObjectOutputStream outputStream = new ObjectOutputStream(out);
-                        outputStream.writeObject(world);
-                        outputStream.close();
-                        sendData = out.toByteArray();
-                    } catch (Exception e) {
-                    }
-                    try {
+                
+                byte[] sendData = new byte[256];
+                String test = "THISISATEST;100;200";
+                sendData = test.getBytes();
+                try {
                         DatagramSocket serverSocket = getServerSocket();
-                        if (port != 0) {
-                            DatagramPacket sendDataPacket
-                                    = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-                            serverSocket.send(sendDataPacket);
-                        }
-                    } catch (Exception e) {
+                    if (port != 0) {
+                        DatagramPacket sendDataPacket
+                                = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                        serverSocket.send(sendDataPacket);
+//                        System.out.println("sent: " + new String(sendDataPacket.getData()));
                     }
+                } catch (Exception e) {
                 }
                 
+                
+                
+                
+                
+                
+//                if (getPlayingUsers().containsValue(name)) { //for difference on connected users and playing users
+//                    byte[] sendData = new byte[256];
+//                    try {
+//                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+//                        ObjectOutputStream outputStream = new ObjectOutputStream(out);
+//                        outputStream.writeObject(world);
+//                        outputStream.close();
+//                        sendData = out.toByteArray();
+//                    } catch (Exception e) {
+//                    }
+//                    try {
+//                        DatagramSocket serverSocket = getServerSocket();
+//                        if (port != 0) {
+//                            DatagramPacket sendDataPacket
+//                                    = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+//                            serverSocket.send(sendDataPacket);
+//                        }
+//                    } catch (Exception e) {
+//                    }
+//                }
             } catch (Exception e) {
             }
         }
