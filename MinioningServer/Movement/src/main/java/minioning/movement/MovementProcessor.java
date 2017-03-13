@@ -36,6 +36,27 @@ public class MovementProcessor implements IEntityProcessingService {
                     System.out.println("dx,dy after : " + entity.getDx() + "," + entity.getDy());
                     break;
             }
+            
+            //Moves entities with a destination x,y != current x,y
+            if(entity.getX() != entity.getDx() || entity.getY() != entity.getDy()){
+                float x = entity.getX();
+                float dx = entity.getDx();
+                float y = entity.getY();
+                float dy = entity.getDy();
+                //float direction = entity.getDirection();
+                if(dx > x){
+                    x += 1;
+                }else{
+                    x -= 1;
+                }
+                if(dy > y){
+                    y += 1;
+                }else{
+                    y -= 1;
+                }
+                entity.setX(x);
+                entity.setY(y);
+            }
         }
     }
 }
