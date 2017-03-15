@@ -1,12 +1,13 @@
 package minioning.common.data;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  * @author Mogensen
  */
-public class Entity {
+public class Entity implements Serializable{
 
     private final UUID ID = UUID.randomUUID();
     private UUID owner;
@@ -22,6 +23,13 @@ public class Entity {
         this.name = name;
     }
 
+    public String toString(){
+        
+        String EntityString = ID+";"+owner+";"+name+";"+x+";"+";"+y+";"+dx+";"+dy+";"+speed+";";
+        
+        return EntityString;
+    }
+    
     public UUID getOwner() {
         return owner;
     }
