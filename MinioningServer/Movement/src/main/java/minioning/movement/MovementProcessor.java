@@ -36,31 +36,51 @@ public class MovementProcessor implements IEntityProcessingService {
                     System.out.println("dx,dy after : " + entity.getDx() + "," + entity.getDy());
                     break;
             }
+            events.getBus().remove(key);
         }
+        
         //Moves entities with a destination x,y != current x,y
+        setEntityMovement(entity);
         moveEntity(entity);
     }
     
-    private void moveEntity(Entity entity){
+    private void setEntityMovement(Entity entity){
         if (entity.getX() != entity.getDx() || entity.getY() != entity.getDy()) {
             float x = entity.getX();
             float dx = entity.getDx();
             float y = entity.getY();
             float dy = entity.getDy();
+            float speed = entity.getSpeed();
+            float direction = entity.getDirection();
+            float xSpeed;
+            float ySpeed;
             //float direction = entity.getDirection();
             if (dx > x) {
-                x += 1;
+                xSpeed = (float)Math.cos(direction)*speed;
             } else {
-                x -= 1;
+                xSpeed = -((float)Math.cos(direction)*speed);
             }
             if (dy > y) {
-                y += 1;
+                ySpeed = (float)Math.sin(direction)*speed;
             } else {
-                y -= 1;
+                ySpeed = -((float)Math.sin(direction)*speed);
             }
-            entity.setX(x);
-            entity.setY(y);
+            entity.setxSpeed(xSpeed);
+            entity.setySpeed(ySpeed);
         }
+    }
+    
+    private void moveEntity(Entity entity){
+        float x = entity.getX();
+        float y = entity.getY();
+        float xSpeed = entity.getxSpeed();
+        float ySpeed = entity.getySpeed();
+        
+        x += xSpeed;
+        y += ySpeed;
+        
+        entity.setX(x);
+        entity.setY(y);
     }
     
     

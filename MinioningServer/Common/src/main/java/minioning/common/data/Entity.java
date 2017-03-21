@@ -2,6 +2,7 @@ package minioning.common.data;
 
 import java.io.Serializable;
 import java.util.UUID;
+import javafx.scene.shape.Circle;
 
 /**
  *
@@ -16,13 +17,44 @@ public class Entity implements Serializable{
     private float y = 0;
     private float dx;
     private float dy;
-    private float speed = 100;
+    private float xSpeed;
+    private float ySpeed;
+    private float speed = 1;
+    private float direction = 0;
 
     public Entity(UUID owner, String name) {
         this.owner = owner;
         this.name = name;
     }
 
+    public float getDirection() {
+        return direction;
+    }
+
+    public void setDirection(float direction) {
+        this.direction = direction;
+    }
+    
+    public Circle getBounds(){
+        return new Circle(x, y, 5);
+    }
+
+    public float getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(float xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public float getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(float ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+    
     public String toString(){
         
         String EntityString = ID+";"+owner+";"+name+";"+x+";"+";"+y+";"+dx+";"+dy+";"+speed+";";
