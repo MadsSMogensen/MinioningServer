@@ -41,7 +41,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Common</artifactId>
+            <artifactId>ServerCommon</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

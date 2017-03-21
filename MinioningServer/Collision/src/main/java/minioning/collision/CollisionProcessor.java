@@ -20,6 +20,7 @@ public class CollisionProcessor implements IEntityProcessingService {
 
     @Override
     public void process(EventBus events, Map<UUID, Entity> entities, Entity entity) {
+        
         float x = entity.getX();
         float y = entity.getY();
         float xSpeed = entity.getxSpeed();

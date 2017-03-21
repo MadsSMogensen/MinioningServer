@@ -20,7 +20,7 @@ public class Entity implements Serializable{
     private float xSpeed;
     private float ySpeed;
     private float speed = 1;
-    private float direction = 0;
+    private float direction = 45;
 
     public Entity(UUID owner, String name) {
         this.owner = owner;
