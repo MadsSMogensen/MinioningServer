@@ -19,10 +19,7 @@ import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import static minioning.common.data.Events.*;
 import static minioning.common.data.Lists.connectUser;
-import static minioning.common.data.Lists.getPlayingUsers;
-import static minioning.common.data.Lists.newPlayer;
 import minioning.common.services.IConnectionService;
-import org.openide.util.Exceptions;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -48,10 +45,16 @@ public class Login implements IConnectionService {
 //        System.out.println(eventBus.size());
 //        System.out.println(eventBus.getBus().entrySet().size());
         for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
-            
             UUID key = entry.getKey();
             Event value = entry.getValue();
+            
             if (value.getType().equals(CREATEACCOUNT)) {
+                //[0]IPAddress
+                //[1]port
+                //[2]
+                //[3]eventType
+                //[4]attemptUserName
+                //[5]attemptPassword
                 String[] data = value.getData();
                 String userName = data[4];
                 System.out.println("user: " + userName);
@@ -75,6 +78,12 @@ public class Login implements IConnectionService {
                 eventBus.getBus().remove(key);
             }
             if (value.getType().equals(LOGIN)) {
+                //[0]IPAddress
+                //[1]port
+                //[2]
+                //[3]eventType
+                //[4]attemptUserName
+                //[5]attemptPassword
                 String attemptUserName = value.getData()[4];
                 String attemptPassword = value.getData()[5];
 
@@ -112,14 +121,14 @@ public class Login implements IConnectionService {
                             Event success = new Event(LOGINSUCCESS, data);
                             eventBus.getBus().put(UUID.randomUUID(), success);
                             System.out.println("putting event LOGINSUCCESS");
-                            
-                            String IPAddress = value.getData()[0];
-                            IPAddress = IPAddress.replace("/", "");
-                            int port = Integer.parseInt(value.getData()[1]);
-                            String name = username;
-                            System.out.println("putting connectUser");
-                            connectUser(IPAddress, port, name, UUID.fromString(data[3]));
-                            
+
+//                            String IPAddress = value.getData()[0];
+//                            IPAddress = IPAddress.replace("/", "");
+//                            int port = Integer.parseInt(value.getData()[1]);
+//                            String name = username;
+//                            System.out.println("putting connectUser");
+//                            connectUser(IPAddress, port, name, UUID.fromString(data[3]));
+
                         } else {
                             //Wrong password
                             System.out.println("Wrong password");
@@ -128,8 +137,7 @@ public class Login implements IConnectionService {
                             data[1] = "Wrong Password!";
                             Event wrongPass = new Event(LOGINFAILED, data);
                             eventBus.getBus().put(UUID.randomUUID(), wrongPass);
-                            
-                            
+
                         }
                     } else {
                         //Username not found
@@ -137,6 +145,19 @@ public class Login implements IConnectionService {
                     }
                 }
                 eventBus.getBus().remove(key);
+            }
+            if (value.getType().equals(PLAY)) {
+                //[0]IPAddress
+                //[1]port
+                //[2]UUID
+                //[3]eventType
+                //[4]Name
+                String IPAddress = value.getData()[0];
+                IPAddress = IPAddress.replace("/", "");
+                int port = Integer.parseInt(value.getData()[1]);
+                String name = value.getData()[4];;
+                System.out.println("putting connectUser");
+                connectUser(IPAddress, port, name, UUID.fromString(value.getData()[2]));
             }
         }
     }
