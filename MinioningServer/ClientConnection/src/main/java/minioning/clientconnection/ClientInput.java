@@ -22,7 +22,7 @@ public class ClientInput implements IConnectionService {
     public void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
         //Check the temporary data for errors, put into real eventbus
         for (String[] data : getTempData()) {
-            if (data != null && data.length > 1) {
+            if (data != null && data.length > 4) { //1 eller 4?
                 Events eventType;
                 switch (data[3]) {
                     case "CREATEPLAYER":

@@ -4,7 +4,11 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
+import minioning.common.data.Event;
 import minioning.common.data.EventBus;
+import static minioning.common.data.Events.LOGIN;
+import static minioning.common.data.Events.PLAY;
+import static minioning.common.data.Events.TESTEVENT;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -39,15 +43,9 @@ public class GameServer implements Runnable {
         }
     }
      */
-    private int i = 0;
-
     public void update() {
 //      Process using all entity processing services
-        if (i == 0) {
-            Entity test = new Entity(UUID.randomUUID(), "TEST");
-            world.put(UUID.randomUUID(), test);
-            i++;
-        }
+
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
             for (Entity e : world.values()) {
                 processor.process(EventBus.getInstance(), world, e);
@@ -107,6 +105,8 @@ public class GameServer implements Runnable {
      */
     @Override
     public void run() {
+        boolean test = true;
+
         while (true) {
             long currentTime = System.nanoTime();
             double elapsedTime = (currentTime - lastTime) / 1000000000.0;
@@ -116,6 +116,30 @@ public class GameServer implements Runnable {
                 updateConnection();
                 create();
                 update();
+            }
+            if (test) {
+//                String[] data = new String[6];
+//                data[0] = "localhost";
+//                data[1] = "9876";
+//                data[2] = "";
+//                data[3] = "LOGIN";
+//                data[4] = "hit";
+//                data[5] = "me";
+//                Event testEvent = new Event(LOGIN, data);
+//                EventBus.getInstance().putEvent(testEvent);
+//                System.out.println("login put");
+//
+//                String[] data1 = new String[6];
+//                data[0] = "localhost";
+//                data[1] = "9876";
+//                data[2] = UUID.randomUUID().toString();
+//                data[3] = "PLAY";
+//                data[4] = "hit";
+//                Event playEvent = new Event(PLAY, data);
+//                EventBus.getInstance().putEvent(playEvent);
+//                System.out.println("playEvent put");
+
+                test = false;
             }
         }
     }
