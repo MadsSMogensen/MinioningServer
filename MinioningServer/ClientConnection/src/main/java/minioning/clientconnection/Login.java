@@ -117,7 +117,6 @@ public class Login implements IConnectionService {
                     data[3] = UUID.randomUUID().toString();
                     Event success = new Event(LOGINSUCCESS, data);
                     getConnectedUsers().put(data[0], username);
-                    System.out.println(data[0] + "; " + username);
                     getPortList().put(data[0], Integer.parseInt(data[1]));
                     EventBus.getInstance().putEvent(success);
                 } else {
@@ -177,7 +176,6 @@ public class Login implements IConnectionService {
 //        String name = value.getData()[4];
         UUID ID = UUID.fromString(value.getData()[2]);
         String name = getConnectedUsers().get(IPAddress);
-        System.out.println(IPAddress);
         getPlayingUsers().put(ID, name);
     }
 }

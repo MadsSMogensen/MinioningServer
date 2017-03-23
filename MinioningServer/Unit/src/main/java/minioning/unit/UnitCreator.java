@@ -39,6 +39,9 @@ public class UnitCreator implements IEntityCreatorService {
         for(int i = 0; i < data.length; i++){
             System.out.println(data[i]);
         }
+        System.out.println(data[1]);
+        System.out.println(data[2]);
+        System.out.println(data[3]);
         UUID owner = UUID.fromString(data[2]);
         String name = data[4];
         Entity newEntity = new Entity(owner, name);
