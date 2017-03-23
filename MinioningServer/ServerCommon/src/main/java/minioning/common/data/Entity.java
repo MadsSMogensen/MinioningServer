@@ -3,12 +3,13 @@ package minioning.common.data;
 import java.io.Serializable;
 import java.util.UUID;
 import javafx.scene.shape.Circle;
+import static minioning.common.data.EntityType.PLAYER;
 
 /**
  *
  * @author Mogensen
  */
-public class Entity implements Serializable{
+public class Entity implements Serializable {
 
     private final UUID ID = UUID.randomUUID();
     private UUID owner;
@@ -21,6 +22,7 @@ public class Entity implements Serializable{
     private float ySpeed;
     private float speed = 1;
     private float direction = 45;
+    private EntityType type = PLAYER;
 
     public Entity(UUID owner, String name) {
         this.owner = owner;
@@ -34,8 +36,8 @@ public class Entity implements Serializable{
     public void setDirection(float direction) {
         this.direction = direction;
     }
-    
-    public Circle getBounds(){
+
+    public Circle getBounds() {
         return new Circle(x, y, 5);
     }
 
@@ -54,14 +56,34 @@ public class Entity implements Serializable{
     public void setySpeed(float ySpeed) {
         this.ySpeed = ySpeed;
     }
-    
-    public String toString(){
-        
-        String EntityString = ID+";"+owner+";"+name+";"+x+";"+";"+y+";"+dx+";"+dy+";"+speed+";";
-        
-        return EntityString;
+
+    @Override
+    public String toString() {
+
+        String entityString;
+        entityString  = ID + ";";
+        entityString += owner + ";";
+        entityString += name + ";";
+        entityString += x + ";";
+        entityString += y + ";";
+        entityString += dx + ";";
+        entityString += dy + ";";
+        entityString += xSpeed + ";";
+        entityString += ySpeed + ";";
+        entityString += speed + ";";
+        entityString += direction;
+        return entityString;
     }
     
+    public String toClients(){
+        String entityString;
+        entityString = ID + ";";
+        entityString += type.toString() + ";";
+        entityString += x + ";";
+        entityString += y + ";";
+        return entityString;
+    }
+
     public UUID getOwner() {
         return owner;
     }

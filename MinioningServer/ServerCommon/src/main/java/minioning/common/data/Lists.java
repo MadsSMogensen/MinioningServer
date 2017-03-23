@@ -9,54 +9,64 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Mogensen
  */
 public class Lists {
+
     //IPAdress, name
-    private static ConcurrentHashMap<String, String> connectedUsers;
+    private static ConcurrentHashMap<String, String> connectedUsers = new ConcurrentHashMap<String, String>();
     //IPadress, port
-    private static ConcurrentHashMap<String, Integer> connectedUserPorts;
+    private static ConcurrentHashMap<String, Integer> connectedUserPorts = new ConcurrentHashMap<String, Integer>();
     //UUID, name
-    private static ConcurrentHashMap<UUID, String> playingUsers;
-    
+    private static ConcurrentHashMap<UUID, String> playingUsers = new ConcurrentHashMap<UUID, String>();
+
     //<IPAdress, name>
     public static ConcurrentHashMap<String, String> getConnectedUsers() {
-        if(connectedUsers == null){
+        if (connectedUsers == null) {
             connectedUsers = new ConcurrentHashMap<String, String>();
         }
         return connectedUsers;
     }
-    
-    public static ConcurrentHashMap<String, Integer> getPortList(){
-        if(connectedUserPorts == null){
+
+    public static String getIP(String name) {
+        for (Map.Entry<String, String> connectedUser : getConnectedUsers().entrySet()) {
+            String key = connectedUser.getKey();
+            String value = connectedUser.getValue();
+            if (value.equals(name)) {
+                return key;
+            }
+        }
+        return null;
+    }
+
+    public static ConcurrentHashMap<String, Integer> getPortList() {
+        if (connectedUserPorts == null) {
             connectedUserPorts = new ConcurrentHashMap<String, Integer>();
         }
         return connectedUserPorts;
     }
-    
-    public static ConcurrentHashMap<UUID, String> getPlayingUsers(){
-        if(playingUsers == null){
+
+    public static ConcurrentHashMap<UUID, String> getPlayingUsers() {
+        if (playingUsers == null) {
             playingUsers = new ConcurrentHashMap<UUID, String>();
         }
         return playingUsers;
     }
-    
-    public static void newPlayer(UUID ID, String name){
+
+    public static void newPlayer(UUID ID, String name) {
         getPlayingUsers().put(ID, name);
     }
-    
-    public static int getPort(String IPAddress){
+
+    public static int getPort(String IPAddress) {
         int port = 0;
-        for(Map.Entry<String, Integer> entry : getPortList().entrySet()){
+        for (Map.Entry<String, Integer> entry : getPortList().entrySet()) {
             String IPAdressKey = entry.getKey();
             int portValue = entry.getValue();
-            if(IPAdressKey.equals(IPAddress)){
+            if (IPAdressKey.equals(IPAddress)) {
                 port = portValue;
             }
         }
         return port;
     }
-    
-    
-    
-    public static void disconnectUser(String user){
+
+    public static void disconnectUser(String user) {
         //simply try to remove user by IPAddress
         try {
             getPortList().remove(user);
@@ -74,8 +84,8 @@ public class Lists {
             //no such name found
         }
     }
-    
-    public static void connectUser(String IPAddress, int port, String name, UUID ID){
+
+    public static void connectUser(String IPAddress, int port, String name, UUID ID) {
         getConnectedUsers().put(IPAddress, name);
         getPortList().put(IPAddress, port);
         getPlayingUsers().put(ID, name);

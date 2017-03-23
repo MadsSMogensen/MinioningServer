@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
@@ -19,6 +20,9 @@ import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import static minioning.common.data.Events.*;
 import static minioning.common.data.Lists.connectUser;
+import static minioning.common.data.Lists.getConnectedUsers;
+import static minioning.common.data.Lists.getPlayingUsers;
+import static minioning.common.data.Lists.getPortList;
 import minioning.common.services.IConnectionService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -35,12 +39,14 @@ public class Login implements IConnectionService {
     public synchronized void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
         if (file == null) {
             file = Paths.get("testMinioningFileCreation.txt");
-//            try {
-//                file.toFile().createNewFile();
-//                System.out.println("file created");
-//            } catch (IOException ex) {
-//                System.out.println(ex);
-//            }
+            if(!file.toFile().isFile()){
+               try {
+                    file.toFile().createNewFile();
+                    System.out.println("file created");
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            }     
         }
         for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
             UUID key = entry.getKey();
@@ -110,6 +116,9 @@ public class Login implements IConnectionService {
                     data[2] = LOGINSUCCESS.toString();
                     data[3] = UUID.randomUUID().toString();
                     Event success = new Event(LOGINSUCCESS, data);
+                    getConnectedUsers().put(data[0], username);
+                    System.out.println(data[0] + "; " + username);
+                    getPortList().put(data[0], Integer.parseInt(data[1]));
                     EventBus.getInstance().putEvent(success);
                 } else {
                     //Wrong password
@@ -162,11 +171,13 @@ public class Login implements IConnectionService {
         //[3]eventType
         //[4]Name
         String IPAddress = value.getData()[0];
-        IPAddress = IPAddress.replace("/", "");
-        int port = Integer.parseInt(value.getData()[1]);
-        String name = value.getData()[4];
+//        IPAddress = IPAddress.replace("/", "");
+//        int port = Integer.parseInt(value.getData()[1]);
+        
+//        String name = value.getData()[4];
         UUID ID = UUID.fromString(value.getData()[2]);
-        connectUser(IPAddress, port, name, ID);
+        String name = getConnectedUsers().get(IPAddress);
+        System.out.println(IPAddress);
+        getPlayingUsers().put(ID, name);
     }
-
 }

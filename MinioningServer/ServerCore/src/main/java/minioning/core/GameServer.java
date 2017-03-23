@@ -45,7 +45,7 @@ public class GameServer implements Runnable {
      */
     public void update() {
 //      Process using all entity processing services
-
+        
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
             for (Entity e : world.values()) {
                 processor.process(EventBus.getInstance(), world, e);
