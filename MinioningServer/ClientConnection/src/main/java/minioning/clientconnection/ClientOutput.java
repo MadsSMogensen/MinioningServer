@@ -49,7 +49,7 @@ public class ClientOutput implements IConnectionService {
             byte[] sendData = new byte[256];
             String resultPackage = /*data[2] + ";" + */ data[3];
             sendData = resultPackage.getBytes();
-            String IPAddressString = data[0].replace("/","");
+            String IPAddressString = data[0].replace("/", "");
 //            String IPAddressString = data[0]; //used for localhost
             InetAddress IPAddress = InetAddress.getByName(IPAddressString);
             int port = Integer.parseInt(data[1]);
@@ -71,8 +71,7 @@ public class ClientOutput implements IConnectionService {
 //            System.out.println("connectedUsers: " + getConnectedUsers().size());
 //        }
         for (Map.Entry<UUID, String> user : playingUsers.entrySet()) {
-            
-            
+
             try {
                 String name = user.getValue();
 //                String IPAddressString = user.getKey();
@@ -83,24 +82,44 @@ public class ClientOutput implements IConnectionService {
 
                 byte[] sendData = new byte[256];
 
-                sendData = serialize(world);
-                try {
-                    DatagramSocket serverSocket = getServerSocket();
-                    if (port != 0) {
-                        DatagramPacket sendDataPacket
-                                = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-                        serverSocket.send(sendDataPacket);
-//                        System.out.println("sent: " + new String(sendDataPacket.getData()));
-                    }
-                } catch (Exception e) {
-                }
+                sendData = serialize("world", world);
+
+                sendData(sendData, IPAddress, port);
+                
+//                try { //GAMMEL KODE
+//                    DatagramSocket serverSocket = getServerSocket();
+//                    if (port != 0) {
+//                        DatagramPacket sendDataPacket
+//                                = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+//                        serverSocket.send(sendDataPacket);
+////                        System.out.println("sent: " + new String(sendDataPacket.getData()));
+//                    }
+//                } catch (Exception e) {
+//                }
             } catch (Exception e) {
             }
         }
     }
 
-    private byte[] serialize(ConcurrentHashMap<UUID, Entity> world) throws IOException {
+    private void sendData(byte[] data, InetAddress IPAddress, int port) {
+        try {
+            if (port != 0) {
+                byte[] sendData = data;
+                DatagramSocket serverSocket = getServerSocket();
+                DatagramPacket sendDataPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                serverSocket.send(sendDataPacket);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private byte[] serialize(String event, ConcurrentHashMap<UUID, Entity> world) throws IOException {
         String[] stringWorld = stringify(world);
+        String[] resultWorld = new String[stringWorld.length+1];
+        resultWorld[0] = event;
+        for(int i = 1; i < resultWorld.length; i++){
+            resultWorld[i] = stringWorld[i-1];
+        }
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         final ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(stringWorld);
@@ -116,6 +135,7 @@ public class ClientOutput implements IConnectionService {
         int index = 0;
         for (Entity e : world.values()) {
             resultString[index] = e.toClients();
+            index++;
         }
         return resultString;
     }
@@ -124,34 +144,34 @@ public class ClientOutput implements IConnectionService {
 
 //The previous updateClients();
 /*
-ConcurrentHashMap<String, String> connectedUsers = getConnectedUsers();
-        //for printing amount of connected users if more than 0
-//        if (getConnectedUsers().size() > 0) {     
-//            System.out.println("connectedUsers: " + getConnectedUsers().size());
-//        }
-        for (Map.Entry<String, String> user : connectedUsers.entrySet()) {
-            try {
-                String IPAddressString = user.getKey();
-                IPAddressString = IPAddressString.replace("/", "");
-                InetAddress IPAddress = InetAddress.getByName(IPAddressString);
-                String name = user.getValue();
-                int port = getPort(IPAddressString);
+ ConcurrentHashMap<String, String> connectedUsers = getConnectedUsers();
+ //for printing amount of connected users if more than 0
+ //        if (getConnectedUsers().size() > 0) {     
+ //            System.out.println("connectedUsers: " + getConnectedUsers().size());
+ //        }
+ for (Map.Entry<String, String> user : connectedUsers.entrySet()) {
+ try {
+ String IPAddressString = user.getKey();
+ IPAddressString = IPAddressString.replace("/", "");
+ InetAddress IPAddress = InetAddress.getByName(IPAddressString);
+ String name = user.getValue();
+ int port = getPort(IPAddressString);
 
-                byte[] sendData = new byte[256];
-                String test = "THISISATEST;100;200";
+ byte[] sendData = new byte[256];
+ String test = "THISISATEST;100;200";
                 
-                sendData = test.getBytes();
-                try {
-                    DatagramSocket serverSocket = getServerSocket();
-                    if (port != 0) {
-                        DatagramPacket sendDataPacket
-                                = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-                        serverSocket.send(sendDataPacket);
-//                        System.out.println("sent: " + new String(sendDataPacket.getData()));
-                    }
-                } catch (Exception e) {
-                }
-            } catch (Exception e) {
-            }
-        }
+ sendData = test.getBytes();
+ try {
+ DatagramSocket serverSocket = getServerSocket();
+ if (port != 0) {
+ DatagramPacket sendDataPacket
+ = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+ serverSocket.send(sendDataPacket);
+ //                        System.out.println("sent: " + new String(sendDataPacket.getData()));
+ }
+ } catch (Exception e) {
+ }
+ } catch (Exception e) {
+ }
+ }
  */
