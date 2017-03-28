@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Install: minioning/core/Installer.class
+OpenIDE-Module-Localizing-Bundle: minioning/core/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Implementation-Version: 1.0-20170327
+OpenIDE-Module-Build-Version: 201703271436
+OpenIDE-Module: minioning.ServerCore
+OpenIDE-Module-Public-Packages: -
+OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1
+OpenIDE-Module-Display-Category: minioning
+OpenIDE-Module-Name: ServerCore
+OpenIDE-Module-Short-Description: <undefined>
+OpenIDE-Module-Long-Description: <undefined>
+OpenIDE-Module-Module-Dependencies: org.netbeans.api.annotations.commo
+ n/1 > 1.27.1, org.openide.util.lookup > 8.32.1, org.openide.modules >
+  7.47.1, minioning.ServerCommon > 1.0.0
+
