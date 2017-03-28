@@ -5,3 +5,6 @@
 /MinioningServer/Unit/target/
 /MinioningServer/ClientConnection/target/
 /MinioningServer/Movement/target/
+/MinioningServer/ServerCore/target/
+/MinioningServer/ServerCommon/target/
+/MinioningServer/Collision/target/

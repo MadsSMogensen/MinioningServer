@@ -87,9 +87,9 @@ public class Installer extends ModuleInstall {
                     String[] uniqueData = new String[data.length + 2];
                     InetAddress IPAddress = receivePacket.getAddress();
                     int port = receivePacket.getPort();
-                    uniqueData[0] = IPAddress.toString();
+                    uniqueData[0] = IPAddress.toString().replace("/", ""); //removes the unwanted "/"
                     uniqueData[1] = Integer.toString(port);
-                    for (int i = 1; i <= data.length; i++) { //Ryd op i det her for loop!
+                    for (int i = 1; i <= data.length; i++) {
                         uniqueData[i + 1] = data[i - 1];
                     }
                     getActualTempData().add(uniqueData);

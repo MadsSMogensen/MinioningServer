@@ -32,9 +32,13 @@ public class EventBus {
         return bus.size();
     }
     
-    public void putEvent(Events event, String[] data){
-        Event newEvent = new Event(event, data);
-        bus.put(UUID.randomUUID(), newEvent);
+    public void putEvent(Events eventType, String[] data){
+        Event newEvent = new Event(eventType, data);
+        bus.putIfAbsent(UUID.randomUUID(), newEvent);
+    }
+    
+    public void putEvent(Event event){
+        bus.putIfAbsent(UUID.randomUUID(), event);
     }
     
 //    public static void removeEvent(UUID ID){

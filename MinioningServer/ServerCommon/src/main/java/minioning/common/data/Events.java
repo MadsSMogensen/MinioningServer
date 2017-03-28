@@ -13,6 +13,8 @@ public enum Events implements Serializable{
     LOGINSUCCESS,
     LOGINFAILED,
     MOVEMENT,
+    PLAY,
+    TESTEVENT,
     FALSEEVENT
     
 }
