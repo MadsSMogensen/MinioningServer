@@ -4,11 +4,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.Event;
 import minioning.common.data.EventBus;
-import static minioning.common.data.Events.LOGIN;
-import static minioning.common.data.Events.PLAY;
-import static minioning.common.data.Events.TESTEVENT;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -105,7 +101,7 @@ public class GameServer implements Runnable {
      */
     @Override
     public void run() {
-        boolean test = true;
+        boolean test = false;
 
         while (true) {
             long currentTime = System.nanoTime();
@@ -118,6 +114,8 @@ public class GameServer implements Runnable {
                 update();
             }
             if (test) {
+                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
+                world.put(testEntity.getID(), testEntity);
 //                String[] data = new String[6];
 //                data[0] = "localhost";
 //                data[1] = "9876";

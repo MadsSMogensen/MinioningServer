@@ -119,6 +119,7 @@ public class Login implements IConnectionService {
                     getConnectedUsers().put(data[0], username);
                     getPortList().put(data[0], Integer.parseInt(data[1]));
                     EventBus.getInstance().putEvent(success);
+                    System.out.println("putting event LOGINSUCCESS");
                 } else {
                     //Wrong password
                     System.out.println("Wrong password");
