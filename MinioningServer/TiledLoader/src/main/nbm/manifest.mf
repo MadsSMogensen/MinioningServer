@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
+OpenIDE-Module-Install: minioning/tiledloader/MapInstaller.class
 OpenIDE-Module-Localizing-Bundle: minioning/tiledloader/Bundle.properties
 

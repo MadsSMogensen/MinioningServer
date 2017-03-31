@@ -13,27 +13,24 @@ import org.openide.util.lookup.ServiceProvider;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.services.ITiledLoaderService;
-
+import com.badlogic.gdx.ApplicationListener;
 /**
  *
  * @author Jakob
  */
 @ServiceProvider(service = ITiledLoaderService.class)
-public class TiledProcessor implements ITiledLoaderService {
+public class TiledProcessor implements ITiledLoaderService, ApplicationListener{
 
-    private static final String RESOURCE_ROOT = "../../../../TiledLoader/src/main/resources/";
+    private static final String RESOURCE_ROOT = "../../TiledLoader/src/main/resources/";
 
-    private Map tiledMap;
 
-    private ExternalFileHandleResolver fr = new ExternalFileHandleResolver();
-    private TmxMapLoader mloader = new TmxMapLoader(fr);
 
     @Override
     public void load(ConcurrentHashMap<UUID, Entity> entities) {
 
         // Load tiled map
 
-        tiledMap = mloader.load(RESOURCE_ROOT + "map/level1.tmx");
+//        tiledMap = mloader.load(RESOURCE_ROOT + "map/level1.tmx");
 
 //        // Convert Tiled objects to entities
 //        Iterable<MapObject> objects = tiledMap.getLayers().get("Collision").getObjects();
@@ -56,6 +53,38 @@ public class TiledProcessor implements ITiledLoaderService {
 //            // Place entity in world
 //            entities.putIfAbsent(id, e);
 //        }
+    }
+
+    @Override
+    public void create() {
+        
+        Map tiledMap = new TmxMapLoader().load("map/wilderness.tmx");
+        
+//             Map tiledMap;
+//
+//     ExternalFileHandleResolver fr = new ExternalFileHandleResolver();
+//     TmxMapLoader mloader = new TmxMapLoader(fr);
+//        tiledMap = mloader.load(RESOURCE_ROOT + "map/level1.tmx");
+    }
+
+    @Override
+    public void resize(int i, int i1) {
+    }
+
+    @Override
+    public void render() {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void dispose() {
     }
 
 }
