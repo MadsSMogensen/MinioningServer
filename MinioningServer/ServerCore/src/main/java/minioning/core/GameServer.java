@@ -128,9 +128,8 @@ public class GameServer implements Runnable {
     public void run() {
         boolean test = true;
 
-        System.out.println("1");
-        loadMap();
-        System.out.println("2");
+      
+      
         while (true) {
             long currentTime = System.nanoTime();
             double elapsedTime = (currentTime - lastTime) / 1000000000.0;
@@ -142,6 +141,7 @@ public class GameServer implements Runnable {
                 updateConnection();
                 create();
                 update();
+                  loadMap();
             }
             
             
