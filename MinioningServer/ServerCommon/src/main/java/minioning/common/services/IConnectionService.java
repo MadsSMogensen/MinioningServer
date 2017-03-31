@@ -3,7 +3,7 @@ package minioning.common.services;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.EventBus;
+import minioning.common.data.Event;
 
 
 /**
@@ -12,5 +12,5 @@ import minioning.common.data.EventBus;
  */
 public interface IConnectionService {
     
-    void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world);
+    void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world);
 }

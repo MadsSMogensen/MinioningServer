@@ -28,15 +28,20 @@ import org.openide.util.lookup.ServiceProvider;
 public class ClientOutput implements IConnectionService {
 
     @Override
-    public void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
-        for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
+    public void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
+//        for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
+        if (eventBus.size() > 0) {
+            System.out.println("output: " + eventBus.size());
+        }
+        for (Map.Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event event = entry.getValue();
-
+            System.out.println("Event found!: " + event.getType());
             switch (event.getType()) {
                 case LOGINSUCCESS:
+                    System.out.println("LOGINSUCCESS FOUND");
                     loginSuccess(event);
-                    EventBus.getInstance().getBus().remove(key);
+                    eventBus.remove(key);
                     break;
             }
         }
@@ -47,10 +52,10 @@ public class ClientOutput implements IConnectionService {
         try {
             String[] data = event.getData();
             byte[] sendData = new byte[256];
-            String resultPackage = /*data[2] + ";" + */ data[3];
-            sendData = resultPackage.getBytes();
+            String[] resultPackage = new String[1];
+            resultPackage[0] = data[3];
+            sendData = serializeString("LOGINSUCCESS", resultPackage);
             String IPAddressString = data[0].replace("/", "");
-//            String IPAddressString = data[0]; //used for localhost
             InetAddress IPAddress = InetAddress.getByName(IPAddressString);
             int port = Integer.parseInt(data[1]);
             DatagramSocket serverSocket = getServerSocket();
@@ -58,7 +63,6 @@ public class ClientOutput implements IConnectionService {
                     = new DatagramPacket(sendData, sendData.length, IPAddress, port);
             serverSocket.send(sendDataPacket);
             System.out.println("datapacket sent!");
-            System.out.println(resultPackage);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -82,10 +86,10 @@ public class ClientOutput implements IConnectionService {
 
                 byte[] sendData = new byte[256];
 
-                sendData = serialize("world", world);
+                sendData = serializeWorld("WORLD", world);
 
                 sendData(sendData, IPAddress, port);
-                
+
 //                try { //GAMMEL KODE
 //                    DatagramSocket serverSocket = getServerSocket();
 //                    if (port != 0) {
@@ -108,21 +112,38 @@ public class ClientOutput implements IConnectionService {
                 DatagramSocket serverSocket = getServerSocket();
                 DatagramPacket sendDataPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
                 serverSocket.send(sendDataPacket);
+//                System.out.println("packetSent");
             }
         } catch (Exception e) {
         }
     }
 
-    private byte[] serialize(String event, ConcurrentHashMap<UUID, Entity> world) throws IOException {
+    private byte[] serializeWorld(String event, ConcurrentHashMap<UUID, Entity> world) throws IOException {
         String[] stringWorld = stringify(world);
-        String[] resultWorld = new String[stringWorld.length+1];
+        String[] resultWorld = new String[stringWorld.length + 1];
         resultWorld[0] = event;
-        for(int i = 1; i < resultWorld.length; i++){
-            resultWorld[i] = stringWorld[i-1];
+        for (int i = 1; i < resultWorld.length; i++) {
+            resultWorld[i] = stringWorld[i - 1];
         }
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         final ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(stringWorld);
+        objectOutputStream.writeObject(resultWorld);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+        final byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+        return byteArray;
+    }
+
+    private byte[] serializeString(String event, String[] data) throws IOException {
+        String[] eventData = new String[data.length + 1];
+        eventData[0] = event;
+        for (int i = 1; i <= data.length; i++) {
+            eventData[i] = data[i - 1];
+        }
+        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        final ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(eventData);
         objectOutputStream.flush();
         objectOutputStream.close();
         final byte[] byteArray = byteArrayOutputStream.toByteArray();

@@ -4,11 +4,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.Event;
-import minioning.common.data.EventBus;
-import static minioning.common.data.Events.LOGIN;
-import static minioning.common.data.Events.PLAY;
-import static minioning.common.data.Events.TESTEVENT;
+import static minioning.common.data.EventBus.getBus;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -23,8 +19,17 @@ public class GameServer implements Runnable {
 
     // Internal & game data
     private ConcurrentHashMap<UUID, Entity> world = new ConcurrentHashMap(); //burde vi have singleton på den her liste??
+//    private EventBus eventBus = new EventBus();
 
     private final Lookup lookup = Lookup.getDefault();
+
+//    private EventBus getEventBus() {
+//        if (eventBus == null) {
+//            eventBus = new EventBus();
+//            System.out.println("new instance created");
+//        }
+//        return eventBus;
+//    }
 
     /*
     private void loadGamePlugins() {
@@ -44,26 +49,35 @@ public class GameServer implements Runnable {
         }
     }
      */
+<<<<<<< HEAD
     private void update() {
+=======
+    public void update() {
+//        System.out.println("eventBus.size upd: " + getEventBus().size());
+>>>>>>> master
 //      Process using all entity processing services
-        
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
             for (Entity e : world.values()) {
-                processor.process(EventBus.getInstance(), world, e);
+                processor.process(getBus(), world, e);
             }
         }
     }
 
+<<<<<<< HEAD
     private void updateConnection() {
+=======
+    public void updateConnection() {
+//        System.out.println("eventBus.size con: " + getEventBus().size());
+>>>>>>> master
         for (IConnectionService processor : getIConnectionServices()) {
-            processor.process(EventBus.getInstance(), world);
+            processor.process(getBus(), world);
         }
     }
 
     private void create() {
 //      Process using all entity processing services
         for (IEntityCreatorService creator : getIEntityCreatorServices()) {
-            creator.createNew(EventBus.getInstance(), world);
+            creator.createNew(getBus(), world);
         }
     }
     
@@ -129,11 +143,25 @@ public class GameServer implements Runnable {
 
             if (elapsedTime >= timeStep) {
                 lastTime = currentTime;
+//                System.out.println(getBus().size());
+//                System.out.println(world.size());
                 updateConnection();
                 create();
                 update();
             }
+            
+            
             if (test) {
+                
+                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
+                testEntity.setDx(500);
+                testEntity.setDy(500);
+                world.put(testEntity.getID(), testEntity);
+                
+                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
+                testCollisionEntity.setX(450);
+                testCollisionEntity.setY(450);
+                world.put(testCollisionEntity.getID(), testCollisionEntity);
 //                String[] data = new String[6];
 //                data[0] = "localhost";
 //                data[1] = "9876";
@@ -142,7 +170,7 @@ public class GameServer implements Runnable {
 //                data[4] = "hit";
 //                data[5] = "me";
 //                Event testEvent = new Event(LOGIN, data);
-//                EventBus.getInstance().putEvent(testEvent);
+//                EventBus.putEvent(testEvent);
 //                System.out.println("login put");
 //
 //                String[] data1 = new String[6];

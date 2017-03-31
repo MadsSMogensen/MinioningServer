@@ -7,8 +7,9 @@ package minioning.common.services;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.EventBus;
+import minioning.common.data.Event;
 
 /**
  *
@@ -16,6 +17,6 @@ import minioning.common.data.EventBus;
  */
 public interface IEntityProcessingService {
     
-    void process(EventBus events, Map<UUID, Entity> entities, Entity entity);
+    void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity);
     
 }

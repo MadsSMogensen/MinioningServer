@@ -3,9 +3,9 @@ package minioning.movement;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import minioning.common.data.Event;
-import minioning.common.data.EventBus;
 import static minioning.common.data.Events.*;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -18,8 +18,8 @@ import org.openide.util.lookup.ServiceProvider;
 public class MovementProcessor implements IEntityProcessingService {
 
     @Override
-    public void process(EventBus events, Map<UUID, Entity> entities, Entity entity) {
-        for (Entry<UUID, Event> eventEntry : events.getBus().entrySet()) {
+    public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
+        for (Entry<UUID, Event> eventEntry : eventBus.entrySet()) {
             UUID key = eventEntry.getKey();
             Event event = eventEntry.getValue();
             switch (event.getType()) {
@@ -34,9 +34,9 @@ public class MovementProcessor implements IEntityProcessingService {
                         entity.setDy(dy);
                     }
                     System.out.println("dx,dy after : " + entity.getDx() + "," + entity.getDy());
+                    eventBus.remove(key);
                     break;
             }
-            events.getBus().remove(key);
         }
 
         //Moves entities with a destination x,y != current x,y
@@ -45,7 +45,7 @@ public class MovementProcessor implements IEntityProcessingService {
     }
 
     private void setEntityMovement(Entity entity) {
-        if (entity.getX() != entity.getDx() || entity.getY() != entity.getDy()) {
+        if (Math.round(entity.getX()) != Math.round(entity.getDx()) || Math.round(entity.getY()) != Math.round(entity.getDy())) {
             float x = entity.getX();
             float dx = entity.getDx();
             float y = entity.getY();
@@ -63,7 +63,8 @@ public class MovementProcessor implements IEntityProcessingService {
             xSpeed = (float) Math.cos(direction) * speed;
             ySpeed = (float) Math.cos(direction) * speed;
 
-            System.out.println("speed: " + xSpeed + ", " + ySpeed);
+//            System.out.println("speed: " + xSpeed + ", " + ySpeed);
+//System.out.println("pos: " + x + "; " + y);
             entity.setxSpeed(xSpeed);
             entity.setySpeed(ySpeed);
         }
