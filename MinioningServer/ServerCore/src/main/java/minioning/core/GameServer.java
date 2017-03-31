@@ -49,12 +49,9 @@ public class GameServer implements Runnable {
         }
     }
      */
-<<<<<<< HEAD
-    private void update() {
-=======
+
     public void update() {
 //        System.out.println("eventBus.size upd: " + getEventBus().size());
->>>>>>> master
 //      Process using all entity processing services
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
             for (Entity e : world.values()) {
@@ -63,12 +60,9 @@ public class GameServer implements Runnable {
         }
     }
 
-<<<<<<< HEAD
-    private void updateConnection() {
-=======
+
     public void updateConnection() {
 //        System.out.println("eventBus.size con: " + getEventBus().size());
->>>>>>> master
         for (IConnectionService processor : getIConnectionServices()) {
             processor.process(getBus(), world);
         }
