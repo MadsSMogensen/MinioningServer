@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="minioning.ServerCore">
-    <module_version install_time="1490948742397" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1490955144325" last="true" origin="installer" specification_version="1.0">
         <file crc="3209712129" name="config/Modules/minioning-ServerCore.xml"/>
-        <file crc="2344983796" name="modules/minioning-ServerCore.jar"/>
+        <file crc="2507241025" name="modules/minioning-ServerCore.jar"/>
+        <file crc="2521439907" name="update_tracking/minioning-ServerCore.xml"/>
     </module_version>
 </module>

@@ -4,11 +4,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.Event;
-import minioning.common.data.EventBus;
 import static minioning.common.data.EventBus.getBus;
-import static minioning.common.data.EventBus.putEvent;
-import static minioning.common.data.Events.LOGIN;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -137,6 +133,11 @@ public class GameServer implements Runnable {
                 testEntity.setDx(500);
                 testEntity.setDy(500);
                 world.put(testEntity.getID(), testEntity);
+                
+                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
+                testCollisionEntity.setX(450);
+                testCollisionEntity.setY(450);
+                world.put(testCollisionEntity.getID(), testCollisionEntity);
 //                String[] data = new String[6];
 //                data[0] = "localhost";
 //                data[1] = "9876";
