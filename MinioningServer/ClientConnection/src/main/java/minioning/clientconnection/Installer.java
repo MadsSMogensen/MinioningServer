@@ -22,12 +22,11 @@ public class Installer extends ModuleInstall {
     private static DatagramSocket serverSocket;
     private static List<String[]> tempData;
 
-    public static List<String[]> getTempData() {
-        if (tempData == null) {
-            tempData = Collections.synchronizedList(new ArrayList<String[]>());
+    public synchronized static List<String[]> getTempData() {
+        List<String[]> copyOfTempData = Collections.synchronizedList(new ArrayList<String[]>());;
+        for(String[] data : getActualTempData()){
+            copyOfTempData.add(data);
         }
-        List<String[]> copyOfTempData = tempData;
-
         return copyOfTempData;
     }
     
@@ -50,7 +49,7 @@ public class Installer extends ModuleInstall {
     }
 
     public static void clearTempData() {
-        tempData.clear();
+        getActualTempData().clear();
     }
 
     @Override

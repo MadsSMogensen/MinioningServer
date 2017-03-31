@@ -3,10 +3,12 @@ package minioning.collision;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import minioning.common.data.Entity;
+import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -19,7 +21,7 @@ import org.openide.util.lookup.ServiceProvider;
 public class CollisionProcessor implements IEntityProcessingService {
 
     @Override
-    public void process(EventBus events, Map<UUID, Entity> entities, Entity entity) {
+    public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         
         float x = entity.getX();
         float y = entity.getY();

@@ -10,35 +10,44 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class EventBus {
     
-    private static EventBus instance = null;
-    private Map<UUID, Event> bus = new ConcurrentHashMap<UUID, Event>();
+    private static EventBus instance;
+    private static ConcurrentHashMap<UUID, Event> bus;
     
-    public EventBus(){
-        
+    private EventBus(){
+        bus = new ConcurrentHashMap<UUID, Event>();
+        System.out.println("BUSCREATED");
     }
     
-    public static EventBus getInstance() {
-        if (instance == null) {
-            instance = new EventBus();
+//    public static EventBus getInstance() {
+//        if (instance == null) {
+//            instance = new EventBus();
+//            System.out.println("new instance created");
+//        }
+//        return instance;
+//    }
+    
+    public static ConcurrentHashMap<UUID, Event> getBus(){
+        if(bus == null){
+            bus = new ConcurrentHashMap<UUID, Event>();
+            System.out.println("new bus instance created");
         }
-        return instance;
-    }
-    
-    public Map<UUID, Event> getBus(){
         return bus;
     }
     
-    public int size(){
-        return bus.size();
+    public static int size(){
+        return getBus().size();
     }
     
-    public void putEvent(Events eventType, String[] data){
+    public static void putEvent(Events eventType, String[] data){
         Event newEvent = new Event(eventType, data);
-        bus.putIfAbsent(UUID.randomUUID(), newEvent);
+        getBus().putIfAbsent(UUID.randomUUID(), newEvent);
     }
     
-    public void putEvent(Event event){
-        bus.putIfAbsent(UUID.randomUUID(), event);
+    public static void putEvent(Event event){
+        getBus().putIfAbsent(UUID.randomUUID(), event);
+    }
+    public static void removeEvent(UUID event){
+        getBus().remove(event);
     }
     
 //    public static void removeEvent(UUID ID){

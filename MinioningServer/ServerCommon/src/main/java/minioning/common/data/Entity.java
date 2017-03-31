@@ -11,11 +11,11 @@ import static minioning.common.data.EntityType.PLAYER;
  */
 public class Entity implements Serializable {
 
-    private final UUID ID = UUID.randomUUID();
+    private final UUID ID;
     private UUID owner;
     private String name;
-    private float x = 0;
-    private float y = 0;
+    private float x = 100;
+    private float y = 100;
     private float dx;
     private float dy;
     private float xSpeed;
@@ -27,6 +27,7 @@ public class Entity implements Serializable {
     public Entity(UUID owner, String name) {
         this.owner = owner;
         this.name = name;
+        this.ID = UUID.randomUUID();
     }
 
     public float getDirection() {

@@ -2,8 +2,6 @@ package minioning.core;
 
 //import java.util.concurrent.Executors;
 //import java.util.concurrent.ScheduledExecutorService;
-import static minioning.common.data.EventBus.getInstance;
-import minioning.common.data.Events;
 import org.openide.modules.ModuleInstall;
 
 /**

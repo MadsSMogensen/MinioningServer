@@ -36,7 +36,7 @@ public class Login implements IConnectionService {
     private static Path file;
 
     @Override
-    public synchronized void process(EventBus eventBus, ConcurrentHashMap<UUID, Entity> world) {
+    public synchronized void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
         if (file == null) {
             file = Paths.get("testMinioningFileCreation.txt");
             if(!file.toFile().isFile()){
@@ -48,21 +48,25 @@ public class Login implements IConnectionService {
                 }
             }     
         }
-        for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
+        for (Map.Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event value = entry.getValue();
-
+            System.out.println("Login test " + value.getType().toString());
             if (value.getType().equals(CREATEACCOUNT)) {
                 createLogin(value);
-                EventBus.getInstance().getBus().remove(key);
+                eventBus.remove(key);
             }
             if (value.getType().equals(LOGIN)) {
+                System.out.println("now the eventbusSize is: " + eventBus.size());
                 login(value, eventBus);
-                EventBus.getInstance().getBus().remove(key);
+                System.out.println("now the eventbusSize is: " + eventBus.size());
+//                EventBus.getInstance().getBus().remove(key);
+                eventBus.remove(key);
+                System.out.println("now the eventbusSize is: " + eventBus.size());
             }
             if (value.getType().equals(PLAY)) {
                 play(value);
-                EventBus.getInstance().getBus().remove(key);
+                eventBus.remove(key);
             }
         }
     }
@@ -89,7 +93,7 @@ public class Login implements IConnectionService {
         }
     }
 
-    private void login(Event value, EventBus eventBus) {
+    private void login(Event value, ConcurrentHashMap<UUID, Event> eventBus) {
         //[0]IPAddress
         //[1]port
         //[2]
@@ -118,7 +122,8 @@ public class Login implements IConnectionService {
                     Event success = new Event(LOGINSUCCESS, data);
                     getConnectedUsers().put(data[0], username);
                     getPortList().put(data[0], Integer.parseInt(data[1]));
-                    EventBus.getInstance().putEvent(success);
+//                    EventBus.getInstance().putEvent(success);
+                    EventBus.putEvent(success);
                     System.out.println("putting event LOGINSUCCESS");
                 } else {
                     //Wrong password
@@ -127,7 +132,7 @@ public class Login implements IConnectionService {
                     data[0] = value.getData()[0];
                     data[1] = "Wrong Password!";
                     Event wrongPass = new Event(LOGINFAILED, data);
-                    eventBus.getBus().put(UUID.randomUUID(), wrongPass);
+                    eventBus.put(UUID.randomUUID(), wrongPass);
 
                 }
             } else if (!username.equals(attemptUserName)) {
@@ -137,7 +142,7 @@ public class Login implements IConnectionService {
                 data[0] = value.getData()[0];
                 data[1] = "Wrong Username!";
                 Event wrongPass = new Event(LOGINFAILED, data);
-                eventBus.getBus().put(UUID.randomUUID(), wrongPass);
+                eventBus.put(UUID.randomUUID(), wrongPass);
             }
         }
     }
