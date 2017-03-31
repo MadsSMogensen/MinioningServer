@@ -130,6 +130,8 @@ public class GameServer implements Runnable {
             if (test) {
                 
                 Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
+                testEntity.setX(100);
+                testEntity.setY(100);
                 testEntity.setDx(500);
                 testEntity.setDy(500);
                 world.put(testEntity.getID(), testEntity);
@@ -137,7 +139,17 @@ public class GameServer implements Runnable {
                 Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
                 testCollisionEntity.setX(450);
                 testCollisionEntity.setY(450);
+                testCollisionEntity.setDx(100);
+                testCollisionEntity.setDy(100);
                 world.put(testCollisionEntity.getID(), testCollisionEntity);
+                
+                Entity fun = new Entity(UUID.randomUUID(), "FUN");
+                fun.setX(450);
+                fun.setY(100);
+                fun.setDx(100);
+                fun.setDy(450);
+                world.put(fun.getID(), fun);
+                
 //                String[] data = new String[6];
 //                data[0] = "localhost";
 //                data[1] = "9876";

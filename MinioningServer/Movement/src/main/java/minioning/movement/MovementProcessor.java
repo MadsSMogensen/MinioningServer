@@ -50,7 +50,7 @@ public class MovementProcessor implements IEntityProcessingService {
             float dx = entity.getDx();
             float y = entity.getY();
             float dy = entity.getDy();
-            float speed = entity.getSpeed();
+            float speed = entity.getCSpeed();
             float direction;
             float xSpeed;
             float ySpeed;
@@ -61,7 +61,9 @@ public class MovementProcessor implements IEntityProcessingService {
             
             //moving
             xSpeed = (float) Math.cos(direction) * speed;
-            ySpeed = (float) Math.cos(direction) * speed;
+            ySpeed = (float) Math.sin(direction) * speed;
+            System.out.println("xs: " + xSpeed);
+            System.out.println("ys: " + ySpeed);
 
 //            System.out.println("speed: " + xSpeed + ", " + ySpeed);
 //System.out.println("pos: " + x + "; " + y);
@@ -89,10 +91,10 @@ public class MovementProcessor implements IEntityProcessingService {
         if (direction < 0) {
             direction += 360;
         }
-        if(direction < 360){
+        if(direction > 360){
             direction -= 360;
         }
-
+        System.out.println("direction: " + direction);
         return direction;
     }
 

@@ -20,7 +20,8 @@ public class Entity implements Serializable {
     private float dy;
     private float xSpeed;
     private float ySpeed;
-    private float speed = 1;
+    private float cSpeed = 1;
+    private float mSpeed = 1;
     private float direction = 45;
     private EntityType type = PLAYER;
 
@@ -28,6 +29,8 @@ public class Entity implements Serializable {
         this.owner = owner;
         this.name = name;
         this.ID = UUID.randomUUID();
+        this.dx = x;
+        this.dy = y;
     }
 
     public float getDirection() {
@@ -39,7 +42,7 @@ public class Entity implements Serializable {
     }
 
     public Circle getBounds() {
-        return new Circle(x, y, 5);
+        return new Circle(x, y, 10);
     }
 
     public float getxSpeed() {
@@ -71,7 +74,7 @@ public class Entity implements Serializable {
         entityString += dy + ";";
         entityString += xSpeed + ";";
         entityString += ySpeed + ";";
-        entityString += speed + ";";
+        entityString += cSpeed + ";";
         entityString += direction;
         return entityString;
     }
@@ -133,12 +136,15 @@ public class Entity implements Serializable {
         this.y = y;
     }
 
-    public float getSpeed() {
-        return speed;
+    public float getCSpeed() {
+        return cSpeed;
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
+    public void setCSpeed(float speed) {
+        this.cSpeed = speed;
+    }
+    public float getMSpeed(){
+        return mSpeed;
     }
 
     public UUID getID() {

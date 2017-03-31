@@ -22,28 +22,41 @@ public class CollisionProcessor implements IEntityProcessingService {
 
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
-        
+
         float x = entity.getX();
         float y = entity.getY();
-        float xSpeed = entity.getxSpeed();
-        float ySpeed = entity.getySpeed();
+//        float xSpeed = entity.getxSpeed();
+//        float ySpeed = entity.getySpeed();
+        float speed = entity.getCSpeed();
+        UUID ID = entity.getID();
         int bounds = 160; //5*32 pixels
         Circle c1 = entity.getBounds();
         for (Entry<UUID, Entity> entry : entities.entrySet()) {
-            float entryX = entry.getValue().getX();
-            float entryY = entry.getValue().getY();
-            //only look for entities within 5*32 pixels
-            if (entryX <= x + bounds && entryX >= x - bounds && entryY <= y + bounds && entryY >= y - bounds) {
-                Circle c2 = entry.getValue().getBounds();
-                if (collide(c1, c2)) {
-                    xSpeed *= -1;
-                    ySpeed *= -1;
+            if (entry.getKey() != ID) {
+                float entryX = entry.getValue().getX();
+                float entryY = entry.getValue().getY();
+                //only look for entities within 5*32 pixels
+                if (entryX <= x + bounds && entryX >= x - bounds && entryY <= y + bounds && entryY >= y - bounds) {
+                    Circle c2 = entry.getValue().getBounds();
+                    if (collide(c1, c2)) {
+                        System.out.println("COLLISION DETECTED!");
+                        
+//                        entity.setDx(x);
+//                        entity.setDy(y);
+                        
+                        speed = -speed;
+                        entity.setCSpeed(speed);
 
-                    entity.setxSpeed(xSpeed);
-                    entity.setySpeed(ySpeed);
+//                    entity.setxSpeed(xSpeed);
+//                    entity.setySpeed(ySpeed);
+                    }else if(speed < 0){
+                        speed *= -1;
+                        entity.setCSpeed(speed);
+                    }
+
                 }
-
             }
+
         }
     }
 //    //returns true if c1 and c2 collides
@@ -53,9 +66,9 @@ public class CollisionProcessor implements IEntityProcessingService {
 //        double radiusSum = c2.getRadius() + c1.getRadius();
 //        return distanceX * distanceX + distanceY * distanceY <= radiusSum * radiusSum;
 //    }
-    
-    private boolean collide(Shape s1, Shape s2){
+
+    private boolean collide(Shape s1, Shape s2) {
         return s1.intersects(s2.getBoundsInLocal());
     }
-    
+
 }
