@@ -45,7 +45,7 @@ public class MovementProcessor implements IEntityProcessingService {
     }
 
     private void setEntityMovement(Entity entity) {
-        if (entity.getX() != entity.getDx() || entity.getY() != entity.getDy()) {
+        if (Math.round(entity.getX()) != Math.round(entity.getDx()) || Math.round(entity.getY()) != Math.round(entity.getDy())) {
             float x = entity.getX();
             float dx = entity.getDx();
             float y = entity.getY();

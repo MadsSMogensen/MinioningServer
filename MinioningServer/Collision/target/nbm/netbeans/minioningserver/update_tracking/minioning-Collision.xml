@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="minioning.Collision">
-    <module_version install_time="1490880032603" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1490948742742" last="true" origin="installer" specification_version="1.0">
         <file crc="3259991056" name="config/Modules/minioning-Collision.xml"/>
-        <file crc="3650462689" name="modules/minioning-Collision.jar"/>
-        <file crc="319733401" name="update_tracking/minioning-Collision.xml"/>
+        <file crc="2078984612" name="modules/minioning-Collision.jar"/>
     </module_version>
 </module>
