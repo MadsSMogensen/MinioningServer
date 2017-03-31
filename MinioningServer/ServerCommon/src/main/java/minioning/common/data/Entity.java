@@ -14,14 +14,14 @@ public class Entity implements Serializable {
     private final UUID ID;
     private UUID owner;
     private String name;
-    private float x = 100;
-    private float y = 100;
-    private float dx;
-    private float dy;
+    private int x = 100;
+    private int y = 100;
+    private int dx;
+    private int dy;
     private float xSpeed;
     private float ySpeed;
-    private float cSpeed = 1;
-    private float mSpeed = 1;
+    private float cSpeed = 5;
+    private float mSpeed = 5;
     private float direction = 45;
     private EntityType type = PLAYER;
 
@@ -42,7 +42,7 @@ public class Entity implements Serializable {
     }
 
     public Circle getBounds() {
-        return new Circle(x, y, 10);
+        return new Circle(x, y, 12);
     }
 
     public float getxSpeed() {
@@ -96,19 +96,19 @@ public class Entity implements Serializable {
         this.owner = owner;
     }
 
-    public float getDx() {
+    public int getDx() {
         return dx;
     }
 
-    public void setDx(float dx) {
+    public void setDx(int dx) {
         this.dx = dx;
     }
 
-    public float getDy() {
+    public int getDy() {
         return dy;
     }
 
-    public void setDy(float dy) {
+    public void setDy(int dy) {
         this.dy = dy;
     }
 
@@ -120,19 +120,19 @@ public class Entity implements Serializable {
         this.name = name;
     }
 
-    public float getX() {
+    public int getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public float getY() {
+    public int getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(int y) {
         this.y = y;
     }
 

@@ -3,7 +3,7 @@ OpenIDE-Module-Install: minioning/core/Installer.class
 OpenIDE-Module-Localizing-Bundle: minioning/core/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 OpenIDE-Module-Implementation-Version: 1.0-20170331
-OpenIDE-Module-Build-Version: 201703311115
+OpenIDE-Module-Build-Version: 201703311606
 OpenIDE-Module: minioning.ServerCore
 OpenIDE-Module-Public-Packages: -
 OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1

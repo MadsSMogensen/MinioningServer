@@ -26,9 +26,9 @@ public class MovementProcessor implements IEntityProcessingService {
                 case MOVEMENT:  //currently only setting destination x and y
                     System.out.println("dx,dy before: " + entity.getDx() + "," + entity.getDy());
                     String[] data = event.getData();
-                    UUID owner = UUID.fromString(data[0]);
-                    int dx = Integer.parseInt(data[1]);
-                    int dy = Integer.parseInt(data[2]);
+                    UUID owner = UUID.fromString(data[2]);
+                    int dx = Integer.parseInt(data[4]);
+                    int dy = Integer.parseInt(data[5].trim());
                     if (entity.getOwner().equals(owner)) {
                         entity.setDx(dx);
                         entity.setDy(dy);
@@ -41,60 +41,99 @@ public class MovementProcessor implements IEntityProcessingService {
 
         //Moves entities with a destination x,y != current x,y
         setEntityMovement(entity);
-        moveEntity(entity);
+
     }
 
     private void setEntityMovement(Entity entity) {
-        if (Math.round(entity.getX()) != Math.round(entity.getDx()) || Math.round(entity.getY()) != Math.round(entity.getDy())) {
-            float x = entity.getX();
-            float dx = entity.getDx();
-            float y = entity.getY();
-            float dy = entity.getDy();
+        if (!destinationReached(entity)) {
+            int x = entity.getX();
+            int dx = entity.getDx();
+            int y = entity.getY();
+            int dy = entity.getDy();
             float speed = entity.getCSpeed();
             float direction;
-            float xSpeed;
-            float ySpeed;
+            float xSpeed = entity.getxSpeed();
+            float ySpeed = entity.getySpeed();
 
             //calculate angle
+            direction = getDirection(x, dx, y, dy);
+
+            //Directional moving
+//            xSpeed = (float) Math.sin(direction) * speed;
+//            ySpeed = (float) Math.cos(direction) * speed;
+            //simpler moving
+            if (x < dx) {
+                xSpeed = entity.getCSpeed();
+            }
+            if (x > dx) {
+                xSpeed = -entity.getCSpeed();
+            }
+            if (y < dy) {
+                ySpeed = entity.getCSpeed();
+            }
+            if (y > dy) {
+                ySpeed = -entity.getCSpeed();
+            }
             
-            direction = getDirection(x,dx,y,dy);
             
-            //moving
-            xSpeed = (float) Math.cos(direction) * speed;
-            ySpeed = (float) Math.sin(direction) * speed;
-            System.out.println("xs: " + xSpeed);
-            System.out.println("ys: " + ySpeed);
+//            System.out.println("xs: " + xSpeed);
+//            System.out.println("ys: " + ySpeed);
 
 //            System.out.println("speed: " + xSpeed + ", " + ySpeed);
 //System.out.println("pos: " + x + "; " + y);
             entity.setxSpeed(xSpeed);
             entity.setySpeed(ySpeed);
+            moveEntity(entity);
         }
     }
 
+    private boolean destinationReached(Entity entity) {
+        return widthReached(entity) && heightReached(entity);
+    }
+    private boolean widthReached(Entity entity){
+        int x = entity.getX();
+        int dx = entity.getDx();
+        float offset = entity.getCSpeed();
+        if (x > dx - offset && x < dx + offset) {
+            return true;
+        }
+        return false;
+    }
+    private boolean heightReached(Entity entity){
+        int y = entity.getY();
+        int dy = entity.getDy();
+        float offset = entity.getCSpeed();
+        if (y > dy - offset && y < dy + offset) {
+            return true;
+        }
+        return false;
+    }
+
     private void moveEntity(Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float xSpeed = entity.getxSpeed();
-        float ySpeed = entity.getySpeed();
-
-        x += xSpeed;
-        y += ySpeed;
-
-        entity.setX(x);
-        entity.setY(y);
+        if (!widthReached(entity)) {
+            int x = entity.getX();
+            float xSpeed = entity.getxSpeed();
+            x += xSpeed;
+            entity.setX(x);
+        }
+        if(!heightReached(entity)){
+            int y = entity.getY();
+            float ySpeed = entity.getySpeed();
+            y += ySpeed;
+            entity.setY(y);
+        }
     }
 
     public float getDirection(float x1, float x2, float y1, float y2) {
         float direction = (float) Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
 
-        if (direction < 0) {
-            direction += 360;
-        }
-        if(direction > 360){
-            direction -= 360;
-        }
-        System.out.println("direction: " + direction);
+//        if (direction < 0) {
+//            direction += 360;
+//        }
+//        if (direction > 360) {
+//            direction -= 360;
+//        }
+//        System.out.println("direction: " + direction);
         return direction;
     }
 
