@@ -65,6 +65,7 @@
         <module>Collision</module>
         <module>ServerCore</module>
         <module>ServerCommon</module>
+        <module>TiledLoader</module>
     </modules>
 
     <properties>

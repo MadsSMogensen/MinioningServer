@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="48" tileheight="48" nextobjectid="57">
+ <tileset firstgid="1" name="tiny48" tilewidth="48" tileheight="48" tilecount="120" columns="8">
+  <image source="tiny48.png" width="384" height="720"/>
+ </tileset>
+ <layer name="regions" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,
+65,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,
+65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+65,0,0,0,0,10,0,0,0,65,0,0,0,0,0,0,75,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+65,0,0,0,0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="input_Decoration" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,92,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,0,0,0,
+78,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,
+59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,94,95,96,0,0,
+39,0,0,0,0,54,0,0,0,48,0,0,0,0,0,102,103,104,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,110,111,112,0,0,
+70,0,0,0,0,0,0,0,0,61,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="output_Collision">
+  <properties>
+   <property name="Collidable" type="bool" value="true"/>
+  </properties>
+  <object id="30" name="Column" x="288" y="528" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="31" name="Tree1" x="0" y="768" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="33" name="Gems" type="powerup" x="0" y="864" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="34" name="Tree2" x="0" y="576" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="35" name="Stone" x="0" y="672" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="38" name="Well" x="96" y="576" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="46" name="Bed" x="240" y="719" width="46" height="96"/>
+  <object id="47" name="Urn" x="432" y="624" width="48" height="48"/>
+  <object id="48" name="Statue1" x="432" y="769" width="46" height="46"/>
+  <object id="50" name="Torch" x="432" y="864" width="47" height="49"/>
+  <object id="55" name="LavaField" x="763" y="758" width="57" height="64">
+   <properties>
+    <property name="Hot" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

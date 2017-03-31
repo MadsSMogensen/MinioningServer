@@ -12,6 +12,7 @@ import static minioning.common.data.Events.TESTEVENT;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
+import minioning.common.services.ITiledLoaderService;
 import org.openide.util.Lookup;
 
 public class GameServer implements Runnable {
@@ -43,7 +44,7 @@ public class GameServer implements Runnable {
         }
     }
      */
-    public void update() {
+    private void update() {
 //      Process using all entity processing services
         
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
@@ -53,16 +54,24 @@ public class GameServer implements Runnable {
         }
     }
 
-    public void updateConnection() {
+    private void updateConnection() {
         for (IConnectionService processor : getIConnectionServices()) {
             processor.process(EventBus.getInstance(), world);
         }
     }
 
-    public void create() {
+    private void create() {
 //      Process using all entity processing services
         for (IEntityCreatorService creator : getIEntityCreatorServices()) {
             creator.createNew(EventBus.getInstance(), world);
+        }
+    }
+    
+    private void loadMap(){
+             for (ITiledLoaderService loader : getITiledLoaderServices()) {
+           
+                loader.load(world);
+            
         }
     }
 
@@ -78,6 +87,10 @@ public class GameServer implements Runnable {
         return lookup.lookupAll(IConnectionService.class);
     }
 
+        private Collection<? extends ITiledLoaderService> getITiledLoaderServices() {
+        return lookup.lookupAll(ITiledLoaderService.class);
+    }
+    
     /*
     private final LookupListener lookupListener = new LookupListener() {
         //Listens for changes in components, starting and stopping them when needed
@@ -107,6 +120,9 @@ public class GameServer implements Runnable {
     public void run() {
         boolean test = true;
 
+        System.out.println("1");
+        loadMap();
+        System.out.println("2");
         while (true) {
             long currentTime = System.nanoTime();
             double elapsedTime = (currentTime - lastTime) / 1000000000.0;

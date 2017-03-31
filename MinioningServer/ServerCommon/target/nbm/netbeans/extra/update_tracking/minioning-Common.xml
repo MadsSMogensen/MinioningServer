@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="minioning.Common">
-    <module_version install_time="1489667144307" last="true" origin="installer" specification_version="1.0.0">
-        <file crc="2469231490" name="config/Modules/minioning-Common.xml"/>
-        <file crc="612148424" name="modules/minioning-Common.jar"/>
-    </module_version>
-</module>
