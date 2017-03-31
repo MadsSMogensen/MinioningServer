@@ -51,18 +51,13 @@ public class Login implements IConnectionService {
         for (Map.Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event value = entry.getValue();
-            System.out.println("Login test " + value.getType().toString());
             if (value.getType().equals(CREATEACCOUNT)) {
                 createLogin(value);
                 eventBus.remove(key);
             }
             if (value.getType().equals(LOGIN)) {
-                System.out.println("now the eventbusSize is: " + eventBus.size());
                 login(value, eventBus);
-                System.out.println("now the eventbusSize is: " + eventBus.size());
-//                EventBus.getInstance().getBus().remove(key);
                 eventBus.remove(key);
-                System.out.println("now the eventbusSize is: " + eventBus.size());
             }
             if (value.getType().equals(PLAY)) {
                 play(value);
