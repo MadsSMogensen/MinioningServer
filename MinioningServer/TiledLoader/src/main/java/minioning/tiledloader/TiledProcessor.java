@@ -5,8 +5,7 @@
  */
 package minioning.tiledloader;
 
-import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
-import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.Gdx;
 import java.util.UUID;
 import minioning.common.data.Entity;
 import org.openide.util.lookup.ServiceProvider;
@@ -25,7 +24,7 @@ import com.badlogic.gdx.maps.MapProperties;
 @ServiceProvider(service = ITiledLoaderService.class)
 public class TiledProcessor implements ITiledLoaderService, ApplicationListener {
 
-    private static final String RESOURCE_ROOT = "../../TiledLoader/src/main/resources/";
+    private static final String RESOURCE_ROOT = "../../../TiledLoader/src/main/resources/";
     ConcurrentHashMap<UUID, Entity> entities;
     private Map tiledMap;
 
@@ -33,13 +32,15 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
 
     @Override
     public void load(ConcurrentHashMap<UUID, Entity> entities) {
-        create();
         this.entities = entities;
-        try {
+        create();
+        render();
+        
+        
+
             LoadAssets(this.tiledMap);
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
+        
+//
 
         entities = this.entities;
 //        System.out.println("Size " + entities.size());
@@ -49,7 +50,7 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
     private void LoadAssets(Map tiledMap) {
 
         // Convert Tiled objects to entities
-        System.out.println(this.tiledMap.getProperties());
+        System.out.println("test 3" + this.tiledMap.getLayers().getCount());
         
         try {
             System.out.println("Loading Objects");
@@ -91,12 +92,12 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
     public void render() {
         if (loaded == false) {
             System.out.println("Load map");
-            this.tiledMap = new TmxMapLoader().load("map/wilderness.tmx");
+            Map tiledMap = new TmxMapLoader().load(RESOURCE_ROOT + "map/wilderness.tmx");
             
             
             Map testMap = new TmxMapLoader().load("map/wilderness.tmx");
             
-            System.out.println("test 1" + testMap.getLayers().getCount());
+            System.out.println("test 1 " + testMap.getLayers().getCount());
             System.out.println("test 2" + this.tiledMap.getLayers().getCount());
             
             loaded = true;
