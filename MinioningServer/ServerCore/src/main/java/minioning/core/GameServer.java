@@ -5,6 +5,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import static minioning.common.data.EventBus.getBus;
+import minioning.common.data.GameData;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -13,7 +14,7 @@ import org.openide.util.Lookup;
 public class GameServer implements Runnable {
 
     // Constants
-    double timeStep = 0.1;
+    float timeStep = (float)0.1;
     long lastTime = System.nanoTime();
 
     // Internal & game data
@@ -115,8 +116,8 @@ public class GameServer implements Runnable {
 
         while (true) {
             long currentTime = System.nanoTime();
-            double elapsedTime = (currentTime - lastTime) / 1000000000.0;
-
+            float elapsedTime = (currentTime - lastTime) / (float)1000000000.0;
+            GameData.setDt(elapsedTime);
             if (elapsedTime >= timeStep) {
                 lastTime = currentTime;
 //                System.out.println(getBus().size());
@@ -129,12 +130,12 @@ public class GameServer implements Runnable {
             
             if (test) {
                 
-//                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
-//                testEntity.setX(100);
-//                testEntity.setY(100);
-//                testEntity.setDx(500);
-//                testEntity.setDy(500);
-//                world.put(testEntity.getID(), testEntity);
+                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
+                testEntity.setX(100);
+                testEntity.setY(100);
+                testEntity.setDx(500);
+                testEntity.setDy(500);
+                world.put(testEntity.getID(), testEntity);
 //                
 //                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
 //                testCollisionEntity.setX(450);

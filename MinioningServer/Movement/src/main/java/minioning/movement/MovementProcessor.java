@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
+import minioning.common.data.GameData;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -19,6 +20,9 @@ public class MovementProcessor implements IEntityProcessingService {
 
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
+        float dt = GameData.getDt();
+        
+        //check for new movement calls
         for (Entry<UUID, Event> eventEntry : eventBus.entrySet()) {
             UUID key = eventEntry.getKey();
             Event event = eventEntry.getValue();
@@ -38,11 +42,36 @@ public class MovementProcessor implements IEntityProcessingService {
                     break;
             }
         }
-
+        
         //Moves entities with a destination x,y != current x,y
-        setEntityMovement(entity);
-
+        processRotation(entity);
+        processMovement(entity, dt);
+//        setEntityMovement(entity);
     }
+    
+    private void processRotation(Entity entity){
+        int x = entity.getX();
+        int y = entity.getY();
+        int destinationX = entity.getDestinationX();
+        int destinationY = entity.getDestinationY();
+        
+        //get angle
+        float direction = getDirection(x, y, destinationX, destinationY);
+        //rotate left or right
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    private void processMovement(Entity entity, float dt){
+        
+    }
+    
+    
 
     private void setEntityMovement(Entity entity) {
         if (!destinationReached(entity)) {
@@ -126,10 +155,11 @@ public class MovementProcessor implements IEntityProcessingService {
 
     public float getDirection(float x1, float x2, float y1, float y2) {
         float direction = (float) Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
+        direction = direction % 360;
 
-//        if (direction < 0) {
-//            direction += 360;
-//        }
+        if (direction < 0) {
+            direction += 360;
+        }
 //        if (direction > 360) {
 //            direction -= 360;
 //        }

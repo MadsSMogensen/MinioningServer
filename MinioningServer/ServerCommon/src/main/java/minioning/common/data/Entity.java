@@ -18,11 +18,14 @@ public class Entity implements Serializable {
     private int y = 100;
     private int dx;
     private int dy;
+    private int destinationX;
+    private int destinationY;
     private float xSpeed;
     private float ySpeed;
     private float cSpeed = 5;
     private float mSpeed = 5;
     private float direction = 45;
+    private float radians;
     private EntityType type = PLAYER;
 
     public Entity(UUID owner, String name) {
@@ -33,6 +36,30 @@ public class Entity implements Serializable {
         this.dy = y;
     }
 
+    public float getRadians() {
+        return radians;
+    }
+
+    public void setRadians(float radians) {
+        this.radians = radians;
+    }
+
+    public int getDestinationX() {
+        return destinationX;
+    }
+
+    public void setDestinationX(int destinationX) {
+        this.destinationX = destinationX;
+    }
+
+    public int getDestinationY() {
+        return destinationY;
+    }
+
+    public void setDestinationY(int destinationY) {
+        this.destinationY = destinationY;
+    }
+    
     public float getDirection() {
         return direction;
     }
