@@ -129,7 +129,7 @@ public class GameServer implements Runnable {
         boolean test = true;
 
       
-      
+          loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             double elapsedTime = (currentTime - lastTime) / 1000000000.0;
@@ -141,7 +141,7 @@ public class GameServer implements Runnable {
                 updateConnection();
                 create();
                 update();
-                  loadMap();
+                System.out.println(world.size());
             }
             
             
