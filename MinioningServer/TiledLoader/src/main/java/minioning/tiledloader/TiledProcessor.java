@@ -32,16 +32,13 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
 
     @Override
     public void load(ConcurrentHashMap<UUID, Entity> entities) {
+        System.out.println("load");
         this.entities = entities;
-        create();
-        render();
-        
-        
+//        create();
+//        render();
 
-            LoadAssets(this.tiledMap);
-        
+//            LoadAssets(this.tiledMap);
 //
-
         entities = this.entities;
 //        System.out.println("Size " + entities.size());
 
@@ -51,7 +48,7 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
 
         // Convert Tiled objects to entities
         System.out.println("test 3" + this.tiledMap.getLayers().getCount());
-        
+
         try {
             System.out.println("Loading Objects");
             Iterable<MapObject> objects = tiledMap.getLayers().get("Collision").getObjects();
@@ -82,6 +79,8 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
 
     @Override
     public void create() {
+        System.out.println("create");
+        Map tiledMap = new TmxMapLoader().load(RESOURCE_ROOT + "map/wilderness.tmx");
     }
 
     @Override
@@ -90,21 +89,22 @@ public class TiledProcessor implements ITiledLoaderService, ApplicationListener 
 
     @Override
     public void render() {
-        if (loaded == false) {
-            System.out.println("Load map");
-            Map tiledMap = new TmxMapLoader().load(RESOURCE_ROOT + "map/wilderness.tmx");
-            
-            
-            Map testMap = new TmxMapLoader().load("map/wilderness.tmx");
-            
-            System.out.println("test 1 " + testMap.getLayers().getCount());
-            System.out.println("test 2" + this.tiledMap.getLayers().getCount());
-            
-            loaded = true;
-            if (!tiledMap.equals(null)) {
-                System.out.println("Map loaded");
-            }
-        }
+//        System.out.println("render");
+//        if (loaded == false) {
+//            System.out.println("Load map");
+//         
+//            
+//            
+//            Map testMap = new TmxMapLoader().load("map/wilderness.tmx");
+//            
+//            System.out.println("test 1 " + testMap.getLayers().getCount());
+//            System.out.println("test 2" + this.tiledMap.getLayers().getCount());
+//            
+//            loaded = true;
+//            if (!tiledMap.equals(null)) {
+//                System.out.println("Map loaded");
+//            }
+//        }
     }
 
     @Override

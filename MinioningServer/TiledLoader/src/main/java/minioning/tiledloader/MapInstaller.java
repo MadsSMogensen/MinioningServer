@@ -25,7 +25,7 @@ public class MapInstaller extends ModuleInstall {
         cfg.resizable = false;
 
         new LwjglApplication(new TiledProcessor(), cfg);
-
+        
     }
 
     @Override
