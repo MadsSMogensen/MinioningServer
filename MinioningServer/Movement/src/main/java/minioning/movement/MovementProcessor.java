@@ -20,33 +20,33 @@ public class MovementProcessor implements IEntityProcessingService {
 
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
-        float dt = GameData.getDt();
-        
-        //check for new movement calls
-        for (Entry<UUID, Event> eventEntry : eventBus.entrySet()) {
-            UUID key = eventEntry.getKey();
-            Event event = eventEntry.getValue();
-            switch (event.getType()) {
-                case MOVEMENT:  //currently only setting destination x and y
-                    System.out.println("dx,dy before: " + entity.getDx() + "," + entity.getDy());
-                    String[] data = event.getData();
-                    UUID owner = UUID.fromString(data[2]);
-                    int dx = Integer.parseInt(data[4]);
-                    int dy = Integer.parseInt(data[5].trim());
-                    if (entity.getOwner().equals(owner)) {
-                        entity.setDx(dx);
-                        entity.setDy(dy);
-                    }
-                    System.out.println("dx,dy after : " + entity.getDx() + "," + entity.getDy());
-                    eventBus.remove(key);
-                    break;
-            }
-        }
-        
-        //Moves entities with a destination x,y != current x,y
-        processRotation(entity);
-        processMovement(entity, dt);
-//        setEntityMovement(entity);
+//////        float dt = GameData.getDt();
+//////        
+//////        //check for new movement calls
+//////        for (Entry<UUID, Event> eventEntry : eventBus.entrySet()) {
+//////            UUID key = eventEntry.getKey();
+//////            Event event = eventEntry.getValue();
+//////            switch (event.getType()) {
+//////                case MOVEMENT:  //currently only setting destination x and y
+//////                    System.out.println("dx,dy before: " + entity.getDx() + "," + entity.getDy());
+//////                    String[] data = event.getData();
+//////                    UUID owner = UUID.fromString(data[2]);
+//////                    int dx = Integer.parseInt(data[4]);
+//////                    int dy = Integer.parseInt(data[5].trim());
+//////                    if (entity.getOwner().equals(owner)) {
+//////                        entity.setDx(dx);
+//////                        entity.setDy(dy);
+//////                    }
+//////                    System.out.println("dx,dy after : " + entity.getDx() + "," + entity.getDy());
+//////                    eventBus.remove(key);
+//////                    break;
+//////            }
+//////        }
+//////        
+//////        //Moves entities with a destination x,y != current x,y
+//////        processRotation(entity);
+//////        processMovement(entity, dt);
+////////        setEntityMovement(entity);
     }
     
     private void processRotation(Entity entity){

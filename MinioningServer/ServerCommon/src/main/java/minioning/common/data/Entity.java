@@ -14,26 +14,53 @@ public class Entity implements Serializable {
     private final UUID ID;
     private UUID owner;
     private String name;
-    private int x = 100;
-    private int y = 100;
+    private Position position = new Position(100, 100);
+    private Vector2D velocity = new Vector2D();
     private int dx;
     private int dy;
     private int destinationX;
     private int destinationY;
     private float xSpeed;
     private float ySpeed;
-    private float cSpeed = 5;
+    private float cSpeed = 50;
     private float mSpeed = 5;
     private float direction = 45;
     private float radians;
     private EntityType type = PLAYER;
+    private float deacceleration = 1;
 
     public Entity(UUID owner, String name) {
         this.owner = owner;
         this.name = name;
         this.ID = UUID.randomUUID();
-        this.dx = x;
-        this.dy = y;
+        this.dx = position.getX();
+        this.dy = position.getY();
+        this.destinationX = position.getX();
+        this.destinationY = position.getY();
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public float getDeacceleration() {
+        return deacceleration;
+    }
+
+    public void setDeacceleration(float deacceleration) {
+        this.deacceleration = deacceleration;
+    }
+    
+    public Vector2D getVelocity(){
+        return velocity;
+    }
+    
+    public void setVelocity(Vector2D newVector){
+        this.velocity = newVector;
     }
 
     public float getRadians() {
@@ -69,7 +96,7 @@ public class Entity implements Serializable {
     }
 
     public Circle getBounds() {
-        return new Circle(x, y, 12);
+        return new Circle(getX(), getY(), 12);
     }
 
     public float getxSpeed() {
@@ -95,8 +122,8 @@ public class Entity implements Serializable {
         entityString  = ID + ";";
         entityString += owner + ";";
         entityString += name + ";";
-        entityString += x + ";";
-        entityString += y + ";";
+        entityString += getX() + ";";
+        entityString += getY() + ";";
         entityString += dx + ";";
         entityString += dy + ";";
         entityString += xSpeed + ";";
@@ -110,8 +137,8 @@ public class Entity implements Serializable {
         String entityString;
         entityString = ID + ";";
         entityString += type.toString() + ";";
-        entityString += x + ";";
-        entityString += y + ";";
+        entityString += getX() + ";";
+        entityString += getY() + ";";
         return entityString;
     }
 
@@ -148,19 +175,19 @@ public class Entity implements Serializable {
     }
 
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     public void setX(int x) {
-        this.x = x;
+        position.setX(x);
     }
 
     public int getY() {
-        return y;
+        return position.getY();
     }
 
     public void setY(int y) {
-        this.y = y;
+        position.setY(y);
     }
 
     public float getCSpeed() {

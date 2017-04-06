@@ -130,12 +130,14 @@ public class GameServer implements Runnable {
             
             if (test) {
                 
-                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
-                testEntity.setX(100);
-                testEntity.setY(100);
-                testEntity.setDx(500);
-                testEntity.setDy(500);
-                world.put(testEntity.getID(), testEntity);
+//                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
+//                testEntity.setX(100);
+//                testEntity.setY(100);
+//                testEntity.setDx(500);
+//                testEntity.setDy(500);
+//                testEntity.setDestinationX(500);
+//                testEntity.setDestinationY(500);
+//                world.put(testEntity.getID(), testEntity);
 //                
 //                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
 //                testCollisionEntity.setX(450);
