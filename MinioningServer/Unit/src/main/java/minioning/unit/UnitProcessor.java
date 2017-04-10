@@ -18,7 +18,10 @@ public class UnitProcessor implements IEntityProcessingService {
 
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
-//        System.out.println("Processing: " + entity.getName());
+        //handle process for SKILLQ
+        /*
+        IP;PORT;SKILLQ;UUID (owner); mouseX; mouseY
+        */
     }
 
 }

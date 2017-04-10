@@ -15,6 +15,7 @@ public enum Events implements Serializable{
     MOVEMENT,
     PLAY,
     TESTEVENT,
+    SKILLQ,
     FALSEEVENT
     
 }

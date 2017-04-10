@@ -51,6 +51,11 @@ public class ClientInput implements IConnectionService {
                         System.out.println("putting event: " + eventType.toString());
                         EventBus.putEvent(eventType, data);
                         break;
+                    case "ABILITYQ":
+                        eventType = SKILLQ;
+                        System.out.println("putting event: " + eventType.toString());
+                        EventBus.putEvent(eventType, data);
+                        break;
                     default:
                         eventType = FALSEEVENT;
                         System.out.println("False Event");

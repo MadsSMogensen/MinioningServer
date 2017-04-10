@@ -139,6 +139,7 @@ public class Entity implements Serializable {
         entityString += type.toString() + ";";
         entityString += getX() + ";";
         entityString += getY() + ";";
+        entityString += getOwner().toString() + ";";
         return entityString;
     }
 
