@@ -9,6 +9,7 @@ import minioning.common.data.GameData;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
+import minioning.common.services.ITiledLoaderService;
 import org.openide.util.Lookup;
 
 public class GameServer implements Runnable {
@@ -49,6 +50,7 @@ public class GameServer implements Runnable {
         }
     }
      */
+
     public void update() {
 //        System.out.println("eventBus.size upd: " + getEventBus().size());
 //      Process using all entity processing services
@@ -59,6 +61,7 @@ public class GameServer implements Runnable {
         }
     }
 
+
     public void updateConnection() {
 //        System.out.println("eventBus.size con: " + getEventBus().size());
         for (IConnectionService processor : getIConnectionServices()) {
@@ -66,10 +69,18 @@ public class GameServer implements Runnable {
         }
     }
 
-    public void create() {
+    private void create() {
 //      Process using all entity processing services
         for (IEntityCreatorService creator : getIEntityCreatorServices()) {
             creator.createNew(getBus(), world);
+        }
+    }
+    
+    private void loadMap(){
+             for (ITiledLoaderService loader : getITiledLoaderServices()) {
+           
+                loader.load(world);
+            
         }
     }
 
@@ -85,6 +96,10 @@ public class GameServer implements Runnable {
         return lookup.lookupAll(IConnectionService.class);
     }
 
+        private Collection<? extends ITiledLoaderService> getITiledLoaderServices() {
+        return lookup.lookupAll(ITiledLoaderService.class);
+    }
+    
     /*
     private final LookupListener lookupListener = new LookupListener() {
         //Listens for changes in components, starting and stopping them when needed
@@ -114,6 +129,8 @@ public class GameServer implements Runnable {
     public void run() {
         boolean test = true;
 
+      
+          loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime) / (float)1000000000.0;
@@ -125,6 +142,7 @@ public class GameServer implements Runnable {
                 updateConnection();
                 create();
                 update();
+                System.out.println(world.size());
             }
             
             

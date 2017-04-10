@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="48" tileheight="48" nextobjectid="2924">
+ <tileset firstgid="1" name="tiny48" tilewidth="48" tileheight="48" tilecount="120" columns="8">
+  <image source="tiny48.png" width="384" height="720"/>
+ </tileset>
+ <layer name="Ground" width="20" height="20">
+  <data encoding="csv">
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,75,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65,
+65,65,65,65,65,65,65,65,65,74,65,65,65,65,65,65,65,65,65,65
+</data>
+ </layer>
+ <layer name="Decoration" width="20" height="20">
+  <data encoding="csv">
+59,59,59,59,59,0,0,0,0,0,0,0,0,0,0,59,59,59,59,59,
+0,0,0,0,0,59,0,0,0,0,0,0,0,0,0,0,0,59,0,0,
+0,0,0,0,59,0,0,92,0,0,0,92,0,0,0,0,0,0,0,0,
+39,0,0,0,0,0,0,100,0,0,0,100,0,0,0,0,0,0,0,78,
+39,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,78,
+39,39,39,0,0,0,0,92,0,0,0,92,0,0,0,0,0,78,78,78,
+39,39,39,0,0,0,0,100,0,0,0,100,0,0,0,0,0,78,78,78,
+39,39,39,0,0,0,0,0,0,0,0,0,0,0,0,70,0,0,78,78,
+39,39,39,0,0,0,0,92,0,0,0,92,0,0,0,0,0,78,78,78,
+39,39,39,0,0,0,0,100,0,0,0,100,0,0,70,0,78,78,78,78,
+39,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,78,0,
+39,39,0,0,0,0,0,92,0,0,0,92,0,0,0,0,0,0,0,0,
+39,39,0,0,0,0,0,100,0,0,0,100,0,0,0,0,0,0,0,0,
+39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,94,95,96,0,0,
+39,0,0,0,0,0,0,92,0,0,0,92,0,0,0,102,103,104,0,0,
+0,0,0,0,0,0,0,100,0,0,0,100,0,0,0,110,111,112,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,59,
+0,0,32,0,0,0,0,92,0,0,0,92,0,0,0,0,0,59,59,59,
+0,0,0,0,0,61,0,100,0,0,0,100,0,61,0,0,0,59,59,59,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,59,59,59,59
+</data>
+ </layer>
+ <objectgroup name="Collision">
+  <object id="2835" name="Column" x="336" y="144" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2836" name="Column" x="528" y="144" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2837" name="Column" x="336" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2838" name="Column" x="528" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2839" name="Column" x="336" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2840" name="Column" x="528" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2841" name="Column" x="336" y="576" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2842" name="Column" x="528" y="576" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2843" name="Column" x="336" y="720" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2844" name="Column" x="528" y="720" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2845" name="Column" x="336" y="864" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2846" name="Column" x="528" y="864" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2847" name="Tree2" x="912" y="144" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2848" name="Tree2" x="864" y="192" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2849" name="Tree2" x="912" y="192" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2850" name="Tree2" x="816" y="240" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2851" name="Tree2" x="864" y="240" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2852" name="Tree2" x="912" y="240" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2853" name="Tree2" x="816" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2854" name="Tree2" x="864" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2855" name="Tree2" x="912" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2856" name="Tree2" x="864" y="336" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2857" name="Tree2" x="912" y="336" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2858" name="Tree2" x="816" y="384" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2859" name="Tree2" x="864" y="384" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2860" name="Tree2" x="912" y="384" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2861" name="Tree2" x="768" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2862" name="Tree2" x="816" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2863" name="Tree2" x="864" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2864" name="Tree2" x="912" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2865" name="Tree2" x="816" y="480" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2866" name="Tree2" x="864" y="480" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2867" name="Well" x="96" y="816" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2868" name="Stone" x="0" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2869" name="Stone" x="48" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2870" name="Stone" x="96" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2871" name="Stone" x="144" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2872" name="Stone" x="192" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2873" name="Stone" x="720" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2874" name="Stone" x="768" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2875" name="Stone" x="816" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2876" name="Stone" x="864" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2877" name="Stone" x="912" y="0" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2878" name="Stone" x="240" y="48" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2879" name="Stone" x="816" y="48" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2880" name="Stone" x="192" y="96" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2881" name="Stone" x="912" y="768" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2882" name="Stone" x="816" y="816" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2883" name="Stone" x="864" y="816" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2884" name="Stone" x="912" y="816" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2885" name="Stone" x="816" y="864" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2886" name="Stone" x="864" y="864" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2887" name="Stone" x="912" y="864" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2888" name="Stone" x="768" y="912" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2889" name="Stone" x="816" y="912" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2890" name="Stone" x="864" y="912" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2891" name="Stone" x="912" y="912" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2892" name="Tree1" x="0" y="144" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2893" name="Tree1" x="0" y="192" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2894" name="Tree1" x="48" y="192" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2895" name="Tree1" x="0" y="240" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2896" name="Tree1" x="48" y="240" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2897" name="Tree1" x="96" y="240" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2898" name="Tree1" x="0" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2899" name="Tree1" x="48" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2900" name="Tree1" x="96" y="288" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2901" name="Tree1" x="0" y="336" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2902" name="Tree1" x="48" y="336" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2903" name="Tree1" x="96" y="336" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2904" name="Tree1" x="0" y="384" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2905" name="Tree1" x="48" y="384" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2906" name="Tree1" x="96" y="384" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2907" name="Tree1" x="0" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2908" name="Tree1" x="48" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2909" name="Tree1" x="96" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2910" name="Tree1" x="0" y="480" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2911" name="Tree1" x="48" y="480" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2912" name="Tree1" x="0" y="528" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2913" name="Tree1" x="48" y="528" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2914" name="Tree1" x="0" y="576" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2915" name="Tree1" x="48" y="576" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2916" name="Tree1" x="0" y="624" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2917" name="Tree1" x="0" y="672" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2918" name="LavaField" x="763" y="662" width="57" height="64">
+   <properties>
+    <property name="Hot" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="2919" name="Gems" type="powerup" x="720" y="336" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2920" name="Gems" type="powerup" x="672" y="432" width="48" height="48">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2921" name="Torch" x="240" y="864" width="47" height="49"/>
+  <object id="2922" name="Torch" x="624" y="864" width="47" height="49"/>
+ </objectgroup>
+</map>
