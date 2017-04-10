@@ -17,6 +17,7 @@ import minioning.common.data.Entity;
 import org.openide.util.lookup.ServiceProvider;
 import java.util.concurrent.ConcurrentHashMap;
 import javafx.beans.property.MapProperty;
+import minioning.common.data.Location;
 import minioning.common.services.ITiledLoaderService;
 import minioning.tiledloader.tiled.Map;
 import minioning.tiledloader.tiled.MapLayer;
@@ -67,8 +68,10 @@ public class TiledProcessor implements ITiledLoaderService {
                     MapObject newTile = test.getObjectAt(i * 32, j * 32);
                     try {
                         Entity newEntity = new Entity(UUID.randomUUID(), "MAP");
-                        newEntity.setX((float) newTile.getX() * 32);
-                        newEntity.setY((float) newTile.getY() * 32);
+                        newEntity.setX((int)Math.round(newTile.getX()) * 32);
+                        newEntity.setY((int)Math.round(newTile.getY()) * 32);
+//                        newEntity.setDoorTo((Location)newTile.getDoorTo());
+//                        newEntity.setLocation((Location)newTile.getLocation());
                         entities.putIfAbsent(newEntity.getID(), newEntity);
                     } catch (Exception e) {
                     }

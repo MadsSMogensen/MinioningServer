@@ -28,6 +28,8 @@ public class Entity implements Serializable {
     private float radians;
     private EntityType type = PLAYER;
     private float deacceleration = 1;
+    private Location location;
+    private Location doorTo;
 
     public Entity(UUID owner, String name) {
         this.owner = owner;
@@ -39,6 +41,46 @@ public class Entity implements Serializable {
         this.destinationY = position.getY();
     }
 
+    public Location getDoorTo() {
+        return doorTo;
+    }
+
+    public void setDoorTo(Location doorTo) {
+        this.doorTo = doorTo;
+    }
+
+    public float getcSpeed() {
+        return cSpeed;
+    }
+
+    public void setcSpeed(float cSpeed) {
+        this.cSpeed = cSpeed;
+    }
+
+    public float getmSpeed() {
+        return mSpeed;
+    }
+
+    public void setmSpeed(float mSpeed) {
+        this.mSpeed = mSpeed;
+    }
+
+    public EntityType getType() {
+        return type;
+    }
+
+    public void setType(EntityType type) {
+        this.type = type;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    
     public Position getPosition() {
         return position;
     }
@@ -140,6 +182,8 @@ public class Entity implements Serializable {
         entityString += getX() + ";";
         entityString += getY() + ";";
         entityString += getOwner().toString() + ";";
+        entityString += getLocation() + ";";
+        entityString += getDoorTo() + ";";
         return entityString;
     }
 

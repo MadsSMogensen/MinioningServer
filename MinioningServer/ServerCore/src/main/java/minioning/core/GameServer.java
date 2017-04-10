@@ -4,8 +4,10 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
+import minioning.common.data.EntityType;
 import static minioning.common.data.EventBus.getBus;
 import minioning.common.data.GameData;
+import minioning.common.data.Location;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
@@ -148,14 +150,17 @@ public class GameServer implements Runnable {
             
             if (test) {
                 
-//                Entity testEntity = new Entity(UUID.randomUUID(), "TEST");
-//                testEntity.setX(100);
-//                testEntity.setY(100);
+                Entity testEntity = new Entity(UUID.randomUUID(), "DOORTEST");
+                testEntity.setX(500);
+                testEntity.setY(500);
 //                testEntity.setDx(500);
 //                testEntity.setDy(500);
 //                testEntity.setDestinationX(500);
 //                testEntity.setDestinationY(500);
-//                world.put(testEntity.getID(), testEntity);
+                testEntity.setLocation(Location.wilderness);
+                testEntity.setDoorTo(Location.arena);
+                testEntity.setType(EntityType.DOOR);
+                world.put(testEntity.getID(), testEntity);
 //                
 //                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
 //                testCollisionEntity.setX(450);

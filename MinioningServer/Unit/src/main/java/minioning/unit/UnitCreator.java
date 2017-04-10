@@ -8,6 +8,7 @@ import minioning.common.data.Entity;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import static minioning.common.data.Events.CREATEPLAYER;
+import minioning.common.data.Location;
 import minioning.common.services.IEntityCreatorService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -41,6 +42,7 @@ public class UnitCreator implements IEntityCreatorService {
         UUID owner = UUID.fromString(data[2]);
         String name = data[4];
         Entity newEntity = new Entity(owner, name);
+        newEntity.setLocation(Location.wilderness);
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
     }

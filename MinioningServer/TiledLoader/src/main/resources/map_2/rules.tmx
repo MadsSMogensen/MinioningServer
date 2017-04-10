@@ -6,7 +6,7 @@
    <terrain name="New Terrain" tile="-1"/>
   </terraintypes>
  </tileset>
- <layer name="regions" width="20" height="20" visible="0">
+ <layer name="regions" width="20" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
