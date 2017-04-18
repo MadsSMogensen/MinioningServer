@@ -31,7 +31,8 @@ public class CollisionProcessor implements IEntityProcessingService {
 //        float ySpeed = entity.getySpeed();
         float speed = entity.getCSpeed();
         UUID ID = entity.getID();
-        int bounds = 160; //5*32 pixels
+        int bounds = 10; 
+//        int bounds = 160; //5*32 pixels
         Circle c1 = entity.getBounds();
         for (Entry<UUID, Entity> entry : entities.entrySet()) {
             if (entry.getKey() != ID) {
