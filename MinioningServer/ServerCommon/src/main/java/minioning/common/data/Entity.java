@@ -177,13 +177,15 @@ public class Entity implements Serializable {
     
     public String toClients(){
         String entityString;
-        entityString = ID + ";";
-        entityString += type.toString() + ";";
-        entityString += getX() + ";";
-        entityString += getY() + ";";
-        entityString += getOwner().toString() + ";";
-        entityString += getLocation() + ";";
-        entityString += getDoorTo() + ";";
+        entityString = ID + ";";                        //0
+        entityString += type.toString() + ";";          //1
+        entityString += getX() + ";";                   //2
+        entityString += getY() + ";";                   //3
+        entityString += getVelocity().getX() + ";";     //4
+        entityString += getVelocity().getY() + ";";     //5
+        entityString += getOwner().toString() + ";";    //7
+        entityString += getLocation() + ";";            //8
+        entityString += getDoorTo() + ";";              //9
         return entityString;
     }
 
