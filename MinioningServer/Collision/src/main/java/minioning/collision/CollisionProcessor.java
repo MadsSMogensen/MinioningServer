@@ -39,13 +39,15 @@ public class CollisionProcessor implements IEntityProcessingService {
                 float entryX = entry.getValue().getX();
                 float entryY = entry.getValue().getY();
                 //only look in the same world
+                
+                
                 if (entry.getValue().getLocation().equals(entity.getLocation())) {
                     //only look for entities within 5*32 pixels
                     if (entryX <= x + bounds && entryX >= x - bounds && entryY <= y + bounds && entryY >= y - bounds) {
                         Circle c2 = entry.getValue().getBounds();
                         
                         if (collide(c1, c2)) {
-                            System.out.println("COLLISION DETECTED!");
+//                            System.out.println("COLLISION DETECTED!");
                             if (entry.getValue().getType().equals(DOOR) && entity.getType().equals(PLAYER)) {
                                 entity.setLocation(entry.getValue().getDoorTo());
                                 entity.setX(500);
@@ -54,8 +56,8 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 entity.setDx(500);
                                 entity.setDy(200);
                             } else {
-                                speed = -speed;
-                                entity.setCSpeed(speed);
+//                                speed = -speed;
+//                                entity.setCSpeed(speed);
                             }
 
 //                        entity.setDx(x);
@@ -63,8 +65,8 @@ public class CollisionProcessor implements IEntityProcessingService {
 //                    entity.setxSpeed(xSpeed);
 //                    entity.setySpeed(ySpeed);
                         } else if (speed < 0) {
-                            speed *= -1;
-                            entity.setCSpeed(speed);
+//                            speed *= -1;
+//                            entity.setCSpeed(speed);
                         }
                     }
                 }

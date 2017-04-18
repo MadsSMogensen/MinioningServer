@@ -58,17 +58,17 @@ public class UnitCreator implements IEntityCreatorService {
 
         for (Entity entity : entities.values()) {
 
-            if (entity.getType() == PLAYER) {
+            if (entity.getType() == PORTAL) {
                 if (entity.getSpawnCount() < 1) {
-                    int x = 100;
-                    int y = 100;
+                    int x = entity.getX();
+                    int y = entity.getY();
 
                     UUID owner = UUID.randomUUID();
                     String name = "Enemy";
                     Entity newEntity = new Entity(owner, name);
                     newEntity.setX(x);
                     newEntity.setY(y);
-                    newEntity.setType(LAVA);
+                    newEntity.setType(ENEMY);
                     newEntity.setLocation(entity.getLocation());
                     entities.put(owner, newEntity);
                     entity.setSpawnCount(1);

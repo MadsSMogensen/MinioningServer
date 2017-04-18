@@ -161,41 +161,20 @@ public class GameServer implements Runnable {
                 testEntity.setDoorTo(Location.arena);
                 testEntity.setType(EntityType.DOOR);
                 world.put(testEntity.getID(), testEntity);
-//                
-//                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
-//                testCollisionEntity.setX(450);
-//                testCollisionEntity.setY(450);
-//                testCollisionEntity.setDx(100);
-//                testCollisionEntity.setDy(100);
-//                world.put(testCollisionEntity.getID(), testCollisionEntity);
-//                
-//                Entity fun = new Entity(UUID.randomUUID(), "FUN");
-//                fun.setX(450);
-//                fun.setY(100);
-//                fun.setDx(100);
-//                fun.setDy(450);
-//                world.put(fun.getID(), fun);
                 
-//                String[] data = new String[6];
-//                data[0] = "localhost";
-//                data[1] = "9876";
-//                data[2] = "";
-//                data[3] = "LOGIN";
-//                data[4] = "hit";
-//                data[5] = "me";
-//                Event testEvent = new Event(LOGIN, data);
-//                EventBus.putEvent(testEvent);
-//                System.out.println("login put");
-//
-//                String[] data1 = new String[6];
-//                data[0] = "localhost";
-//                data[1] = "9876";
-//                data[2] = UUID.randomUUID().toString();
-//                data[3] = "PLAY";
-//                data[4] = "hit";
-//                Event playEvent = new Event(PLAY, data);
-//                EventBus.getInstance().putEvent(playEvent);
-//                System.out.println("playEvent put");
+                
+                
+                Entity testPortal = new Entity(UUID.randomUUID(), "Portal");
+                testPortal.setX(300);
+                testPortal.setY(500);
+//                testEntity.setDx(500);
+//                testEntity.setDy(500);
+//                testEntity.setDestinationX(500);
+//                testEntity.setDestinationY(500);
+                testPortal.setLocation(Location.wilderness);
+                testPortal.setType(EntityType.PORTAL);
+                world.put(testPortal.getID(), testPortal);
+                
 
                 test = false;
             }
