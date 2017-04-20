@@ -5,9 +5,12 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
+import static minioning.common.data.EntityType.PLAYER;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
-import minioning.common.data.GameData;
+import static minioning.common.data.GameData.getDt;
+import minioning.common.data.Vector2D;
+import static minioning.common.data.Vector2D.getDirection;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -17,154 +20,84 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class MovementProcessor implements IEntityProcessingService {
-
+    
+//    float lastTime = 0;
+    float elapsed;
+    
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
-//////        float dt = GameData.getDt();
-//////        
-//////        //check for new movement calls
-//////        for (Entry<UUID, Event> eventEntry : eventBus.entrySet()) {
-//////            UUID key = eventEntry.getKey();
-//////            Event event = eventEntry.getValue();
-//////            switch (event.getType()) {
-//////                case MOVEMENT:  //currently only setting destination x and y
-//////                    System.out.println("dx,dy before: " + entity.getDx() + "," + entity.getDy());
-//////                    String[] data = event.getData();
-//////                    UUID owner = UUID.fromString(data[2]);
-//////                    int dx = Integer.parseInt(data[4]);
-//////                    int dy = Integer.parseInt(data[5].trim());
-//////                    if (entity.getOwner().equals(owner)) {
-//////                        entity.setDx(dx);
-//////                        entity.setDy(dy);
-//////                    }
-//////                    System.out.println("dx,dy after : " + entity.getDx() + "," + entity.getDy());
-//////                    eventBus.remove(key);
-//////                    break;
-//////            }
-//////        }
-//////        
-//////        //Moves entities with a destination x,y != current x,y
-//////        processRotation(entity);
-//////        processMovement(entity, dt);
-////////        setEntityMovement(entity);
+        elapsed = getDt();
+        //check the eventBus for movement events
+        for (Entry<UUID, Event> entry : eventBus.entrySet()) {
+            UUID key = entry.getKey();
+            Event event = entry.getValue();
+            String[] data = event.getData();
+            if (event.getType().equals(MOVEMENT)) {
+                UUID owner = UUID.fromString(data[2]);
+                if (owner.equals(entity.getOwner())) {
+                    int xGoal = Integer.parseInt(data[4]);
+                    int yGoal = Integer.parseInt(data[5]);
+                    /* OLD VECTOR MOVEMENT
+                    Vector2D vGoal = new Vector2D(x, y);
+                    entity.setvGoal(vGoal);
+                    */
+                    entity.setDx(xGoal);
+                    entity.setDy(yGoal);
+                    eventBus.remove(key);
+                }
+            }
+        }
+        if (entity.getType().equals(PLAYER)) {
+            processMovement(entity, elapsed);
+        }
     }
-    
-    private void processRotation(Entity entity){
+    /* OLD PROCESSMOVEMENT
+    private void processMovement(Entity entity, float elapsed) {
+        Vector2D currentPos = entity.getvPosition();
+        Vector2D goalPos = entity.getvGoal();
+        float speed = entity.getSpeed();
+        
+        float distance = Vector2D.distance(currentPos, goalPos);
+        Vector2D direction = goalPos.minus(currentPos);
+        direction.normalize();
+        if(distance < 0){
+           distance *= -1;
+        }
+        if (distance > 3 || distance < -3) {
+            Vector2D newPosition;
+            newPosition = direction.times(speed).times(elapsed);
+            entity.setvPosition(newPosition);
+            
+            entity.setVx(Math.round(entity.getVx() + newPosition.getX()));
+            
+            entity.setVy(Math.round(entity.getVy() + newPosition.getY()));
+        }
+    }*/
+    //mangler offset på ca 5 pixels hver retning!
+    private void processMovement(Entity entity, float elapsed) {
+        //get data
+        float speed = entity.getSpeed();
         int x = entity.getX();
         int y = entity.getY();
-        int destinationX = entity.getDestinationX();
-        int destinationY = entity.getDestinationY();
-        
-        //get angle
-        float direction = getDirection(x, y, destinationX, destinationY);
-        //rotate left or right
-        
-        
-        
-        
-        
+        float xReal = entity.getxReal();
+        float yReal = entity.getyReal();
+        int gx = entity.getDx();
+        int gy = entity.getDy();
+        //calculate directional unit vector
+        Vector2D direction = getDirection(x,gx,y,gy);
+        entity.setDirection(direction);
+        //calculate velocity vector (direction*speed)
+        Vector2D velocity = direction.times(speed);
+        entity.setVelocity(velocity);
+        //calculate new x & y position
+        xReal += velocity.getX() * elapsed;
+        yReal += velocity.getY() * elapsed;
+        x = Math.round(xReal);
+        y = Math.round(yReal);
+        //set the new position
+        entity.setX(x);
+        entity.setY(y);
+        entity.setxReal(xReal);
+        entity.setyReal(yReal);
     }
-    
-    
-    
-    private void processMovement(Entity entity, float dt){
-        
-    }
-    
-    
-
-    private void setEntityMovement(Entity entity) {
-        if (!destinationReached(entity)) {
-            int x = entity.getX();
-            int dx = entity.getDx();
-            int y = entity.getY();
-            int dy = entity.getDy();
-            float speed = entity.getCSpeed();
-            float direction;
-            float xSpeed = entity.getxSpeed();
-            float ySpeed = entity.getySpeed();
-
-            //calculate angle
-            direction = getDirection(x, dx, y, dy);
-
-            //Directional moving
-//            xSpeed = (float) Math.sin(direction) * speed;
-//            ySpeed = (float) Math.cos(direction) * speed;
-            //simpler moving
-            if (x < dx) {
-                xSpeed = entity.getCSpeed();
-            }
-            if (x > dx) {
-                xSpeed = -entity.getCSpeed();
-            }
-            if (y < dy) {
-                ySpeed = entity.getCSpeed();
-            }
-            if (y > dy) {
-                ySpeed = -entity.getCSpeed();
-            }
-            
-            
-//            System.out.println("xs: " + xSpeed);
-//            System.out.println("ys: " + ySpeed);
-
-//            System.out.println("speed: " + xSpeed + ", " + ySpeed);
-//System.out.println("pos: " + x + "; " + y);
-            entity.setxSpeed(xSpeed);
-            entity.setySpeed(ySpeed);
-            moveEntity(entity);
-        }
-    }
-
-    private boolean destinationReached(Entity entity) {
-        return widthReached(entity) && heightReached(entity);
-    }
-    private boolean widthReached(Entity entity){
-        int x = entity.getX();
-        int dx = entity.getDx();
-        float offset = entity.getCSpeed();
-        if (x > dx - offset && x < dx + offset) {
-            return true;
-        }
-        return false;
-    }
-    private boolean heightReached(Entity entity){
-        int y = entity.getY();
-        int dy = entity.getDy();
-        float offset = entity.getCSpeed();
-        if (y > dy - offset && y < dy + offset) {
-            return true;
-        }
-        return false;
-    }
-
-    private void moveEntity(Entity entity) {
-        if (!widthReached(entity)) {
-            int x = entity.getX();
-            float xSpeed = entity.getxSpeed();
-            x += xSpeed;
-            entity.setX(x);
-        }
-        if(!heightReached(entity)){
-            int y = entity.getY();
-            float ySpeed = entity.getySpeed();
-            y += ySpeed;
-            entity.setY(y);
-        }
-    }
-
-    public float getDirection(float x1, float x2, float y1, float y2) {
-        float direction = (float) Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
-        direction = direction % 360;
-
-        if (direction < 0) {
-            direction += 360;
-        }
-//        if (direction > 360) {
-//            direction -= 360;
-//        }
-//        System.out.println("direction: " + direction);
-        return direction;
-    }
-
 }

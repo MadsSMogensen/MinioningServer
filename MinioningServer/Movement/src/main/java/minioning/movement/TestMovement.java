@@ -19,7 +19,7 @@ public class TestMovement implements IEntityProcessingService {
 
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
-//        System.out.println("running");
+        /*
         float dt = GameData.getDt();
 
         //check for new movement calls
@@ -43,22 +43,22 @@ public class TestMovement implements IEntityProcessingService {
         }
         setMovement(entity);
         moveEntity(entity, dt);
-
+*/
     }
 
     private void setMovement(Entity entity) {
-        int x = entity.getX();
-        int y = entity.getY();
-        int destinationX = entity.getDestinationX();
-        int destinationY = entity.getDestinationY();
-
-        //the new vector to be added to the entitie's movement
-        float B = getAngle(x, destinationX, y, destinationY);
-        float A = 180 - 90 - B;
-        float b = entity.getCSpeed() * (float) Math.cos(A);
-        float a = b * (float) Math.tan(A);
-        Vector2D newVector = new Vector2D(a, b);
-        entity.setVelocity(newVector);
+//        int x = entity.getX();
+//        int y = entity.getY();
+//        int destinationX = entity.getDestinationX();
+//        int destinationY = entity.getDestinationY();
+//
+//        //the new vector to be added to the entitie's movement
+//        float B = getAngle(x, destinationX, y, destinationY);
+//        float A = 180 - 90 - B;
+//        float b = entity.getCSpeed() * (float) Math.cos(A);
+//        float a = b * (float) Math.tan(A);
+//        Vector2D newVector = new Vector2D(a, b);
+//        entity.setVelocity(newVector);
 
         //the deacceleration vector to be added to the entities movement
 //        entity.getVelocity().times(entity.getDeacceleration());

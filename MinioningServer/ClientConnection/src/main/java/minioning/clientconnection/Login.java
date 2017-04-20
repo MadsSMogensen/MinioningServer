@@ -35,14 +35,14 @@ public class Login implements IConnectionService {
     public synchronized void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
         if (file == null) {
             file = Paths.get("testMinioningFileCreation.txt");
-            if(!file.toFile().isFile()){
-               try {
+            if (!file.toFile().isFile()) {
+                try {
                     file.toFile().createNewFile();
                     System.out.println("file created");
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
-            }     
+            }
         }
         for (Map.Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
@@ -95,7 +95,7 @@ public class Login implements IConnectionService {
         String attemptPassword = value.getData()[5];
 
         Map<String, String> accounts = getAccounts();
-
+        boolean found = false;
         for (Map.Entry<String, String> accountEntry : accounts.entrySet()) {
             String username = accountEntry.getKey();
             String password = accountEntry.getValue();
@@ -116,6 +116,7 @@ public class Login implements IConnectionService {
 //                    EventBus.getInstance().putEvent(success);
                     EventBus.putEvent(success);
                     System.out.println("putting event LOGINSUCCESS");
+                    found = true;
                 } else {
                     //Wrong password
                     System.out.println("Wrong password");
@@ -126,15 +127,16 @@ public class Login implements IConnectionService {
                     eventBus.put(UUID.randomUUID(), wrongPass);
 
                 }
-            } else if (!username.equals(attemptUserName)) {
-                //Username not found
-                System.out.println("No such user");
-                String[] data = new String[2];
-                data[0] = value.getData()[0];
-                data[1] = "Wrong Username!";
-                Event wrongPass = new Event(LOGINFAILED, data);
-                eventBus.put(UUID.randomUUID(), wrongPass);
             }
+        }
+        if (!found) {
+            //Username not found
+            System.out.println("No such user");
+            String[] data = new String[2];
+            data[0] = value.getData()[0];
+            data[1] = "Wrong Username!";
+            Event wrongPass = new Event(LOGINFAILED, data);
+            eventBus.put(UUID.randomUUID(), wrongPass);
         }
     }
 
@@ -169,7 +171,7 @@ public class Login implements IConnectionService {
         String IPAddress = value.getData()[0];
 //        IPAddress = IPAddress.replace("/", "");
 //        int port = Integer.parseInt(value.getData()[1]);
-        
+
 //        String name = value.getData()[4];
         UUID ID = UUID.fromString(value.getData()[2]);
         String name = getConnectedUsers().get(IPAddress);

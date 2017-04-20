@@ -6,9 +6,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import minioning.common.data.Event;
-import minioning.common.data.EventBus;
 import static minioning.common.data.Events.CREATEPLAYER;
+import static minioning.common.data.Events.SKILLQ;
 import minioning.common.data.Location;
+import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityCreatorService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -31,7 +32,25 @@ public class UnitCreator implements IEntityCreatorService {
                 createPlayer(event, entities);
                 eventBus.remove(key);
             }
+            if(event.getType().equals(SKILLQ)){
+                System.out.println("SKILLQ found");
+                createSkill(event, entities);
+                eventBus.remove(key);
+            }
         }
+    }
+    
+    private void createSkill(Event event, Map<UUID, Entity> entities){
+        String[] data = event.getData();
+        for(int i = 0; i < data.length; i++){
+            System.out.println(data[i]);
+        }
+        UUID owner = UUID.fromString(data[2]);
+        Entity ownerEntity = getOwnerEntity(owner, entities);
+        Entity skillEntity = new Entity(owner, "skill");
+        skillEntity.setLocation(ownerEntity.getLocation());
+        skillEntity.setX(ownerEntity.getX());
+        skillEntity.setY(ownerEntity.getY());
     }
 
     private void createPlayer(Event event, Map<UUID, Entity> entities) {
@@ -45,5 +64,27 @@ public class UnitCreator implements IEntityCreatorService {
         newEntity.setLocation(Location.wilderness);
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
+    }
+    
+    
+    
+    private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world){
+        Entity entity;
+        for(Entry<UUID, Entity> entry : world.entrySet()){
+            UUID key = entry.getKey();
+            entity = entry.getValue();
+            if(entity.getOwner().equals(ownerID)){
+                return entity;
+            }
+        }
+        return null;
+    }
+    
+    private Vector2D direction(Entity skillEntity, float dx, float dy){
+        Vector2D velocity = new Vector2D();
+        /*
+        Use the on in Vector2D.class!
+        */
+        return velocity;
     }
 }
