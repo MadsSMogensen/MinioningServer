@@ -24,7 +24,7 @@ public class CollisionProcessor implements IEntityProcessingService {
     
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
-        
+        /*
         float x = entity.getX();
         float y = entity.getY();
 //        float xSpeed = entity.getxSpeed();
@@ -73,7 +73,7 @@ public class CollisionProcessor implements IEntityProcessingService {
                 
             }
         }
-    }
+    */}
 //    //returns true if c1 and c2 collides
 //    private boolean collide(Circle c1, Circle c2) {
 //        double distanceX = c2.centerXProperty().getValue() - c1.centerXProperty().getValue();

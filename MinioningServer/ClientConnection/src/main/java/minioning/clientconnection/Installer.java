@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import minioning.common.data.GameData;
 import org.openide.modules.ModuleInstall;
 
 /**
@@ -33,7 +34,7 @@ public class Installer extends ModuleInstall {
     public static DatagramSocket getServerSocket(){
         if(serverSocket == null){
             try {
-                serverSocket = new DatagramSocket(9876);
+                serverSocket = new DatagramSocket(GameData.getPort());
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -89,7 +90,7 @@ public class Installer extends ModuleInstall {
                     uniqueData[0] = IPAddress.toString().replace("/", ""); //removes the unwanted "/"
                     uniqueData[1] = Integer.toString(port);
                     for (int i = 1; i <= data.length; i++) {
-                        uniqueData[i + 1] = data[i - 1];
+                        uniqueData[i + 1] = data[i - 1].trim();
                     }
                     getActualTempData().add(uniqueData);
                 }

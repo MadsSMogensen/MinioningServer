@@ -5,15 +5,11 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import static minioning.common.data.EntityType.DOOR;
-import static minioning.common.data.EntityType.ENEMY;
-import static minioning.common.data.EntityType.LAVA;
-import static minioning.common.data.EntityType.PLAYER;
-import static minioning.common.data.EntityType.PORTAL;
 import minioning.common.data.Event;
-import minioning.common.data.EventBus;
 import static minioning.common.data.Events.CREATEPLAYER;
+import static minioning.common.data.Events.SKILLQ;
 import minioning.common.data.Location;
+import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityCreatorService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -28,7 +24,6 @@ public class UnitCreator implements IEntityCreatorService {
     public void createNew(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities) {
 //        System.out.println(events.getBus().size());
 //        System.out.println(EventBus.getInstance().size());
-    
         for (Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event event = entry.getValue();
@@ -37,13 +32,30 @@ public class UnitCreator implements IEntityCreatorService {
                 createPlayer(event, entities);
                 eventBus.remove(key);
             }
+            if(event.getType().equals(SKILLQ)){
+                System.out.println("SKILLQ found");
+                createSkill(event, entities);
+                eventBus.remove(key);
+            }
         }
-        createEnemy(entities);
+    }
+    
+    private void createSkill(Event event, Map<UUID, Entity> entities){
+        String[] data = event.getData();
+        for(int i = 0; i < data.length; i++){
+            System.out.println(data[i]);
+        }
+        UUID owner = UUID.fromString(data[2]);
+        Entity ownerEntity = getOwnerEntity(owner, entities);
+        Entity skillEntity = new Entity(owner, "skill");
+        skillEntity.setLocation(ownerEntity.getLocation());
+        skillEntity.setX(ownerEntity.getX());
+        skillEntity.setY(ownerEntity.getY());
     }
 
     private void createPlayer(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
-        for (int i = 0; i < data.length; i++) {
+        for(int i = 0; i < data.length; i++){
             System.out.println(data[i]);
         }
         UUID owner = UUID.fromString(data[2]);
@@ -53,28 +65,26 @@ public class UnitCreator implements IEntityCreatorService {
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
     }
-
-    private void createEnemy(Map<UUID, Entity> entities) {
-
-        for (Entity entity : entities.values()) {
-
-            if (entity.getType() == PORTAL) {
-                if (entity.getSpawnCount() < 1) {
-                    int x = entity.getX();
-                    int y = entity.getY();
-
-                    UUID owner = UUID.randomUUID();
-                    String name = "Enemy";
-                    Entity newEntity = new Entity(owner, name);
-                    newEntity.setX(x);
-                    newEntity.setY(y);
-                    newEntity.setType(ENEMY);
-                    newEntity.setLocation(entity.getLocation());
-                    entities.put(owner, newEntity);
-                    entity.setSpawnCount(1);
-                    System.out.println("Enemy created");
-                }
+    
+    
+    
+    private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world){
+        Entity entity;
+        for(Entry<UUID, Entity> entry : world.entrySet()){
+            UUID key = entry.getKey();
+            entity = entry.getValue();
+            if(entity.getOwner().equals(ownerID)){
+                return entity;
             }
         }
+        return null;
+    }
+    
+    private Vector2D direction(Entity skillEntity, float dx, float dy){
+        Vector2D velocity = new Vector2D();
+        /*
+        Use the on in Vector2D.class!
+        */
+        return velocity;
     }
 }
