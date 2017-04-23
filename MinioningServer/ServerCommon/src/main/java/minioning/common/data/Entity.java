@@ -18,10 +18,21 @@ public class Entity implements Serializable {
     private int y = 100;
     private float xReal = 100;
     private float yReal = 100;
+    private int nextx = 100;
+    private int nexty = 100;
+    private float nextxReal = 100;
+    private float nextyReal = 100;
     private Vector2D velocity = new Vector2D();
+    private Vector2D nextVelocity = new Vector2D();
+    private boolean collisionChecked = true;
+    private boolean hasMoved = false;
+    private boolean immobile;
+    private float size = 10;
     private float speed = 50;
     private int dx;
     private int dy;
+    private int previousDx;
+    private int previousDy;
     private Vector2D direction;
     private EntityType type = PLAYER;
     private float deacceleration = 1;
@@ -38,6 +49,106 @@ public class Entity implements Serializable {
 
     public float getSpeed() {
         return speed;
+    }
+
+    public float getSize() {
+        return size;
+    }
+
+    public void setSize(float size) {
+        this.size = size;
+    }
+
+    public boolean isImmobile() {
+        return immobile;
+    }
+
+    public void ignoreCollision(){
+        collisionChecked = true;
+    }
+
+    public int getPreviousDx() {
+        return previousDx;
+    }
+
+    public void setPreviousDx(int previousDx) {
+        this.previousDx = previousDx;
+    }
+
+    public int getPreviousDy() {
+        return previousDy;
+    }
+
+    public void setPreviousDy(int previousDy) {
+        this.previousDy = previousDy;
+    }
+    
+    public int getNextx() {
+        return nextx;
+    }
+
+    public void setNextx(int nextx) {
+        this.nextx = nextx;
+    }
+
+    public int getNexty() {
+        return nexty;
+    }
+
+    public void setNexty(int nexty) {
+        this.nexty = nexty;
+    }
+
+    public float getNextxReal() {
+        return nextxReal;
+    }
+
+    public void setNextxReal(float nextxReal) {
+        this.nextxReal = nextxReal;
+    }
+
+    public float getNextyReal() {
+        return nextyReal;
+    }
+
+    public void setNextyReal(float nextyReal) {
+        this.nextyReal = nextyReal;
+    }
+
+    public boolean isCollisionChecked() {
+        return collisionChecked;
+    }
+
+    public void setCollisionChecked(boolean collisionChecked) {
+        this.collisionChecked = collisionChecked;
+    }
+
+    public boolean isHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+    
+    public void hasMoved(){
+        this.hasMoved = true;
+    }
+    
+    public void setImmobile(boolean immobile) {
+        this.immobile = immobile;
+    }
+    
+    public void checkCollision(){
+        this.collisionChecked = false;
+    }
+
+    public Vector2D getNextVelocity() {
+        return nextVelocity;
+    }
+
+    public void setNextVelocity(Vector2D nextVelocity) {
+        this.nextVelocity = nextVelocity;
     }
 
     public float getxReal() {

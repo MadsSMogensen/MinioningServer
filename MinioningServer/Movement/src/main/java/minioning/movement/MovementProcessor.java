@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import static minioning.common.data.EntityType.PLAYER;
+import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
 import static minioning.common.data.GameData.getDt;
@@ -20,14 +20,25 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class MovementProcessor implements IEntityProcessingService {
-    
+
 //    float lastTime = 0;
     float elapsed;
-    
+
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         elapsed = getDt();
         //check the eventBus for movement events
+        //sets the goal coordinates for the entity
+        processEventBus(eventBus, entity);
+
+        //moves the unit according to preevaluated movement
+        if (!entity.isImmobile()) {
+            processMove(entity);
+            processNextMovement(entity, elapsed);
+        }
+    }
+
+    private void processEventBus(ConcurrentHashMap<UUID, Event> eventBus, Entity entity) {
         for (Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event event = entry.getValue();
@@ -35,45 +46,20 @@ public class MovementProcessor implements IEntityProcessingService {
             if (event.getType().equals(MOVEMENT)) {
                 UUID owner = UUID.fromString(data[2]);
                 if (owner.equals(entity.getOwner())) {
+                    entity.setPreviousDx(entity.getDx());
+                    entity.setPreviousDy(entity.getDy());
                     int xGoal = Integer.parseInt(data[4]);
                     int yGoal = Integer.parseInt(data[5]);
-                    /* OLD VECTOR MOVEMENT
-                    Vector2D vGoal = new Vector2D(x, y);
-                    entity.setvGoal(vGoal);
-                    */
                     entity.setDx(xGoal);
                     entity.setDy(yGoal);
                     eventBus.remove(key);
                 }
             }
         }
-        if (entity.getType().equals(PLAYER)) {
-            processMovement(entity, elapsed);
-        }
     }
-    /* OLD PROCESSMOVEMENT
-    private void processMovement(Entity entity, float elapsed) {
-        Vector2D currentPos = entity.getvPosition();
-        Vector2D goalPos = entity.getvGoal();
-        float speed = entity.getSpeed();
-        
-        float distance = Vector2D.distance(currentPos, goalPos);
-        Vector2D direction = goalPos.minus(currentPos);
-        direction.normalize();
-        if(distance < 0){
-           distance *= -1;
-        }
-        if (distance > 3 || distance < -3) {
-            Vector2D newPosition;
-            newPosition = direction.times(speed).times(elapsed);
-            entity.setvPosition(newPosition);
-            
-            entity.setVx(Math.round(entity.getVx() + newPosition.getX()));
-            
-            entity.setVy(Math.round(entity.getVy() + newPosition.getY()));
-        }
-    }*/
+
     //mangler offset på ca 5 pixels hver retning!
+    //currently not used!
     private void processMovement(Entity entity, float elapsed) {
         //get data
         float speed = entity.getSpeed();
@@ -84,7 +70,7 @@ public class MovementProcessor implements IEntityProcessingService {
         int gx = entity.getDx();
         int gy = entity.getDy();
         //calculate directional unit vector
-        Vector2D direction = getDirection(x,gx,y,gy);
+        Vector2D direction = getDirection(x, gx, y, gy);
         entity.setDirection(direction);
         //calculate velocity vector (direction*speed)
         Vector2D velocity = direction.times(speed);
@@ -99,5 +85,77 @@ public class MovementProcessor implements IEntityProcessingService {
         entity.setY(y);
         entity.setxReal(xReal);
         entity.setyReal(yReal);
+    }
+
+    //actual move
+    //calculate next movement
+    //check collision
+    //set movement til nextMovement
+    private void processNextMovement(Entity entity, float elapsed) {
+        //get the data
+        float speed = entity.getSpeed();
+        int x = entity.getX();
+        int y = entity.getY();
+        float xReal = entity.getxReal();
+        float yReal = entity.getyReal();
+        int nextX;
+        int nextY;
+        float nextxReal = xReal;
+        float nextyReal = yReal;
+        int goalx = entity.getDx();
+        int goaly = entity.getDy();
+        //check if goal is reached
+        if (!goalReached(entity, x, y, goalx, goaly)) {
+            //calculate directional unit vector
+            Vector2D direction = getDirection(x, goalx, y, goaly);
+            entity.setDirection(direction);
+            //calculate velocity vector (direction * speed)
+            Vector2D velocity = direction.times(speed);
+            entity.setVelocity(velocity);
+            //calculate next x & y position
+            nextxReal += velocity.getX() * elapsed;
+            nextyReal += velocity.getY() * elapsed;
+            nextX = Math.round(xReal);
+            nextY = Math.round(yReal);
+            //set next x & y position
+            entity.setNextx(nextX);
+            entity.setNexty(nextY);
+            entity.setNextxReal(nextxReal);
+            entity.setNextyReal(nextyReal);
+//        //entity set up for a collision check, if such exists
+//        if (entity.getPreviousDx() != entity.getDx() || entity.getPreviousDy() != entity.getDy()) {
+//            entity.checkCollision();
+//        }
+        }
+    }
+
+    private boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
+        return distance(x, y, goalx, goaly) < entity.getSize();
+    }
+
+    private float distance(int x1, int y1, int x2, int y2) {
+        float a = (x2-x1)*(x2-x1);
+        float b = (y2-y1)*(y2-y1);
+        float distance = (float)Math.sqrt(a+b);
+        return distance;
+    }
+
+    private void processMove(Entity entity) {
+//        if (entity.isCollisionChecked()) {
+        //get the data
+        int x = entity.getNextx();
+        int y = entity.getNexty();
+        float xReal = entity.getNextxReal();
+        float yReal = entity.getNextyReal();
+        //set the new position
+        entity.setX(x);
+        entity.setY(y);
+        entity.setxReal(xReal);
+        entity.setyReal(yReal);
+//            //set unit up for a new collision check
+//            entity.hasMoved();
+//        } else {
+//            entity.ignoreCollision();
+//        }
     }
 }

@@ -150,15 +150,16 @@ public class GameServer implements Runnable {
             
             
             if (test) {
-                /*DOOR
+                //DOOR
                 Entity testEntity = new Entity(UUID.randomUUID(), "DOORTEST");
                 testEntity.setX(500);
                 testEntity.setY(500);
                 testEntity.setLocation(Location.wilderness);
                 testEntity.setDoorTo(Location.arena);
                 testEntity.setType(EntityType.DOOR);
+                testEntity.setImmobile(true);
                 world.put(testEntity.getID(), testEntity);
-                */
+                
 //                
 //                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
 //                testCollisionEntity.setX(450);
