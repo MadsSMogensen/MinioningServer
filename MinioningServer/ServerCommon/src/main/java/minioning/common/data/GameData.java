@@ -6,7 +6,8 @@ package minioning.common.data;
  */
 public class GameData {
     private static float dt;
-    private static int port = 80;
+//    private static int port = 80;
+    private static int port = 9876;
 
     public static float getDt() {
         return dt;

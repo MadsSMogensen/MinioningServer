@@ -124,7 +124,7 @@ public class Login implements IConnectionService {
                     data[0] = value.getData()[0];
                     data[1] = "Wrong Password!";
                     Event wrongPass = new Event(LOGINFAILED, data);
-                    eventBus.put(UUID.randomUUID(), wrongPass);
+//                    eventBus.put(UUID.randomUUID(), wrongPass);
 
                 }
             }
@@ -136,7 +136,7 @@ public class Login implements IConnectionService {
             data[0] = value.getData()[0];
             data[1] = "Wrong Username!";
             Event wrongPass = new Event(LOGINFAILED, data);
-            eventBus.put(UUID.randomUUID(), wrongPass);
+//            eventBus.put(UUID.randomUUID(), wrongPass);
         }
     }
 

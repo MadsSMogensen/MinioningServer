@@ -29,19 +29,19 @@ public class CollisionProcessor implements IEntityProcessingService {
         UUID ID = entity.getID();
         //don't check immobile entities
         if (!entity.isImmobile()) {
-            System.out.println("checking collision for: " + entity.getName());
+//            System.out.println("checking collision for: " + entity.getName());
             for (Entry<UUID, Entity> entry : entities.entrySet()) {
                 //don't check collision with itself
                 if (entry.getKey() != ID) {
                     Entity entryEntity = entry.getValue();
                     //Only look in the same world
-                    System.out.println("checking if other entity is in same world");
+//                    System.out.println("checking if other entity is in same world");
                     if (entryEntity.getLocation().equals(entity.getLocation())) {
                         //check if colliding
-                        System.out.println("checking if other entity is colliding with the above");
+//                        System.out.println("checking if other entity is colliding with the above");
                         if (colliding(entryEntity, entity)) {
                             //collision detected!
-                            System.out.println("collision detected!");
+//                            System.out.println("collision detected!");
                             int x = entity.getX();
                             int y = entity.getY();
                             int entryx = entryEntity.getX();
@@ -51,10 +51,10 @@ public class CollisionProcessor implements IEntityProcessingService {
                             
                             entity.setNextVelocity(entity.getNextVelocity().plus(collisionVector));
                         }else{
-                            System.out.println("not collided!:");
-                            System.out.println("entity: " + entity.getX() + "," + entity.getY() + ", size: " + entity.getSize());
-                            System.out.println("entry : " + entryEntity.getX() + "," + entryEntity.getY() + ", size: " + entryEntity.getSize());
-                            System.out.println("---------------------");
+//                            System.out.println("not collided!:");
+//                            System.out.println("entity: " + entity.getX() + "," + entity.getY() + ", size: " + entity.getSize());
+//                            System.out.println("entry : " + entryEntity.getX() + "," + entryEntity.getY() + ", size: " + entryEntity.getSize());
+//                            System.out.println("---------------------");
                         }
                     }
                 }
@@ -145,14 +145,14 @@ public class CollisionProcessor implements IEntityProcessingService {
         float entityLowery = vy-size;
         float entityUppery = vy+size;
         if(entityUpperx >= lowerx && entityLowerx <= upperx){
-            System.out.println("x is within now!");
+//            System.out.println("x is within now!");
             //checking vy is within bounds
             if(entityUppery >= lowery && entityLowery <= uppery){
-                System.out.println("y is within now!");
+//                System.out.println("y is within now!");
                 return true; 
             }
         }
-        System.out.println("checking collision: " + vx + "," + vy + " ; " + entryvx + "," + entryvy);
+//        System.out.println("checking collision: " + vx + "," + vy + " ; " + entryvx + "," + entryvy);
         return false;
     }
 
