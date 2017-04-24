@@ -27,6 +27,7 @@ public class CollisionProcessor implements IEntityProcessingService {
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         UUID ID = entity.getID();
+<<<<<<< HEAD
         //don't check immobile entities
         if (!entity.isImmobile()) {
 //            System.out.println("checking collision for: " + entity.getName());
@@ -55,6 +56,44 @@ public class CollisionProcessor implements IEntityProcessingService {
 //                            System.out.println("entity: " + entity.getX() + "," + entity.getY() + ", size: " + entity.getSize());
 //                            System.out.println("entry : " + entryEntity.getX() + "," + entryEntity.getY() + ", size: " + entryEntity.getSize());
 //                            System.out.println("---------------------");
+=======
+        int bounds = 10; 
+//        int bounds = 160; //5*32 pixels
+        Circle c1 = entity.getBounds();
+        for (Entry<UUID, Entity> entry : entities.entrySet()) {
+            if (entry.getKey() != ID) {
+                float entryX = entry.getValue().getX();
+                float entryY = entry.getValue().getY();
+                //only look in the same world
+                
+                
+                if (entry.getValue().getLocation().equals(entity.getLocation())) {
+                    //only look for entities within 5*32 pixels
+                    if (entryX <= x + bounds && entryX >= x - bounds && entryY <= y + bounds && entryY >= y - bounds) {
+                        Circle c2 = entry.getValue().getBounds();
+                        
+                        if (collide(c1, c2)) {
+//                            System.out.println("COLLISION DETECTED!");
+                            if (entry.getValue().getType().equals(DOOR) && entity.getType().equals(PLAYER)) {
+                                entity.setLocation(entry.getValue().getDoorTo());
+                                entity.setX(500);
+                                entity.setY(200);
+                                entity.setVelocity(null);
+                                entity.setDx(500);
+                                entity.setDy(200);
+                            } else {
+//                                speed = -speed;
+//                                entity.setCSpeed(speed);
+                            }
+
+//                        entity.setDx(x);
+//                        entity.setDy(y);
+//                    entity.setxSpeed(xSpeed);
+//                    entity.setySpeed(ySpeed);
+                        } else if (speed < 0) {
+//                            speed *= -1;
+//                            entity.setCSpeed(speed);
+>>>>>>> master
                         }
                     }
                 }

@@ -17,6 +17,7 @@ import minioning.common.data.Entity;
 import org.openide.util.lookup.ServiceProvider;
 import java.util.concurrent.ConcurrentHashMap;
 import javafx.beans.property.MapProperty;
+import minioning.common.data.EntityType;
 import minioning.common.data.Location;
 import minioning.common.services.ITiledLoaderService;
 import minioning.tiledloader.tiled.Map;
@@ -57,7 +58,10 @@ public class TiledProcessor implements ITiledLoaderService {
             Map tiledMap = new TMXMapReader().readMap(file.toFile().getAbsolutePath());
             System.out.println(tiledMap.getLayerCount());
 
-            MapLayer mapLayer = tiledMap.getLayer(0);
+            for(int i = 0; i < tiledMap.getLayerCount(); i++){
+            System.out.println("Layer: "+ i + "Name:" + tiledMap.getLayer(0).getName());
+            }
+            MapLayer mapLayer = tiledMap.getLayer(2);
             ObjectGroup test = (ObjectGroup) mapLayer;
             int height = tiledMap.getHeight();
             int width = tiledMap.getWidth();
@@ -67,9 +71,19 @@ public class TiledProcessor implements ITiledLoaderService {
 
                     MapObject newTile = test.getObjectAt(i * 32, j * 32);
                     try {
-                        Entity newEntity = new Entity(UUID.randomUUID(), "MAP");
-                        newEntity.setX((int)Math.round(newTile.getX()) * 32);
-                        newEntity.setY((int)Math.round(newTile.getY()) * 32);
+                        
+                        String name = "Map";
+                        UUID owner = UUID.randomUUID();
+                        int x = (int)Math.round(newTile.getX()) * 32;
+                        int y = (int)Math.round(newTile.getY()) * 32;
+                        
+                        
+                        Entity newEntity = new Entity(owner, name);
+                        newEntity.setLocation(Location.wilderness);
+                        newEntity.setX(x);
+                        newEntity.setY(y);
+                        newEntity.setType(EntityType.valueOf(newTile.getType()));
+                        System.out.println(newEntity.getType());
 //                        newEntity.setDoorTo((Location)newTile.getDoorTo());
 //                        newEntity.setLocation((Location)newTile.getLocation());
                         entities.putIfAbsent(newEntity.getID(), newEntity);

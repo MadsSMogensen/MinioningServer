@@ -38,6 +38,15 @@ public class Entity implements Serializable {
     private float deacceleration = 1;
     private Location location;
     private Location doorTo;
+    private int SpawnCount = 0;
+
+    public int getSpawnCount() {
+        return SpawnCount;
+    }
+
+    public void setSpawnCount(int SpawnCount) {
+        this.SpawnCount = SpawnCount;
+    }
 
     public Entity(UUID owner, String name) {
         this.owner = owner;
@@ -261,6 +270,7 @@ public class Entity implements Serializable {
         entityString += getOwner().toString() + ";";
         entityString += getLocation() + ";";
         entityString += getDoorTo() + ";";
+        entityString += getType()+ ";";
         return entityString;
     }
 
