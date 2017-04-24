@@ -18,6 +18,7 @@ import org.openide.util.lookup.ServiceProvider;
 import java.util.concurrent.ConcurrentHashMap;
 import javafx.beans.property.MapProperty;
 import minioning.common.data.EntityType;
+import minioning.common.data.GameData;
 import minioning.common.data.Location;
 import minioning.common.services.ITiledLoaderService;
 import minioning.tiledloader.tiled.Map;
@@ -72,20 +73,21 @@ public class TiledProcessor implements ITiledLoaderService {
                     MapObject newTile = test.getObjectAt(i * 32, j * 32);
                     try {
                         
-                        String name = "Map";
+                        //String name = "Map";
+                        String name = "";
                         UUID owner = UUID.randomUUID();
-                        int x = (int)Math.round(newTile.getX()) * 32;
-                        int y = (int)Math.round(newTile.getY()) * 32;
+                        int x = (int)Math.round(newTile.getX()) +16;
+                        int y = (int)Math.round(newTile.getY()) +16;
+                        y = GameData.getGameHeight() - y;
                         
                         
-                        Entity newEntity = new Entity(owner, name);
+                        Entity newEntity = new Entity(owner, name, x, y);
                         newEntity.setLocation(Location.wilderness);
-                        newEntity.setX(x);
-                        newEntity.setY(y);
                         newEntity.setType(EntityType.valueOf(newTile.getType()));
-                        System.out.println(newEntity.getType());
+                        newEntity.setImmobile(true);
 //                        newEntity.setDoorTo((Location)newTile.getDoorTo());
-//                        newEntity.setLocation((Location)newTile.getLocation());
+                        System.out.println(newEntity.getType());
+                        
                         entities.putIfAbsent(newEntity.getID(), newEntity);
                     } catch (Exception e) {
                     }

@@ -14,6 +14,7 @@ import minioning.common.data.Event;
 import minioning.common.data.EventBus;
 import minioning.common.data.GameData;
 import static minioning.common.data.GameData.getDt;
+import minioning.common.data.Location;
 import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -24,14 +25,14 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class CollisionProcessor implements IEntityProcessingService {
-    
+
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         UUID ID = entity.getID();
 
         //don't check immobile entities
-//        if (!entity.isImmobile()) {
-        if (entity.getType().equals(PLAYER)) { //until immobile is implemented
+        if (!entity.isImmobile()) {
+//        if (entity.getType().equals(PLAYER)) { //until immobile is implemented
             System.out.println("checking collision");
 //            System.out.println("checking collision for: " + entity.getName());
             for (Entry<UUID, Entity> entry : entities.entrySet()) {
@@ -46,52 +47,46 @@ public class CollisionProcessor implements IEntityProcessingService {
 //                        System.out.println("checking if other entity is colliding with the above");
 
                         if (colliding(entryEntity, entity)) {
-                            System.out.println("colliding entry: " + entryEntity.getType());
-                            //collision detected!
-//                            System.out.println("collision detected!");
-                            int x = entity.getX();
-                            int y = entity.getY();
-                            int entryx = entryEntity.getX();
-                            int entryy = entryEntity.getY();
-                            
-//                            Vector2D collisionDirection = Vector2D.getDirection(x, entryx, y, entryy);
-//                            Vector2D collisionVector = collisionDirection.times(length(x, y, entryx, entryy));
-//                            System.out.println("collisionVector: " + collisionVector.getX() + "," + collisionVector.getY());
-                            int nextx = entity.getNextx();
-                            int nexty = entity.getNexty();
-                            int nextEntryx = entryEntity.getX();
-                            int nextEntryy = entryEntity.getY();
-//                            Vector2D collisionDirection = Vector2D.getDirection(nextx, nextEntryx, nexty, nextEntryy);
-                            Vector2D collisionDirection = Vector2D.getDirection(nextEntryx, nextx, nextEntryy, nexty);
-//                            Vector2D collisionVector = collisionDirection.times(length(nextx, nexty, nextEntryx, nextEntryy));
-                            
-                            float nextxReal = entity.getNextxReal();
-                            float nextyReal = entity.getNextyReal();
-                            Vector2D velocity = entity.getVelocity();
-                            Vector2D collisionVector = collisionDirection.times(Vector2D.length(velocity)).times(2);
-                            velocity = velocity.plus(collisionVector);
-//                            float speed = entity.getSpeed();
-                            float elapsed = getDt();
-                            nextxReal += velocity.getX() * elapsed;
-                            nextyReal += velocity.getY() * elapsed;
-                            nextx = Math.round(nextxReal);
-                            nexty = Math.round(nextyReal);
-                            entity.setNextx(nextx);
-                            entity.setNexty(nexty);
-                            entity.setNextxReal(nextx);
-                            entity.setNextyReal(nexty);
-//                            entity.setVelocity(entity.getVelocity().plus(collisionVector));
-//                            entity.setNextVelocity(entity.getNextVelocity().plus(collisionVector));
-                        } else {
-//                            System.out.println("not collided!:");
-//                            System.out.println("entity: " + entity.getX() + "," + entity.getY() + ", size: " + entity.getSize());
-//                            System.out.println("entry : " + entryEntity.getX() + "," + entryEntity.getY() + ", size: " + entryEntity.getSize());
-//                            System.out.println("---------------------");
+                            switch (entryEntity.getType()) {
+                                case DOOR:
+                                    entity.setPosition(300, 150, entryEntity.getDoorTo());
+                                    break;
+                                default:
+                                    regularCollision(entryEntity, entity);
+                                    break;
+                            }
+
                         }
                     }
                 }
             }
         }
+    }
+
+    private void regularCollision(Entity entryEntity, Entity entity) {
+        //collision detected!
+        int x = entity.getX();
+        int y = entity.getY();
+        int nextx = entity.getNextx();
+        int nexty = entity.getNexty();
+        int nextEntryx = entryEntity.getX();
+        int nextEntryy = entryEntity.getY();
+        Vector2D collisionDirection = Vector2D.getDirection(nextEntryx, nextx, nextEntryy, nexty);
+
+        float nextxReal = entity.getNextxReal();
+        float nextyReal = entity.getNextyReal();
+        Vector2D velocity = entity.getVelocity();
+        Vector2D collisionVector = collisionDirection.times(Vector2D.length(velocity)).times(2);
+        velocity = velocity.plus(collisionVector);
+        float elapsed = getDt();
+        nextxReal += velocity.getX() * elapsed;
+        nextyReal += velocity.getY() * elapsed;
+        nextx = Math.round(nextxReal);
+        nexty = Math.round(nextyReal);
+        entity.setNextx(nextx);
+        entity.setNexty(nexty);
+        entity.setNextxReal(nextx);
+        entity.setNextyReal(nexty);
     }
 
     //THIS METHOD IS CALCULATING A WRONG X AND Y! vector might use a full dt, instead of elapsed?
@@ -151,7 +146,7 @@ public class CollisionProcessor implements IEntityProcessingService {
 //        return length(vx, vy, size, entryvx, entryvy, entrySize) < entity.getSize() + entry.getSize();
         return length(nextx, nexty, nextxEntry, nextyEntry) < size + sizeEntry;
     }
-    
+
     private float length(float x1, float y1, float x2, float y2) {
         float length = 0;
         //sqrt(a^2+b^2)

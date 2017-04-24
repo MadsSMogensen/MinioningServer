@@ -47,7 +47,20 @@ public class Entity implements Serializable {
     public void setSpawnCount(int SpawnCount) {
         this.SpawnCount = SpawnCount;
     }
-
+    
+    public void setPosition(int x, int y, Location location){
+        this.x = x;
+        this.y = y;
+        this.location = location;
+        xReal = x;
+        yReal = y;
+        nextx = x;
+        nexty = y;
+        nextxReal = x;
+        nextyReal = y;
+        velocity = new Vector2D();
+    }
+    
     public Entity(UUID owner, String name) {
         this.owner = owner;
         this.name = name;

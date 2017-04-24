@@ -132,7 +132,7 @@ public class GameServer implements Runnable {
         boolean test = true;
 
       
-//          loadMap();
+          loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);

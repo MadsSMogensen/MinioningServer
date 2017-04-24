@@ -92,43 +92,45 @@ public class MovementProcessor implements IEntityProcessingService {
     //check collision
     //set movement til nextMovement
     private void processNextMovement(Entity entity, float elapsed) {
-        if (entity.getType().equals(PLAYER)) {
-            System.out.println("setting new movement");
-        }
-        //get the data
-        float speed = entity.getSpeed();
-        int x = entity.getX();
-        int y = entity.getY();
-        float xReal = entity.getxReal();
-        float yReal = entity.getyReal();
-        int nextX;
-        int nextY;
-        float nextxReal = xReal;
-        float nextyReal = yReal;
-        int goalx = entity.getDx();
-        int goaly = entity.getDy();
-        //check if goal is reached
-        if (!goalReached(entity, x, y, goalx, goaly)) {
-            //calculate directional unit vector
-            Vector2D direction = getDirection(x, goalx, y, goaly);
-            entity.setDirection(direction);
-            //calculate velocity vector (direction * speed)
-            Vector2D velocity = direction.times(speed);
-            entity.setVelocity(velocity);
-            //calculate next x & y position
-            nextxReal += velocity.getX() * elapsed;
-            nextyReal += velocity.getY() * elapsed;
-            nextX = Math.round(xReal);
-            nextY = Math.round(yReal);
-            //set next x & y position
-            entity.setNextx(nextX);
-            entity.setNexty(nextY);
-            entity.setNextxReal(nextxReal);
-            entity.setNextyReal(nextyReal);
+        if (!entity.isImmobile()) {
+            if (entity.getType().equals(PLAYER)) {
+//                System.out.println("setting new movement");
+            }
+            //get the data
+            float speed = entity.getSpeed();
+            int x = entity.getX();
+            int y = entity.getY();
+            float xReal = entity.getxReal();
+            float yReal = entity.getyReal();
+            int nextX;
+            int nextY;
+            float nextxReal = xReal;
+            float nextyReal = yReal;
+            int goalx = entity.getDx();
+            int goaly = entity.getDy();
+            //check if goal is reached
+            if (!goalReached(entity, x, y, goalx, goaly)) {
+                //calculate directional unit vector
+                Vector2D direction = getDirection(x, goalx, y, goaly);
+                entity.setDirection(direction);
+                //calculate velocity vector (direction * speed)
+                Vector2D velocity = direction.times(speed);
+                entity.setVelocity(velocity);
+                //calculate next x & y position
+                nextxReal += velocity.getX() * elapsed;
+                nextyReal += velocity.getY() * elapsed;
+                nextX = Math.round(xReal);
+                nextY = Math.round(yReal);
+                //set next x & y position
+                entity.setNextx(nextX);
+                entity.setNexty(nextY);
+                entity.setNextxReal(nextxReal);
+                entity.setNextyReal(nextyReal);
 //        //entity set up for a collision check, if such exists
 //        if (entity.getPreviousDx() != entity.getDx() || entity.getPreviousDy() != entity.getDy()) {
 //            entity.checkCollision();
 //        }
+            }
         }
     }
 
@@ -146,7 +148,7 @@ public class MovementProcessor implements IEntityProcessingService {
     private void processMove(Entity entity) {
         if (!entity.isImmobile()) {
             if (entity.getType().equals(PLAYER)) {
-                System.out.println("moving");
+//                System.out.println("moving");
             }
 
 //        if (entity.isCollisionChecked()) {
@@ -160,7 +162,7 @@ public class MovementProcessor implements IEntityProcessingService {
             entity.setY(y);
             entity.setxReal(xReal);
             entity.setyReal(yReal);
-            System.out.println("currentPos: " + x + "," + y);
+//            System.out.println("currentPos: " + x + "," + y);
 //            //set unit up for a new collision check
 //            entity.hasMoved();
 //        } else {
