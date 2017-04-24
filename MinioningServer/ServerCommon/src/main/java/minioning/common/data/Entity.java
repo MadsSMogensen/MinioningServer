@@ -16,18 +16,18 @@ public class Entity implements Serializable {
     private String name;
     private int x = 100;
     private int y = 100;
-    private float xReal = 100;
-    private float yReal = 100;
-    private int nextx = 100;
-    private int nexty = 100;
-    private float nextxReal = 100;
-    private float nextyReal = 100;
+    private float xReal = x;
+    private float yReal = y;
+    private int nextx = x;
+    private int nexty = y;
+    private float nextxReal = x;
+    private float nextyReal = y;
     private Vector2D velocity = new Vector2D();
     private Vector2D nextVelocity = new Vector2D();
     private boolean collisionChecked = true;
     private boolean hasMoved = false;
     private boolean immobile;
-    private float size = 10;
+    private float size = 16;
     private float speed = 50;
     private int dx;
     private int dy;
@@ -54,6 +54,20 @@ public class Entity implements Serializable {
         this.ID = UUID.randomUUID();
         this.dx = this.x;
         this.dy = this.y;
+    }
+    
+    public Entity(UUID owner, String name, int x, int y){
+        this.owner = owner;
+        this.name = name;
+        this.ID = UUID.randomUUID();
+        this.x = x;
+        this.y = y;
+        this.xReal = x;
+        this.yReal = y;
+        this.nextx = x;
+        this.nexty = y;
+        this.nextxReal = xReal;
+        this.nextyReal = yReal;
     }
 
     public float getSpeed() {

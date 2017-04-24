@@ -132,7 +132,7 @@ public class GameServer implements Runnable {
         boolean test = true;
 
       
-          loadMap();
+//          loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);
@@ -151,15 +151,20 @@ public class GameServer implements Runnable {
             
             if (test) {
                 //DOOR
-                Entity testEntity = new Entity(UUID.randomUUID(), "DOORTEST");
-                testEntity.setX(500);
-                testEntity.setY(500);
+//                Entity testEntity = new Entity(UUID.randomUUID(), "DOORTEST");
+//                testEntity.setX(500);
+//                testEntity.setY(500);
+//                testEntity.setLocation(Location.wilderness);
+//                testEntity.setDoorTo(Location.arena);
+//                testEntity.setType(EntityType.DOOR);
+//                testEntity.setImmobile(true);
+//                world.put(testEntity.getID(), testEntity);
+                Entity testEntity = new Entity(UUID.randomUUID(), "", 300, 300);
+                testEntity.setImmobile(true);
                 testEntity.setLocation(Location.wilderness);
                 testEntity.setDoorTo(Location.arena);
                 testEntity.setType(EntityType.DOOR);
-                testEntity.setImmobile(true);
                 world.put(testEntity.getID(), testEntity);
-                
 //                
 //                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
 //                testCollisionEntity.setX(450);

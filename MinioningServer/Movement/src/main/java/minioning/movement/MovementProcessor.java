@@ -23,7 +23,7 @@ public class MovementProcessor implements IEntityProcessingService {
 
 //    float lastTime = 0;
     float elapsed;
-    
+
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         elapsed = getDt();
@@ -37,7 +37,7 @@ public class MovementProcessor implements IEntityProcessingService {
             processNextMovement(entity, elapsed);
         }
     }
-    
+
     private void processEventBus(ConcurrentHashMap<UUID, Event> eventBus, Entity entity) {
         for (Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
@@ -131,38 +131,42 @@ public class MovementProcessor implements IEntityProcessingService {
 //        }
         }
     }
-    
+
     private boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
         return distance(x, y, goalx, goaly) < entity.getSize();
     }
-    
+
     private float distance(int x1, int y1, int x2, int y2) {
         float a = (x2 - x1) * (x2 - x1);
         float b = (y2 - y1) * (y2 - y1);
         float distance = (float) Math.sqrt(a + b);
         return distance;
     }
-    
+
     private void processMove(Entity entity) {
-        if (entity.getType().equals(PLAYER)) {
-            System.out.println("moving");
-        }
+        if (!entity.isImmobile()) {
+            if (entity.getType().equals(PLAYER)) {
+                System.out.println("moving");
+            }
 
 //        if (entity.isCollisionChecked()) {
-        //get the data
-        int x = entity.getNextx();
-        int y = entity.getNexty();
-        float xReal = entity.getNextxReal();
-        float yReal = entity.getNextyReal();
-        //set the new position
-        entity.setX(x);
-        entity.setY(y);
-        entity.setxReal(xReal);
-        entity.setyReal(yReal);
+            //get the data
+            int x = entity.getNextx();
+            int y = entity.getNexty();
+            float xReal = entity.getNextxReal();
+            float yReal = entity.getNextyReal();
+            //set the new position
+            entity.setX(x);
+            entity.setY(y);
+            entity.setxReal(xReal);
+            entity.setyReal(yReal);
+            System.out.println("currentPos: " + x + "," + y);
 //            //set unit up for a new collision check
 //            entity.hasMoved();
 //        } else {
 //            entity.ignoreCollision();
 //        }
+        }
+
     }
 }

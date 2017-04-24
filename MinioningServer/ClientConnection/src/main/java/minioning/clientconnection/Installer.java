@@ -42,7 +42,7 @@ public class Installer extends ModuleInstall {
         return serverSocket;
     }
 
-    public static List<String[]> getActualTempData() {
+    public synchronized static List<String[]> getActualTempData() {
         if (tempData == null) {
             tempData = Collections.synchronizedList(new ArrayList<String[]>());
         }
