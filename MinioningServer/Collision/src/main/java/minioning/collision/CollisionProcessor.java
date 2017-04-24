@@ -8,7 +8,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import minioning.common.data.Entity;
-import static minioning.common.data.EntityType.DOOR;
+import static minioning.common.data.EntityType.*;
 import static minioning.common.data.EntityType.PLAYER;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
@@ -33,29 +33,38 @@ public class CollisionProcessor implements IEntityProcessingService {
         //don't check immobile entities
         if (!entity.isImmobile()) {
 //        if (entity.getType().equals(PLAYER)) { //until immobile is implemented
-            System.out.println("checking collision");
-//            System.out.println("checking collision for: " + entity.getName());
             for (Entry<UUID, Entity> entry : entities.entrySet()) {
                 //don't check collision with itself
                 if (entry.getKey() != ID) {
                     Entity entryEntity = entry.getValue();
-                    //Only look in the same world
-//                    System.out.println("checking if other entity is in same world");
-                    if (entryEntity.getLocation().equals(entity.getLocation())) {
+                    //Only look in the same world and not for entities owned by the current entity
+                    if (entryEntity.getLocation().equals(entity.getLocation()) && !entryEntity.getOwner().toString().equals(entity.getID().toString())) {
                         //check if colliding
-//                        System.out.println("checking collision between: " + entity.getType().toString() + " & " + entryEntity.getType().toString());
-//                        System.out.println("checking if other entity is colliding with the above");
-
                         if (colliding(entryEntity, entity)) {
                             switch (entryEntity.getType()) {
                                 case DOOR:
-                                    entity.setPosition(300, 150, entryEntity.getDoorTo());
+                                    if (entryEntity.getDoorTo() == null) {
+                                        regularCollision(entryEntity, entity);
+                                        break;
+                                    }
+                                    if (!entity.getType().equals(HOLYBOLT)) {
+                                        entity.setPosition(300, 150, entryEntity.getDoorTo());
+                                    }
+                                    break;
+                                case HOLYBOLT:
+                                    if (!entity.getType().equals(HOLYBOLT)) {
+                                        System.out.println("player with id: " + entity.getID());
+                                        System.out.println("and owner id  : " + entity.getOwner());
+                                        System.out.println("collided with");
+                                        System.out.println("entity with id: " + entryEntity.getID());
+                                        System.out.println("and owner id  : " + entryEntity.getOwner());
+                                        entities.remove(entryEntity.getID());
+                                    }
                                     break;
                                 default:
                                     regularCollision(entryEntity, entity);
                                     break;
                             }
-
                         }
                     }
                 }
@@ -89,61 +98,14 @@ public class CollisionProcessor implements IEntityProcessingService {
         entity.setNextyReal(nexty);
     }
 
-    //THIS METHOD IS CALCULATING A WRONG X AND Y! vector might use a full dt, instead of elapsed?
     private boolean colliding(Entity entry, Entity entity) {
-        //common data
-//        float dt = GameData.getDt();
-//        int bounds;
-
-////        //current entity data
-////        int x = entity.getX();
-////        int y = entity.getY();
-////        Vector2D velocity = entity.getVelocity();
-////        float speed = entity.getSpeed();
-////        float vx = x;
-////        float vy = y;
-////        vx += velocity.getX() * dt * speed;
-////        vy += velocity.getY() * dt * speed;
-////        float size = entity.getSize();
-////
-////        //current entry data
-////        int entryx = entry.getX();
-////        int entryy = entry.getY();
-////        Vector2D entryVelocity = entry.getVelocity();
-////        float entrySpeed = entry.getSpeed();
-////        float entryvx = entryx;
-////        float entryvy = entryy;
-////        entryvx += entryVelocity.getX() * dt * entrySpeed;
-////        entryvy += entryVelocity.getY() * dt * entrySpeed;
-////        float entrySize = entry.getSize();
         int nextx = entity.getNextx();
         int nexty = entity.getNexty();
         float size = entity.getSize();
         int nextxEntry = entry.getNextx();
         int nextyEntry = entry.getNexty();
         float sizeEntry = entry.getSize();
-        System.out.println("entity next: " + nextx + "," + nexty);
-        System.out.println("entry  next: " + nextxEntry + "," + nextyEntry);
 
-//        //checking vx is within bounds
-//        float lowerx = entryvx - entrySize;
-//        float upperx = entryvx + entrySize;
-//        float lowery = entryvy - entrySize;
-//        float uppery = entryvy + entrySize;
-//        float entityLowerx = vy - size;
-//        float entityUpperx = vy + size;
-//        float entityLowery = vy - size;
-//        float entityUppery = vy + size;
-//        if (entityUpperx >= lowerx && entityLowerx <= upperx) {
-////            System.out.println("x is within now!");
-//            //checking vy is within bounds
-//            if (entityUppery >= lowery && entityLowery <= uppery) {
-////                System.out.println("y is within now!");
-//                return true;
-//            }
-//        }
-//        System.out.println("checking collision: " + vx + "," + vy + " ; " + entryvx + "," + entryvy);
-//        return length(vx, vy, size, entryvx, entryvy, entrySize) < entity.getSize() + entry.getSize();
         return length(nextx, nexty, nextxEntry, nextyEntry) < size + sizeEntry;
     }
 
@@ -151,18 +113,6 @@ public class CollisionProcessor implements IEntityProcessingService {
         float length = 0;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-        System.out.println("Length: " + length);
         return length;
     }
-
-//    //returns true if c1 and c2 collides
-//    private boolean collide(Circle c1, Circle c2) {
-//        double distanceX = c2.centerXProperty().getValue() - c1.centerXProperty().getValue();
-//        double distanceY = c2.centerYProperty().getValue() - c1.centerYProperty().getValue();
-//        double radiusSum = c2.getRadius() + c1.getRadius();
-//        return distanceX * distanceX + distanceY * distanceY <= radiusSum * radiusSum;
-//    }
-//    private boolean collide(Shape s1, Shape s2) {
-//        return s1.intersects(s2.getBoundsInLocal());
-//    }
 }

@@ -58,80 +58,46 @@ public class MovementProcessor implements IEntityProcessingService {
         }
     }
 
-    //mangler offset på ca 5 pixels hver retning!
-    //currently not used!
-    private void processMovement(Entity entity, float elapsed) {
-        //get data
+    //set movement til nextMovement
+    private void processNextMovement(Entity entity, float elapsed) {
+        //get the data
         float speed = entity.getSpeed();
         int x = entity.getX();
         int y = entity.getY();
         float xReal = entity.getxReal();
         float yReal = entity.getyReal();
-        int gx = entity.getDx();
-        int gy = entity.getDy();
-        //calculate directional unit vector
-        Vector2D direction = getDirection(x, gx, y, gy);
-        entity.setDirection(direction);
-        //calculate velocity vector (direction*speed)
-        Vector2D velocity = direction.times(speed);
-        entity.setVelocity(velocity);
-        //calculate new x & y position
-        xReal += velocity.getX() * elapsed;
-        yReal += velocity.getY() * elapsed;
-        x = Math.round(xReal);
-        y = Math.round(yReal);
-        //set the new position
-        entity.setX(x);
-        entity.setY(y);
-        entity.setxReal(xReal);
-        entity.setyReal(yReal);
-    }
+        int nextX;
+        int nextY;
+        float nextxReal = xReal;
+        float nextyReal = yReal;
+        int goalx = entity.getDx();
+        int goaly = entity.getDy();
+        Vector2D velocity;
 
-    //actual move
-    //calculate next movement
-    //check collision
-    //set movement til nextMovement
-    private void processNextMovement(Entity entity, float elapsed) {
-        if (!entity.isImmobile()) {
-            if (entity.getType().equals(PLAYER)) {
-//                System.out.println("setting new movement");
-            }
-            //get the data
-            float speed = entity.getSpeed();
-            int x = entity.getX();
-            int y = entity.getY();
-            float xReal = entity.getxReal();
-            float yReal = entity.getyReal();
-            int nextX;
-            int nextY;
-            float nextxReal = xReal;
-            float nextyReal = yReal;
-            int goalx = entity.getDx();
-            int goaly = entity.getDy();
-            //check if goal is reached
-            if (!goalReached(entity, x, y, goalx, goaly)) {
-                //calculate directional unit vector
-                Vector2D direction = getDirection(x, goalx, y, goaly);
-                entity.setDirection(direction);
-                //calculate velocity vector (direction * speed)
-                Vector2D velocity = direction.times(speed);
-                entity.setVelocity(velocity);
-                //calculate next x & y position
-                nextxReal += velocity.getX() * elapsed;
-                nextyReal += velocity.getY() * elapsed;
-                nextX = Math.round(xReal);
-                nextY = Math.round(yReal);
-                //set next x & y position
-                entity.setNextx(nextX);
-                entity.setNexty(nextY);
-                entity.setNextxReal(nextxReal);
-                entity.setNextyReal(nextyReal);
-//        //entity set up for a collision check, if such exists
-//        if (entity.getPreviousDx() != entity.getDx() || entity.getPreviousDy() != entity.getDy()) {
-//            entity.checkCollision();
-//        }
-            }
+        if (entity.getType().equals(HOLYBOLT)) {
+            velocity = entity.getVelocity();
+        } else {
+            //calculate directional unit vector
+            Vector2D direction = getDirection(x, goalx, y, goaly);
+            entity.setDirection(direction);
+            //calculate velocity vector (direction * speed)
+            velocity = direction.times(speed);
+            entity.setVelocity(velocity);
         }
+        //check if goal is reached
+        if (!goalReached(entity, x, y, goalx, goaly)) {
+            //calculate next x & y position
+            nextxReal += velocity.getX() * elapsed;
+            nextyReal += velocity.getY() * elapsed;
+            nextX = Math.round(xReal);
+            nextY = Math.round(yReal);
+            //set next x & y position
+            entity.setNextx(nextX);
+            entity.setNexty(nextY);
+            entity.setNextxReal(nextxReal);
+            entity.setNextyReal(nextyReal);
+        }
+
     }
 
     private boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
@@ -146,29 +112,15 @@ public class MovementProcessor implements IEntityProcessingService {
     }
 
     private void processMove(Entity entity) {
-        if (!entity.isImmobile()) {
-            if (entity.getType().equals(PLAYER)) {
-//                System.out.println("moving");
-            }
-
-//        if (entity.isCollisionChecked()) {
-            //get the data
-            int x = entity.getNextx();
-            int y = entity.getNexty();
-            float xReal = entity.getNextxReal();
-            float yReal = entity.getNextyReal();
-            //set the new position
-            entity.setX(x);
-            entity.setY(y);
-            entity.setxReal(xReal);
-            entity.setyReal(yReal);
-//            System.out.println("currentPos: " + x + "," + y);
-//            //set unit up for a new collision check
-//            entity.hasMoved();
-//        } else {
-//            entity.ignoreCollision();
-//        }
-        }
-
+        //get the data
+        int x = entity.getNextx();
+        int y = entity.getNexty();
+        float xReal = entity.getNextxReal();
+        float yReal = entity.getNextyReal();
+        //set the new position
+        entity.setX(x);
+        entity.setY(y);
+        entity.setxReal(xReal);
+        entity.setyReal(yReal);
     }
 }

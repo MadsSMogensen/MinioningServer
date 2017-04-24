@@ -52,13 +52,15 @@ public class Entity implements Serializable {
         this.x = x;
         this.y = y;
         this.location = location;
-        xReal = x;
-        yReal = y;
-        nextx = x;
-        nexty = y;
-        nextxReal = x;
-        nextyReal = y;
-        velocity = new Vector2D();
+        this.xReal = x;
+        this.yReal = y;
+        this.nextx = x;
+        this.nexty = y;
+        this.nextxReal = x;
+        this.nextyReal = y;
+        this.velocity = new Vector2D();
+        this.dx = x;
+        this.dy = y;
     }
     
     public Entity(UUID owner, String name) {

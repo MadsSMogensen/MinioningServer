@@ -76,8 +76,8 @@ public class TiledProcessor implements ITiledLoaderService {
                         //String name = "Map";
                         String name = "";
                         UUID owner = UUID.randomUUID();
-                        int x = (int)Math.round(newTile.getX()) +16;
-                        int y = (int)Math.round(newTile.getY()) +16;
+                        int x = (int)Math.round(newTile.getX() + newTile.getWidth()/2); //+16
+                        int y = (int)Math.round(newTile.getY() + newTile.getWidth()/2); //+16
                         y = GameData.getGameHeight() - y;
                         
                         
