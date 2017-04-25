@@ -12,6 +12,8 @@ import static minioning.common.data.EntityType.*;
 import static minioning.common.data.EntityType.PLAYER;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
+import minioning.common.data.Events;
+import static minioning.common.data.Events.HPCHANGE;
 import minioning.common.data.GameData;
 import static minioning.common.data.GameData.getDt;
 import minioning.common.data.Location;
@@ -47,6 +49,17 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 if (!entryEntity.getType().equals(entity.getType())) {
                                     //collision event for holy bolt here!
                                     if (colliding(entryEntity, entity)) {
+                                        
+                                        String[] s = new String[2];
+                                        
+                                        s[0] = entry.getValue().getID().toString();
+                                        s[1] = entity.getType().toString();
+                                        
+                                        UUID id = UUID.randomUUID();
+                                        Event event = new Event(HPCHANGE, s);
+                                        
+                                        eventBus.put(id, event);
+                                        System.out.println("event");
                                         System.out.println("A HOLYBOLT COLLIDED!");
                                     }
                                 }
