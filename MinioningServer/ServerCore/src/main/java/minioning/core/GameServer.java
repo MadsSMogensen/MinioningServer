@@ -17,7 +17,7 @@ import org.openide.util.Lookup;
 public class GameServer implements Runnable {
 
     // Constants
-    float timeStep = (float)0.1;
+    float timeStep = (float) 0.1;
     long lastTime = System.nanoTime();
 
     // Internal & game data
@@ -52,7 +52,6 @@ public class GameServer implements Runnable {
         }
     }
      */
-
     public void update() {
 //        System.out.println("eventBus.size upd: " + getEventBus().size());
 //      Process using all entity processing services
@@ -62,7 +61,6 @@ public class GameServer implements Runnable {
             }
         }
     }
-
 
     public void updateConnection() {
 //        System.out.println("eventBus.size con: " + getEventBus().size());
@@ -77,12 +75,12 @@ public class GameServer implements Runnable {
             creator.createNew(getBus(), world);
         }
     }
-    
-    private void loadMap(){
-             for (ITiledLoaderService loader : getITiledLoaderServices()) {
-           
-                loader.load(world);
-            
+
+    private void loadMap() {
+        for (ITiledLoaderService loader : getITiledLoaderServices()) {
+
+            loader.load(world);
+
         }
     }
 
@@ -98,10 +96,10 @@ public class GameServer implements Runnable {
         return lookup.lookupAll(IConnectionService.class);
     }
 
-        private Collection<? extends ITiledLoaderService> getITiledLoaderServices() {
+    private Collection<? extends ITiledLoaderService> getITiledLoaderServices() {
         return lookup.lookupAll(ITiledLoaderService.class);
     }
-    
+
     /*
     private final LookupListener lookupListener = new LookupListener() {
         //Listens for changes in components, starting and stopping them when needed
@@ -131,12 +129,11 @@ public class GameServer implements Runnable {
     public void run() {
         boolean test = true;
 
-      
-//          loadMap();
+        loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);
-            elapsedTime /= (float)1000000000.0;
+            elapsedTime /= (float) 1000000000.0;
             GameData.setDt(elapsedTime);
             if (elapsedTime >= timeStep) {
                 lastTime = currentTime;
@@ -147,8 +144,7 @@ public class GameServer implements Runnable {
                 update();
 //                System.out.println(world.size());
             }
-            
-            
+
             if (test) {
                 //DOOR
 //                Entity testEntity = new Entity(UUID.randomUUID(), "DOORTEST");
@@ -166,14 +162,14 @@ public class GameServer implements Runnable {
                 testEntity.setDoorTo(Location.wilderness);
                 testEntity.setType(EntityType.DOOR);
                 world.put(testEntity.getID(), testEntity);
-                
+
                 Entity testEntity2 = new Entity(UUID.randomUUID(), "", 400, 400);
                 testEntity2.setImmobile(true);
                 testEntity2.setLocation(Location.wilderness);
                 testEntity2.setDoorTo(Location.arena);
                 testEntity2.setType(EntityType.DOOR);
                 world.put(testEntity2.getID(), testEntity2);
-                
+
 //                for(int i = 0; i < 10; i++){
 //                    Entity newMonster = new Entity(UUID.randomUUID(), "", 150+(5*i), 150+(5*i));
 //                    newMonster.setLocation(Location.wilderness);
@@ -194,7 +190,6 @@ public class GameServer implements Runnable {
 //                fun.setDx(100);
 //                fun.setDy(450);
 //                world.put(fun.getID(), fun);
-                
 //                String[] data = new String[6];
 //                data[0] = "localhost";
 //                data[1] = "9876";
@@ -215,7 +210,6 @@ public class GameServer implements Runnable {
 //                Event playEvent = new Event(PLAY, data);
 //                EventBus.getInstance().putEvent(playEvent);
 //                System.out.println("playEvent put");
-
                 test = false;
             }
         }

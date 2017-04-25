@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
+import static minioning.common.data.Events.*;
 import minioning.common.data.GameData;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -26,7 +27,7 @@ public class UnitProcessor implements IEntityProcessingService {
                 spawnTimer += GameData.getDt();
                 entity.setSpawnTimer(spawnTimer);
                 if(spawnTimer >= standardSpawnDelay){
-                    spawnNewMonster(entity, entities);
+                    spawnNewMonster(entity, eventBus);
                     entity.setSpawnCount(entity.getSpawnCount()+1);
                     entity.setSpawnTimer(0);
                 }
@@ -38,20 +39,18 @@ public class UnitProcessor implements IEntityProcessingService {
         }
     }
     
-    private void spawnNewMonster(Entity entity, Map<UUID, Entity> entities){
-        Entity newMonster = new Entity(entity.getID(), entity.getMinionType(), entity.getX()+30, entity.getY()+30);
-        newMonster.setLocation(entity.getLocation());
-        newMonster.setDx(newMonster.getX());
-        newMonster.setDy(newMonster.getY());
-        entities.put(newMonster.getID(), newMonster);
-        System.out.println("");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println("MONSTER SPAWNED!");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println("----------------");
-        System.out.println("");
+    private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus){
+        String data = "";
+        data += owner.getID() + ";";
+        data += owner.getMinionType() + ";";
+        data += owner.getX() + ";";
+        data += owner.getY() + ";";
+        data += owner.getDx() + ";";
+        data += owner.getDy() + ";";
+        data += owner.getLocation();
+        String[] dataArray = data.split(";");
+        Event newEvent = new Event(CREATEMONSTER, dataArray);
+        eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
+        
     }
 }
