@@ -338,6 +338,7 @@ public class Entity implements Serializable {
         entityString += getLocation() + ";";
         entityString += getDoorTo() + ";";
         entityString += getType()+ ";";
+        entityString += getHp()+";";
         return entityString;
     }
 

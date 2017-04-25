@@ -57,8 +57,9 @@ public class CollisionProcessor implements IEntityProcessingService {
                                         
                                         UUID id = UUID.randomUUID();
                                         Event event = new Event(HPCHANGE, s);
-                                        
+                                        entities.remove(ID);
                                         eventBus.put(id, event);
+                                        
                                         System.out.println("event");
                                         System.out.println("A HOLYBOLT COLLIDED!");
                                     }
