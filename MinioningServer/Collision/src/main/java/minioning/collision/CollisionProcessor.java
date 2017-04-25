@@ -34,13 +34,25 @@ public class CollisionProcessor implements IEntityProcessingService {
         if (!entity.isImmobile()) {
 //        if (entity.getType().equals(PLAYER)) { //until immobile is implemented
             for (Entry<UUID, Entity> entry : entities.entrySet()) {
-                //don't check collision with itself
-                if (entry.getKey() != ID) {
-                    Entity entryEntity = entry.getValue();
-                    //Only look in the same world
-                    if (entryEntity.getLocation().equals(entity.getLocation())) {
-                        //don't check for entities owned by the current entity
-                        if (!entryEntity.getOwner().toString().equals(entity.getID().toString())) {
+                Entity entryEntity = entry.getValue();
+                //Only look in the same world
+                if (entryEntity.getLocation().equals(entity.getLocation())) {
+                    //don't check collision with itself
+                    if (entry.getKey() != ID) {
+                        if (entity.getType().equals(HOLYBOLT)) {
+                            //handle collision for holybolts
+                            //don't collide with owner
+                            if (!entity.getOwner().toString().equals(entryEntity.getID().toString())) {
+                                //don't collide with other holybolts
+                                if (!entryEntity.getType().equals(entity.getType())) {
+                                    //collision event for holy bolt here!
+                                    if (colliding(entryEntity, entity)) {
+                                        System.out.println("A HOLYBOLT COLLIDED!");
+                                    }
+                                }
+                            }
+                            //don't collide with owner
+                        } else if (!entryEntity.getOwner().toString().equals(entity.getID().toString())) {
                             //check if colliding
                             if (colliding(entryEntity, entity)) {
                                 switch (entryEntity.getType()) {
@@ -54,14 +66,15 @@ public class CollisionProcessor implements IEntityProcessingService {
                                         }
                                         break;
                                     case HOLYBOLT:
-                                        if (!entity.getType().equals(HOLYBOLT)) {
-                                            System.out.println("player with id: " + entity.getID());
-                                            System.out.println("and owner id  : " + entity.getOwner());
-                                            System.out.println("collided with");
-                                            System.out.println("entity with id: " + entryEntity.getID());
-                                            System.out.println("and owner id  : " + entryEntity.getOwner());
-                                            entities.remove(entryEntity.getID());
-                                        }
+//                                        if (!entity.getType().equals(HOLYBOLT)) {
+//                                            System.out.println("player with id: " + entity.getID());
+//                                            System.out.println("and owner id  : " + entity.getOwner());
+//                                            System.out.println("collided with");
+//                                            System.out.println("entity with id: " + entryEntity.getID());
+//                                            System.out.println("and owner id  : " + entryEntity.getOwner());
+//                                            entities.remove(entryEntity.getID());
+//                                        }
+                                        System.out.println("SOMETHING ELSE COLLIDED WITH A HOLYBOLT");
                                         break;
                                     default:
                                         regularCollision(entryEntity, entity);
