@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import minioning.common.data.EntityType;
+import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
 import minioning.common.data.Location;
@@ -86,9 +87,10 @@ public class UnitCreator implements IEntityCreatorService {
         int dx = Integer.parseInt(data[4]);
         int dy = Integer.parseInt(data[5]);
         Entity newMonster = new Entity(owner, name, x, y);
-        newMonster.setDx(100);//dx
-        newMonster.setDy(100);//dy
+        newMonster.setDx(x);//dx
+        newMonster.setDy(y);//dy
         newMonster.setLocation(Location.valueOf(data[6]));
+        newMonster.setType(ENEMY);
         entities.putIfAbsent(newMonster.getID(), newMonster);
         System.out.println("new monster created");
     }

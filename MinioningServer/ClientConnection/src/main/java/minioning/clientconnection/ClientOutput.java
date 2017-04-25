@@ -63,7 +63,7 @@ public class ClientOutput implements IConnectionService {
             DatagramPacket sendDataPacket
                     = new DatagramPacket(sendData, sendData.length, IPAddress, port);
             serverSocket.send(sendDataPacket);
-            System.out.println("datapacket sent!");
+//            System.out.println("datapacket sent!");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -103,7 +103,7 @@ public class ClientOutput implements IConnectionService {
                 DatagramSocket serverSocket = getServerSocket();
                 DatagramPacket sendDataPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
                 serverSocket.send(sendDataPacket);
-                System.out.println("packetSent");
+//                System.out.println("packetSent");
             }
         } catch (Exception e) {
         }
