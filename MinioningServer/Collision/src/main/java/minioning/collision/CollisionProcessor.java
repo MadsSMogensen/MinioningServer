@@ -37,33 +37,36 @@ public class CollisionProcessor implements IEntityProcessingService {
                 //don't check collision with itself
                 if (entry.getKey() != ID) {
                     Entity entryEntity = entry.getValue();
-                    //Only look in the same world and not for entities owned by the current entity
-                    if (entryEntity.getLocation().equals(entity.getLocation()) && !entryEntity.getOwner().toString().equals(entity.getID().toString())) {
-                        //check if colliding
-                        if (colliding(entryEntity, entity)) {
-                            switch (entryEntity.getType()) {
-                                case DOOR:
-                                    if (entryEntity.getDoorTo() == null) {
+                    //Only look in the same world
+                    if (entryEntity.getLocation().equals(entity.getLocation())) {
+                        //don't check for entities owned by the current entity
+                        if (!entryEntity.getOwner().toString().equals(entity.getID().toString())) {
+                            //check if colliding
+                            if (colliding(entryEntity, entity)) {
+                                switch (entryEntity.getType()) {
+                                    case DOOR:
+                                        if (entryEntity.getDoorTo() == null) {
+                                            regularCollision(entryEntity, entity);
+                                            break;
+                                        }
+                                        if (!entity.getType().equals(HOLYBOLT)) {
+                                            entity.setPosition(300, 150, entryEntity.getDoorTo());
+                                        }
+                                        break;
+                                    case HOLYBOLT:
+                                        if (!entity.getType().equals(HOLYBOLT)) {
+                                            System.out.println("player with id: " + entity.getID());
+                                            System.out.println("and owner id  : " + entity.getOwner());
+                                            System.out.println("collided with");
+                                            System.out.println("entity with id: " + entryEntity.getID());
+                                            System.out.println("and owner id  : " + entryEntity.getOwner());
+                                            entities.remove(entryEntity.getID());
+                                        }
+                                        break;
+                                    default:
                                         regularCollision(entryEntity, entity);
                                         break;
-                                    }
-                                    if (!entity.getType().equals(HOLYBOLT)) {
-                                        entity.setPosition(300, 150, entryEntity.getDoorTo());
-                                    }
-                                    break;
-                                case HOLYBOLT:
-                                    if (!entity.getType().equals(HOLYBOLT)) {
-                                        System.out.println("player with id: " + entity.getID());
-                                        System.out.println("and owner id  : " + entity.getOwner());
-                                        System.out.println("collided with");
-                                        System.out.println("entity with id: " + entryEntity.getID());
-                                        System.out.println("and owner id  : " + entryEntity.getOwner());
-                                        entities.remove(entryEntity.getID());
-                                    }
-                                    break;
-                                default:
-                                    regularCollision(entryEntity, entity);
-                                    break;
+                                }
                             }
                         }
                     }

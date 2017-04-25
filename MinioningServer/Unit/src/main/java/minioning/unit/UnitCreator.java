@@ -43,20 +43,21 @@ public class UnitCreator implements IEntityCreatorService {
     
     private void createSkill(Event event, Map<UUID, Entity> entities){
         String[] data = event.getData();
-        System.out.println("creating skill with data:");
-        for(int i = 0; i < data.length; i++){
-            System.out.println(data[i]);
-        }
+//        System.out.println("creating skill with data:");
+//        for(int i = 0; i < data.length; i++){
+//            System.out.println(data[i]);
+//        }
         UUID owner = UUID.fromString(data[2]);
         Entity ownerEntity = getOwnerEntity(owner, entities);
         Entity skillEntity = new Entity(ownerEntity.getID(), "", ownerEntity.getX(), ownerEntity.getY());
         skillEntity.setLocation(ownerEntity.getLocation());
         skillEntity.setType(EntityType.HOLYBOLT);
+        skillEntity.setSpeed(200);
         
         Vector2D direction = Vector2D.getDirection(skillEntity.getX(), Integer.parseInt(data[4]), skillEntity.getY(), Integer.parseInt(data[5]));
         Vector2D velocity = direction.times(skillEntity.getSpeed());
         skillEntity.setVelocity(velocity);
-        entities.put(skillEntity.getID(), skillEntity);
+        entities.putIfAbsent(skillEntity.getID(), skillEntity);
     }
 
     private void createPlayer(Event event, Map<UUID, Entity> entities) {

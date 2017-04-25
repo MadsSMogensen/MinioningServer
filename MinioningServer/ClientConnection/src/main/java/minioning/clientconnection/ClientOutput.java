@@ -78,28 +78,17 @@ public class ClientOutput implements IConnectionService {
 
             try {
                 String name = user.getValue();
-//                String IPAddressString = user.getKey();
                 String IPAddressString = getIP(name);
                 IPAddressString = IPAddressString.replace("/", "");
                 InetAddress IPAddress = InetAddress.getByName(IPAddressString);
                 int port = getPort(IPAddressString);
 
-                byte[] sendData = new byte[256];
+                byte[] data = new byte[256];
 
-                sendData = serializeWorld("WORLD", world);
-
-                sendData(sendData, IPAddress, port);
-
-//                try { //GAMMEL KODE
-//                    DatagramSocket serverSocket = getServerSocket();
-//                    if (port != 0) {
-//                        DatagramPacket sendDataPacket
-//                                = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-//                        serverSocket.send(sendDataPacket);
-////                        System.out.println("sent: " + new String(sendDataPacket.getData()));
-//                    }
-//                } catch (Exception e) {
-//                }
+                data = serializeWorld("WORLD", world);
+                
+                sendData(data, IPAddress, port);
+                
             } catch (Exception e) {
             }
         }
@@ -112,7 +101,7 @@ public class ClientOutput implements IConnectionService {
                 DatagramSocket serverSocket = getServerSocket();
                 DatagramPacket sendDataPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
                 serverSocket.send(sendDataPacket);
-//                System.out.println("packetSent");
+                System.out.println("packetSent");
             }
         } catch (Exception e) {
         }

@@ -46,8 +46,8 @@ public class MovementProcessor implements IEntityProcessingService {
             if (event.getType().equals(MOVEMENT)) {
                 UUID owner = UUID.fromString(data[2]);
                 if (owner.equals(entity.getOwner())) {
-                    entity.setPreviousDx(entity.getDx());
-                    entity.setPreviousDy(entity.getDy());
+//                    entity.setPreviousDx(entity.getDx());
+//                    entity.setPreviousDy(entity.getDy());
                     int xGoal = Integer.parseInt(data[4]);
                     int yGoal = Integer.parseInt(data[5]);
                     entity.setDx(xGoal);

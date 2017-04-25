@@ -132,7 +132,7 @@ public class GameServer implements Runnable {
         boolean test = true;
 
       
-          loadMap();
+//          loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);
@@ -159,12 +159,27 @@ public class GameServer implements Runnable {
 //                testEntity.setType(EntityType.DOOR);
 //                testEntity.setImmobile(true);
 //                world.put(testEntity.getID(), testEntity);
+
                 Entity testEntity = new Entity(UUID.randomUUID(), "", 300, 300);
                 testEntity.setImmobile(true);
-                testEntity.setLocation(Location.wilderness);
-                testEntity.setDoorTo(Location.arena);
+                testEntity.setLocation(Location.arena);
+                testEntity.setDoorTo(Location.wilderness);
                 testEntity.setType(EntityType.DOOR);
                 world.put(testEntity.getID(), testEntity);
+                
+                Entity testEntity2 = new Entity(UUID.randomUUID(), "", 400, 400);
+                testEntity2.setImmobile(true);
+                testEntity2.setLocation(Location.wilderness);
+                testEntity2.setDoorTo(Location.arena);
+                testEntity2.setType(EntityType.DOOR);
+                world.put(testEntity2.getID(), testEntity2);
+                
+//                for(int i = 0; i < 10; i++){
+//                    Entity newMonster = new Entity(UUID.randomUUID(), "", 150+(5*i), 150+(5*i));
+//                    newMonster.setLocation(Location.wilderness);
+//                    newMonster.setType(EntityType.ENEMY);
+//                    world.put(newMonster.getID(), newMonster);
+//                }
 //                
 //                Entity testCollisionEntity = new Entity(UUID.randomUUID(), "HITME");
 //                testCollisionEntity.setX(450);
