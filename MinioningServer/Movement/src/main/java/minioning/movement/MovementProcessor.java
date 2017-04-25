@@ -76,16 +76,6 @@ public class MovementProcessor implements IEntityProcessingService {
 
         if (entity.getType().equals(HOLYBOLT)) {
             velocity = entity.getVelocity();
-        } else {
-            //calculate directional unit vector
-            Vector2D direction = getDirection(x, goalx, y, goaly);
-            entity.setDirection(direction);
-            //calculate velocity vector (direction * speed)
-            velocity = direction.times(speed);
-            entity.setVelocity(velocity);
-        }
-        //check if goal is reached
-        if (!goalReached(entity, x, y, goalx, goaly)) {
             //calculate next x & y position
             nextxReal += velocity.getX() * elapsed;
             nextyReal += velocity.getY() * elapsed;
@@ -96,8 +86,28 @@ public class MovementProcessor implements IEntityProcessingService {
             entity.setNexty(nextY);
             entity.setNextxReal(nextxReal);
             entity.setNextyReal(nextyReal);
-        }
+        } else {
+            //calculate directional unit vector
+            Vector2D direction = getDirection(x, goalx, y, goaly);
+            entity.setDirection(direction);
+            //calculate velocity vector (direction * speed)
+            velocity = direction.times(speed);
+            entity.setVelocity(velocity);
 
+            //check if goal is reached
+            if (!goalReached(entity, x, y, goalx, goaly)) {
+                //calculate next x & y position
+                nextxReal += velocity.getX() * elapsed;
+                nextyReal += velocity.getY() * elapsed;
+                nextX = Math.round(xReal);
+                nextY = Math.round(yReal);
+                //set next x & y position
+                entity.setNextx(nextX);
+                entity.setNexty(nextY);
+                entity.setNextxReal(nextxReal);
+                entity.setNextyReal(nextyReal);
+            }
+        }
     }
 
     private boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
