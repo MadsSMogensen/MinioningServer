@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="minioning.ServerCommon">
-    <module_version install_time="1493211891401" last="true" origin="installer" specification_version="1.0.0">
+    <module_version install_time="1493243023672" last="true" origin="installer" specification_version="1.0.0">
         <file crc="2115233481" name="config/Modules/minioning-ServerCommon.xml"/>
-        <file crc="2081360817" name="modules/minioning-ServerCommon.jar"/>
+        <file crc="2701346654" name="modules/minioning-ServerCommon.jar"/>
     </module_version>
 </module>

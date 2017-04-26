@@ -31,7 +31,6 @@
 </data>
  </layer>
  <objectgroup name="output_Collision">
-  <object id="2" name="Water" x="225" y="225" width="32" height="32"/>
   <object id="6" name="Gold" type="GOLD" x="352.333" y="224.333" width="31" height="31.3333">
    <properties>
     <property name="isImmobile" type="bool" value="false"/>
@@ -47,17 +46,9 @@
     <property name="isImmobile" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="24" name="Wall" type="WALL" x="160" y="224.667" width="32" height="30">
-   <properties>
-    <property name="isImmobile" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="24" name="Wall" type="WALL" x="160" y="225" width="32" height="32"/>
   <object id="25" name="Lava" type="LAVA" x="159.5" y="288" width="32" height="32"/>
-  <object id="28" name="Tree" type="TREE" x="224" y="287" width="32" height="32">
-   <properties>
-    <property name="isImmobile" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="28" name="Tree" type="TREE" x="224" y="287" width="32" height="32"/>
   <object id="33" name="column" type="COLUMN" x="288" y="288" width="32" height="31"/>
  </objectgroup>
  <layer name="input_Decoration" width="20" height="20">
