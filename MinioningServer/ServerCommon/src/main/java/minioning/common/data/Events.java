@@ -16,11 +16,8 @@ public enum Events implements Serializable{
     PLAY,
     TESTEVENT,
     SKILLQ,
-<<<<<<< HEAD
     CREATEMONSTER,
-=======
     HPCHANGE,
->>>>>>> origin/Health
     FALSEEVENT
     
 }

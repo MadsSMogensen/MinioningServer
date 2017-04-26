@@ -79,11 +79,8 @@ public class GameServer implements Runnable {
 
     private void loadMap() {
         for (ITiledLoaderService loader : getITiledLoaderServices()) {
-<<<<<<< HEAD
 
-            loader.load(world);
-
-=======
+//            loader.load(world);
             loader.load(world);
         }
     }
@@ -91,7 +88,6 @@ public class GameServer implements Runnable {
     private void updateHP() {
         for (IHealthProcessorService processor : getIHealthProcessor()) {
             processor.process(getBus(), world);
->>>>>>> origin/Health
         }
     }
 
@@ -143,12 +139,8 @@ public class GameServer implements Runnable {
     @Override
     public void run() {
         boolean test = true;
-
-<<<<<<< HEAD
+        
         loadMap();
-=======
-//          loadMap();
->>>>>>> origin/Health
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);

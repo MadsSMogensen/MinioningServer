@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="minioning.ServerCommon">
-<<<<<<< HEAD
-    <module_version install_time="1493127825502" last="true" origin="installer" specification_version="1.0.0">
+    <module_version install_time="1493196256509" last="true" origin="installer" specification_version="1.0.0">
         <file crc="2115233481" name="config/Modules/minioning-ServerCommon.xml"/>
-        <file crc="1044820303" name="modules/minioning-ServerCommon.jar"/>
-        <file crc="3605662005" name="update_tracking/minioning-ServerCommon.xml"/>
-=======
-    <module_version install_time="1493127380187" last="true" origin="installer" specification_version="1.0.0">
-        <file crc="2115233481" name="config/Modules/minioning-ServerCommon.xml"/>
-        <file crc="4186754120" name="modules/minioning-ServerCommon.jar"/>
-        <file crc="2305654180" name="update_tracking/minioning-ServerCommon.xml"/>
->>>>>>> origin/Health
+        <file crc="1286826812" name="modules/minioning-ServerCommon.jar"/>
     </module_version>
 </module>

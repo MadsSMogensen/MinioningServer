@@ -2,12 +2,8 @@ Manifest-Version: 1.0
 OpenIDE-Module-Localizing-Bundle: minioning/collision/Bundle.propertie
  s
 OpenIDE-Module-Specification-Version: 1.0
-OpenIDE-Module-Implementation-Version: 1.0-20170425
-<<<<<<< HEAD
-OpenIDE-Module-Build-Version: 201704251343
-=======
-OpenIDE-Module-Build-Version: 201704251336
->>>>>>> origin/Health
+OpenIDE-Module-Implementation-Version: 1.0-20170426
+OpenIDE-Module-Build-Version: 201704260844
 OpenIDE-Module: minioning.Collision
 OpenIDE-Module-Public-Packages: -
 OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1

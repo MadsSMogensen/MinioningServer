@@ -2,11 +2,7 @@ Manifest-Version: 1.0
 OpenIDE-Module-Localizing-Bundle: minioning/common/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0.0
 OpenIDE-Module-Implementation-Version: 1.0.0
-<<<<<<< HEAD
-OpenIDE-Module-Build-Version: 201704251343
-=======
-OpenIDE-Module-Build-Version: 201704251336
->>>>>>> origin/Health
+OpenIDE-Module-Build-Version: 201704260844
 OpenIDE-Module: minioning.ServerCommon
 OpenIDE-Module-Public-Packages: minioning.common.service.*, minioning.
  common.data.*, minioning.common.services.*
