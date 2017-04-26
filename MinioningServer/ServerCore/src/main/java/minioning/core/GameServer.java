@@ -79,6 +79,8 @@ public class GameServer implements Runnable {
 
     private void loadMap() {
         for (ITiledLoaderService loader : getITiledLoaderServices()) {
+
+//            loader.load(world);
             loader.load(world);
         }
     }
@@ -137,8 +139,8 @@ public class GameServer implements Runnable {
     @Override
     public void run() {
         boolean test = true;
-
-//          loadMap();
+        
+        loadMap();
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);

@@ -6,9 +6,9 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import minioning.common.data.EntityType;
+import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
-import static minioning.common.data.Events.CREATEPLAYER;
-import static minioning.common.data.Events.SKILLQ;
+import static minioning.common.data.Events.*;
 import minioning.common.data.Location;
 import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityCreatorService;
@@ -38,6 +38,11 @@ public class UnitCreator implements IEntityCreatorService {
                 createSkill(event, entities);
                 eventBus.remove(key);
             }
+            if(event.getType().equals(CREATEMONSTER)){
+                System.out.println("CREATEMONSTER found");
+                createMonster(event, entities);
+                eventBus.remove(key);
+            }
         }
     }
     
@@ -62,8 +67,8 @@ public class UnitCreator implements IEntityCreatorService {
 
     private void createPlayer(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
-        for(int i = 0; i < data.length; i++){
-            System.out.println(data[i]);
+        for (String data1 : data) {
+            System.out.println(data1);
         }
         UUID owner = UUID.fromString(data[2]);
         String name = data[4];
@@ -71,6 +76,23 @@ public class UnitCreator implements IEntityCreatorService {
         newEntity.setLocation(Location.wilderness);
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
+    }
+    
+    private void createMonster(Event event, Map<UUID, Entity> entities){
+        String[] data = event.getData();
+        UUID owner = UUID.fromString(data[0]);
+        String name = data[1];
+        int x = Integer.parseInt(data[2]);
+        int y = Integer.parseInt(data[3]);
+        int dx = Integer.parseInt(data[4]);
+        int dy = Integer.parseInt(data[5]);
+        Entity newMonster = new Entity(owner, name, x, y);
+        newMonster.setDx(x);//dx
+        newMonster.setDy(y);//dy
+        newMonster.setLocation(Location.valueOf(data[6]));
+        newMonster.setType(ENEMY);
+        entities.putIfAbsent(newMonster.getID(), newMonster);
+        System.out.println("new monster created");
     }
     
     
