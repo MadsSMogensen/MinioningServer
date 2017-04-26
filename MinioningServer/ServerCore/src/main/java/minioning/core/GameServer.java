@@ -11,6 +11,7 @@ import minioning.common.data.Location;
 import minioning.common.services.IConnectionService;
 import minioning.common.services.IEntityCreatorService;
 import minioning.common.services.IEntityProcessingService;
+import minioning.common.services.IHealthProcessorService;
 import minioning.common.services.ITiledLoaderService;
 import org.openide.util.Lookup;
 
@@ -35,22 +36,22 @@ public class GameServer implements Runnable {
 //    }
 
     /*
-    private void loadGamePlugins() {
-        // Lookup game plugins
-        Lookup.Result<IGamePluginService> result = lookup.lookupResult(IGamePluginService.class);
-        result.addLookupListener(lookupListener);
-        synchronized(gamePlugins) {
-            gamePlugins.addAll(result.allInstances());
-        }
-        result.allItems();
+     private void loadGamePlugins() {
+     // Lookup game plugins
+     Lookup.Result<IGamePluginService> result = lookup.lookupResult(IGamePluginService.class);
+     result.addLookupListener(lookupListener);
+     synchronized(gamePlugins) {
+     gamePlugins.addAll(result.allInstances());
+     }
+     result.allItems();
         
-        // Start game plugins
-        synchronized(gamePlugins) {
-            for (IGamePluginService plugin : gamePlugins) {
-                plugin.start(gameData, world);
-            }
-        }
-    }
+     // Start game plugins
+     synchronized(gamePlugins) {
+     for (IGamePluginService plugin : gamePlugins) {
+     plugin.start(gameData, world);
+     }
+     }
+     }
      */
     public void update() {
 //        System.out.println("eventBus.size upd: " + getEventBus().size());
@@ -78,14 +79,28 @@ public class GameServer implements Runnable {
 
     private void loadMap() {
         for (ITiledLoaderService loader : getITiledLoaderServices()) {
+<<<<<<< HEAD
 
             loader.load(world);
 
+=======
+            loader.load(world);
+        }
+    }
+
+    private void updateHP() {
+        for (IHealthProcessorService processor : getIHealthProcessor()) {
+            processor.process(getBus(), world);
+>>>>>>> origin/Health
         }
     }
 
     private Collection<? extends IEntityProcessingService> getIEntityProcessingServices() {
         return lookup.lookupAll(IEntityProcessingService.class);
+    }
+
+    private Collection<? extends IHealthProcessorService> getIHealthProcessor() {
+        return lookup.lookupAll(IHealthProcessorService.class);
     }
 
     private Collection<? extends IEntityCreatorService> getIEntityCreatorServices() {
@@ -101,35 +116,39 @@ public class GameServer implements Runnable {
     }
 
     /*
-    private final LookupListener lookupListener = new LookupListener() {
-        //Listens for changes in components, starting and stopping them when needed
-        @Override
-        public void resultChanged(LookupEvent le) {
-            Collection<? extends IGamePluginService> updatedPluginList = lookup.lookupAll(IGamePluginService.class);
-            for (IGamePluginService updatedGamePlugin : updatedPluginList) {
-                synchronized(gamePlugins) {
-                    if (!gamePlugins.contains(updatedGamePlugin)) {
-                        updatedGamePlugin.start(gameData, world);
-                        gamePlugins.add(updatedGamePlugin);
-                    }
-                }
-            }
-            synchronized(gamePlugins) {
-                for (IGamePluginService gamePlugin : gamePlugins) {
-                    if(!updatedPluginList.contains(gamePlugin)) {
-                        gamePlugin.stop(gameData);
-                        gamePlugins.remove(gamePlugin);
-                    }
-                }
-            }
-        }
-    };
+     private final LookupListener lookupListener = new LookupListener() {
+     //Listens for changes in components, starting and stopping them when needed
+     @Override
+     public void resultChanged(LookupEvent le) {
+     Collection<? extends IGamePluginService> updatedPluginList = lookup.lookupAll(IGamePluginService.class);
+     for (IGamePluginService updatedGamePlugin : updatedPluginList) {
+     synchronized(gamePlugins) {
+     if (!gamePlugins.contains(updatedGamePlugin)) {
+     updatedGamePlugin.start(gameData, world);
+     gamePlugins.add(updatedGamePlugin);
+     }
+     }
+     }
+     synchronized(gamePlugins) {
+     for (IGamePluginService gamePlugin : gamePlugins) {
+     if(!updatedPluginList.contains(gamePlugin)) {
+     gamePlugin.stop(gameData);
+     gamePlugins.remove(gamePlugin);
+     }
+     }
+     }
+     }
+     };
      */
     @Override
     public void run() {
         boolean test = true;
 
+<<<<<<< HEAD
         loadMap();
+=======
+//          loadMap();
+>>>>>>> origin/Health
         while (true) {
             long currentTime = System.nanoTime();
             float elapsedTime = (currentTime - lastTime);
@@ -142,6 +161,7 @@ public class GameServer implements Runnable {
                 updateConnection();
                 create();
                 update();
+                updateHP();
 //                System.out.println(world.size());
             }
 
