@@ -12,5 +12,6 @@ package minioning.common.data;
 public enum Location {
     
     wilderness,
+    wilderness_east,
     arena;
 }

@@ -119,7 +119,9 @@ public class ClientOutput implements IConnectionService {
         }
         for(Map.Entry<UUID, Entity> entry : world.entrySet()){
             if(entry.getValue().getLocation().equals(location)){
-                localWorld.put(entry.getKey(), entry.getValue());
+                if(!entry.getValue().isImmobile()){
+                    localWorld.put(entry.getKey(), entry.getValue());
+                }
             }
         }
         

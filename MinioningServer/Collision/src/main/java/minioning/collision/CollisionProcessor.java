@@ -49,17 +49,17 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 if (!entryEntity.getType().equals(entity.getType())) {
                                     //collision event for holy bolt here!
                                     if (colliding(entryEntity, entity)) {
-                                        
+
                                         String[] s = new String[2];
-                                        
+
                                         s[0] = entry.getValue().getID().toString();
                                         s[1] = entity.getType().toString();
-                                        
+
                                         UUID id = UUID.randomUUID();
                                         Event event = new Event(HPCHANGE, s);
                                         entities.remove(ID);
                                         eventBus.put(id, event);
-                                        
+
                                         System.out.println("event");
                                         System.out.println("A HOLYBOLT COLLIDED!");
                                     }
@@ -72,11 +72,19 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 switch (entryEntity.getType()) {
                                     case DOOR:
                                         if (entryEntity.getDoorTo() == null) {
+
                                             regularCollision(entryEntity, entity);
+
                                             break;
                                         }
                                         if (!entity.getType().equals(HOLYBOLT)) {
-                                            entity.setPosition(300, 150, entryEntity.getDoorTo());
+
+                                            int x = entryEntity.getDoorToX();
+                                            int y = entryEntity.getDoorToY();
+                                            
+                                            
+                                                entity.setPosition(x, y, entryEntity.getDoorTo());
+                                            
                                         }
                                         break;
                                     case HOLYBOLT:

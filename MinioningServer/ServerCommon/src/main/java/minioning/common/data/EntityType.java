@@ -14,5 +14,6 @@ public enum EntityType {
     GOLD,
     PORTAL,
     HOLYBOLT,
+    COLUMN,
     WALL;
 }

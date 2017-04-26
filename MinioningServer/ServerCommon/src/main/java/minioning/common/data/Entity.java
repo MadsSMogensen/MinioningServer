@@ -43,6 +43,24 @@ public class Entity implements Serializable {
     private float spawnTimer;
     private String minionType = "Blob";
     private int hp = 100;
+    private int doorToX;
+    private int doorToY;
+
+    public int getDoorToX() {
+        return doorToX;
+    }
+
+    public void setDoorToX(int doorToX) {
+        this.doorToX = doorToX;
+    }
+
+    public int getDoorToY() {
+        return doorToY;
+    }
+
+    public void setDoorToY(int doorToY) {
+        this.doorToY = doorToY;
+    }
 
     public int getHp() {
         return hp;

@@ -7,6 +7,7 @@ package minioning.health;
 
 
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
@@ -24,6 +25,8 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = IHealthProcessorService.class)
 public class HealthProcess implements IHealthProcessorService {
 
+    private Random ran = new Random();
+    
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
 
@@ -39,9 +42,14 @@ public class HealthProcess implements IHealthProcessorService {
                     UUID entityID = UUID.fromString(data[0]);
                     Entity entity = world.get(entityID);
                     
-                    entity.setHp(entity.getHp()-10);
+                    int min = 5;
+                    int max = 10;
                     
-                    if(entity.getHp() <= 0){
+                    int dmg = ran.nextInt(max - min +1) + min;
+                    
+                    entity.setHp(entity.getHp()-dmg);
+                    
+                    if(entity.getHp() <= 0 && !entity.isImmobile()){
                         world.remove(entityID);
                     }else{
                     
