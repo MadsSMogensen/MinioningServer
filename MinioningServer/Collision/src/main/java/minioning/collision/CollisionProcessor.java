@@ -12,6 +12,8 @@ import static minioning.common.data.EntityType.*;
 import static minioning.common.data.EntityType.PLAYER;
 import minioning.common.data.Event;
 import minioning.common.data.EventBus;
+import minioning.common.data.Events;
+import static minioning.common.data.Events.HPCHANGE;
 import minioning.common.data.GameData;
 import static minioning.common.data.GameData.getDt;
 import minioning.common.data.Location;
@@ -34,36 +36,64 @@ public class CollisionProcessor implements IEntityProcessingService {
         if (!entity.isImmobile()) {
 //        if (entity.getType().equals(PLAYER)) { //until immobile is implemented
             for (Entry<UUID, Entity> entry : entities.entrySet()) {
-                //don't check collision with itself
-                if (entry.getKey() != ID) {
-                    Entity entryEntity = entry.getValue();
-                    //Only look in the same world and not for entities owned by the current entity
-                    if (entryEntity.getLocation().equals(entity.getLocation()) && !entryEntity.getOwner().toString().equals(entity.getID().toString())) {
-                        //check if colliding
-                        if (colliding(entryEntity, entity)) {
-                            switch (entryEntity.getType()) {
-                                case DOOR:
-                                    if (entryEntity.getDoorTo() == null) {
+                Entity entryEntity = entry.getValue();
+                //Only look in the same world
+                if (entryEntity.getLocation().equals(entity.getLocation())) {
+                    //don't check collision with itself
+                    if (entry.getKey() != ID) {
+                        if (entity.getType().equals(HOLYBOLT)) {
+                            //handle collision for holybolts
+                            //don't collide with owner
+                            if (!entity.getOwner().toString().equals(entryEntity.getID().toString())) {
+                                //don't collide with other holybolts
+                                if (!entryEntity.getType().equals(entity.getType())) {
+                                    //collision event for holy bolt here!
+                                    if (colliding(entryEntity, entity)) {
+                                        
+                                        String[] s = new String[2];
+                                        
+                                        s[0] = entry.getValue().getID().toString();
+                                        s[1] = entity.getType().toString();
+                                        
+                                        UUID id = UUID.randomUUID();
+                                        Event event = new Event(HPCHANGE, s);
+                                        entities.remove(ID);
+                                        eventBus.put(id, event);
+                                        
+                                        System.out.println("event");
+                                        System.out.println("A HOLYBOLT COLLIDED!");
+                                    }
+                                }
+                            }
+                            //don't collide with owner
+                        } else if (!entryEntity.getOwner().toString().equals(entity.getID().toString())) {
+                            //check if colliding
+                            if (colliding(entryEntity, entity)) {
+                                switch (entryEntity.getType()) {
+                                    case DOOR:
+                                        if (entryEntity.getDoorTo() == null) {
+                                            regularCollision(entryEntity, entity);
+                                            break;
+                                        }
+                                        if (!entity.getType().equals(HOLYBOLT)) {
+                                            entity.setPosition(300, 150, entryEntity.getDoorTo());
+                                        }
+                                        break;
+                                    case HOLYBOLT:
+//                                        if (!entity.getType().equals(HOLYBOLT)) {
+//                                            System.out.println("player with id: " + entity.getID());
+//                                            System.out.println("and owner id  : " + entity.getOwner());
+//                                            System.out.println("collided with");
+//                                            System.out.println("entity with id: " + entryEntity.getID());
+//                                            System.out.println("and owner id  : " + entryEntity.getOwner());
+//                                            entities.remove(entryEntity.getID());
+//                                        }
+                                        System.out.println("SOMETHING ELSE COLLIDED WITH A HOLYBOLT");
+                                        break;
+                                    default:
                                         regularCollision(entryEntity, entity);
                                         break;
-                                    }
-                                    if (!entity.getType().equals(HOLYBOLT)) {
-                                        entity.setPosition(300, 150, entryEntity.getDoorTo());
-                                    }
-                                    break;
-                                case HOLYBOLT:
-                                    if (!entity.getType().equals(HOLYBOLT)) {
-                                        System.out.println("player with id: " + entity.getID());
-                                        System.out.println("and owner id  : " + entity.getOwner());
-                                        System.out.println("collided with");
-                                        System.out.println("entity with id: " + entryEntity.getID());
-                                        System.out.println("and owner id  : " + entryEntity.getOwner());
-                                        entities.remove(entryEntity.getID());
-                                    }
-                                    break;
-                                default:
-                                    regularCollision(entryEntity, entity);
-                                    break;
+                                }
                             }
                         }
                     }

@@ -66,6 +66,7 @@ public class Lists {
         return port;
     }
 
+    //disconnectUser by ipaddress
     public static void disconnectUser(String user) {
         //simply try to remove user by IPAddress
         try {
@@ -82,6 +83,25 @@ public class Lists {
             //name found
         } catch (Exception e) {
             //no such name found
+        }
+    }
+
+    //disconnect user by UUID
+    public static void disconnectUser(UUID ID) {
+        try {
+            String name = getPlayingUsers().get(ID);
+            String IPAddress = "";
+            for (Map.Entry<String, String> entry : getConnectedUsers().entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if (value.equals(name)) {
+                    IPAddress = key;
+                }
+            }
+            getPlayingUsers().remove(ID);
+            getConnectedUsers().remove(IPAddress);
+            getPortList().remove(IPAddress);
+        } catch (Exception e) {
         }
     }
 

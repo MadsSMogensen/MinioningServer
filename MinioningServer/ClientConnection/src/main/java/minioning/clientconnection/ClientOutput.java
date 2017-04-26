@@ -17,6 +17,7 @@ import static minioning.common.data.Lists.getConnectedUsers;
 import static minioning.common.data.Lists.getIP;
 import static minioning.common.data.Lists.getPlayingUsers;
 import static minioning.common.data.Lists.getPort;
+import minioning.common.data.Location;
 import minioning.common.services.IConnectionService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -62,7 +63,7 @@ public class ClientOutput implements IConnectionService {
             DatagramPacket sendDataPacket
                     = new DatagramPacket(sendData, sendData.length, IPAddress, port);
             serverSocket.send(sendDataPacket);
-            System.out.println("datapacket sent!");
+//            System.out.println("datapacket sent!");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -75,31 +76,21 @@ public class ClientOutput implements IConnectionService {
 //            System.out.println("connectedUsers: " + getConnectedUsers().size());
 //        }
         for (Map.Entry<UUID, String> user : playingUsers.entrySet()) {
-
+            
             try {
                 String name = user.getValue();
-//                String IPAddressString = user.getKey();
                 String IPAddressString = getIP(name);
                 IPAddressString = IPAddressString.replace("/", "");
                 InetAddress IPAddress = InetAddress.getByName(IPAddressString);
                 int port = getPort(IPAddressString);
-
-                byte[] sendData = new byte[256];
-
-                sendData = serializeWorld("WORLD", world);
-
-                sendData(sendData, IPAddress, port);
-
-//                try { //GAMMEL KODE
-//                    DatagramSocket serverSocket = getServerSocket();
-//                    if (port != 0) {
-//                        DatagramPacket sendDataPacket
-//                                = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-//                        serverSocket.send(sendDataPacket);
-////                        System.out.println("sent: " + new String(sendDataPacket.getData()));
-//                    }
-//                } catch (Exception e) {
-//                }
+                UUID owner = user.getKey();
+                
+                byte[] data = new byte[256];
+                
+                data = serializeWorld("WORLD", world, owner);
+                
+                sendData(data, IPAddress, port);
+                
             } catch (Exception e) {
             }
         }
@@ -118,8 +109,21 @@ public class ClientOutput implements IConnectionService {
         }
     }
 
-    private byte[] serializeWorld(String event, ConcurrentHashMap<UUID, Entity> world) throws IOException {
-        String[] stringWorld = stringify(world);
+    private byte[] serializeWorld(String event, ConcurrentHashMap<UUID, Entity> world, UUID entityOwner) throws IOException {
+        ConcurrentHashMap<UUID, Entity> localWorld = new ConcurrentHashMap<>();
+        Location location = null;
+        for(Map.Entry<UUID, Entity> entry : world.entrySet()){
+            if(entry.getValue().getOwner().equals(entityOwner)){
+                location = entry.getValue().getLocation();
+            }
+        }
+        for(Map.Entry<UUID, Entity> entry : world.entrySet()){
+            if(entry.getValue().getLocation().equals(location)){
+                localWorld.put(entry.getKey(), entry.getValue());
+            }
+        }
+        
+        String[] stringWorld = stringify(localWorld);
         String[] resultWorld = new String[stringWorld.length + 1];
         resultWorld[0] = event;
         for (int i = 1; i < resultWorld.length; i++) {
