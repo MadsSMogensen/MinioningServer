@@ -52,8 +52,8 @@ public class MovementProcessor implements IEntityProcessingService {
                     int yGoal = Integer.parseInt(data[5]);
                     entity.setDx(xGoal);
                     entity.setDy(yGoal);
-                    eventBus.remove(key);
                 }
+                eventBus.remove(key);
             }
         }
     }
