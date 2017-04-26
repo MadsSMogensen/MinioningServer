@@ -18,6 +18,7 @@ public enum Events implements Serializable{
     SKILLQ,
     CREATEMONSTER,
     HPCHANGE,
+    ENEMYQ,
     FALSEEVENT
     
 }

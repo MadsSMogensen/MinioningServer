@@ -9,6 +9,7 @@ import minioning.common.data.EntityType;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
+import minioning.common.data.GameData;
 import minioning.common.data.Location;
 import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityCreatorService;
@@ -33,20 +34,46 @@ public class UnitCreator implements IEntityCreatorService {
                 createPlayer(event, entities);
                 eventBus.remove(key);
             }
-            if(event.getType().equals(SKILLQ)){
+            if (event.getType().equals(SKILLQ)) {
                 System.out.println("SKILLQ found");
                 createSkill(event, entities);
                 eventBus.remove(key);
             }
-            if(event.getType().equals(CREATEMONSTER)){
+            if (event.getType().equals(ENEMYQ)) {
+                System.out.println("ENEMYQ found");
+                createEnemySkill(event, entities);
+                eventBus.remove(key);
+            }
+            if (event.getType().equals(CREATEMONSTER)) {
                 System.out.println("CREATEMONSTER found");
                 createMonster(event, entities);
                 eventBus.remove(key);
             }
         }
     }
-    
-    private void createSkill(Event event, Map<UUID, Entity> entities){
+
+    private void createEnemySkill(Event event, Map<UUID, Entity> entities) {
+        String[] data = event.getData();
+        UUID enemyID = UUID.fromString(data[2]);
+        Entity enemy = entities.get(enemyID);
+        try {
+            if (enemy.getSkillqCurrentCD() >= enemy.getSkillqCD()) {
+                Entity enemySkill = new Entity(enemy.getID(), "", enemy.getX(), enemy.getY());
+                enemySkill.setLocation(enemy.getLocation());
+                enemySkill.setType(EntityType.HOLYBOLT);
+                enemySkill.setSpeed(200);
+                Vector2D direction = Vector2D.getDirection(enemySkill.getX(), Integer.parseInt(data[4]), enemySkill.getY(), Integer.parseInt(data[5]));
+                Vector2D velocity = direction.times(enemySkill.getSpeed());
+                enemySkill.setVelocity(velocity);
+                entities.putIfAbsent(enemySkill.getID(), enemySkill);
+                enemy.setSkillqCurrentCD(0);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void createSkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
 //        System.out.println("creating skill with data:");
 //        for(int i = 0; i < data.length; i++){
@@ -54,15 +81,22 @@ public class UnitCreator implements IEntityCreatorService {
 //        }
         UUID owner = UUID.fromString(data[2]);
         Entity ownerEntity = getOwnerEntity(owner, entities);
-        Entity skillEntity = new Entity(ownerEntity.getID(), "", ownerEntity.getX(), ownerEntity.getY());
-        skillEntity.setLocation(ownerEntity.getLocation());
-        skillEntity.setType(EntityType.HOLYBOLT);
-        skillEntity.setSpeed(200);
-        
-        Vector2D direction = Vector2D.getDirection(skillEntity.getX(), Integer.parseInt(data[4]), skillEntity.getY(), Integer.parseInt(data[5]));
-        Vector2D velocity = direction.times(skillEntity.getSpeed());
-        skillEntity.setVelocity(velocity);
-        entities.putIfAbsent(skillEntity.getID(), skillEntity);
+        try {
+            if (ownerEntity.getSkillqCurrentCD() >= ownerEntity.getSkillqCD()) {
+                Entity skillEntity = new Entity(ownerEntity.getID(), "", ownerEntity.getX(), ownerEntity.getY());
+                skillEntity.setLocation(ownerEntity.getLocation());
+                skillEntity.setType(EntityType.HOLYBOLT);
+                skillEntity.setSpeed(200);
+
+                Vector2D direction = Vector2D.getDirection(skillEntity.getX(), Integer.parseInt(data[4]), skillEntity.getY(), Integer.parseInt(data[5]));
+                Vector2D velocity = direction.times(skillEntity.getSpeed());
+                skillEntity.setVelocity(velocity);
+                entities.putIfAbsent(skillEntity.getID(), skillEntity);
+                ownerEntity.setSkillqCurrentCD(0);
+            }
+        } catch (Exception e) {
+        }
+
     }
 
     private void createPlayer(Event event, Map<UUID, Entity> entities) {
@@ -77,8 +111,8 @@ public class UnitCreator implements IEntityCreatorService {
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
     }
-    
-    private void createMonster(Event event, Map<UUID, Entity> entities){
+
+    private void createMonster(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID owner = UUID.fromString(data[0]);
         String name = data[1];
@@ -94,26 +128,26 @@ public class UnitCreator implements IEntityCreatorService {
         entities.putIfAbsent(newMonster.getID(), newMonster);
         System.out.println("new monster created");
     }
-    
-    
-    
-    private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world){
+
+    private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world) {
         Entity entity;
-        for(Entry<UUID, Entity> entry : world.entrySet()){
+        for (Entry<UUID, Entity> entry : world.entrySet()) {
             UUID key = entry.getKey();
             entity = entry.getValue();
-            if(entity.getOwner().equals(ownerID)){
+            System.out.println("checking for owner in getOwnerEntity");
+            if (entity.getOwner().toString().equals(ownerID.toString())) {
+                System.out.println("owner found!");
                 return entity;
             }
         }
         return null;
     }
-    
-    private Vector2D direction(Entity skillEntity, float dx, float dy){
+
+    private Vector2D direction(Entity skillEntity, float dx, float dy) {
         Vector2D velocity = new Vector2D();
         /*
         Use the on in Vector2D.class!
-        */
+         */
         return velocity;
     }
 }

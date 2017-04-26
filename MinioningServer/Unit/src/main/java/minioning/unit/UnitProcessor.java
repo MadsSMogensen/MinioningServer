@@ -1,6 +1,7 @@
 package minioning.unit;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
@@ -17,53 +18,95 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class UnitProcessor implements IEntityProcessingService {
+
     float standardSpawnDelay = 10;
+
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
+        //add cd timer to every entity
+        entity.setSkillqCurrentCD(entity.getSkillqCurrentCD() + GameData.getDt());
+        
         //check monster spawners, if they should spawn new monsters
-        if(entity.getType().equals(PORTAL)){
-            if(entity.getSpawnCount() < entity.getMaxMinions()){
+        if (entity.getType().equals(PORTAL)) {
+            if (entity.getSpawnCount() < entity.getMaxMinions()) {
                 float spawnTimer = entity.getSpawnTimer();
                 spawnTimer += GameData.getDt();
                 entity.setSpawnTimer(spawnTimer);
-                if(spawnTimer >= standardSpawnDelay){
+                if (spawnTimer >= standardSpawnDelay) {
                     spawnNewMonster(entity, eventBus);
-                    entity.setSpawnCount(entity.getSpawnCount()+1);
+                    entity.setSpawnCount(entity.getSpawnCount() + 1);
                     entity.setSpawnTimer(0);
                 }
             }
         }
-        if(entity.getType().equals(ENEMY)){
-            Entity Player;
-            System.out.println("enemy found");
-            System.out.println(entity.getX() + "," + entity.getY());
-            for(Map.Entry<UUID, Entity> entry : entities.entrySet()){
+        if (entity.getType().equals(ENEMY)) {
+            //update skillcooldown
+            entity.setSkillqCurrentCD(entity.getSkillqCurrentCD() + GameData.getDt());
+
+            int x = entity.getX();
+            int y = entity.getY();
+            //looking for players to shoot at
+            for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
                 Entity entryEntity = entry.getValue();
-                if(entryEntity.getType().equals(PLAYER)){
-                    System.out.println("enemy found player");
+                if (entryEntity.getType().equals(PLAYER)) {
                     int entryx = entryEntity.getX();
                     int entryy = entryEntity.getY();
-                    int x = entity.getX();
-                    int y = entity.getY();
-                    System.out.println("distance to player: " + distance(x,y,entryx,entryy));
-                    if(distance(x,y,entryx,entryy) <= 100){
-                        System.out.println("setting movement to players position");
-                        entity.setDx(entryx);
-                        entity.setDy(entryy);
+                    //checking if player is within a certain view distance
+                    if (distance(x, y, entryx, entryy) <= 300) {
+                        //Shooting at player position
+                        String[] data = new String[6];
+                        data[0] = "";
+                        data[1] = "";
+                        data[2] = entity.getID().toString();
+                        System.out.println("entityID: " + entity.getID().toString());
+                        data[3] = "ENEMYQ";
+                        data[4] = String.valueOf(entryx);
+                        data[5] = String.valueOf(entryy);
+                        Event shootQ = new Event(ENEMYQ, data);
+                        eventBus.put(UUID.randomUUID(), shootQ);
                     }
                 }
             }
+            //Set movement
+//            if (entity.getX() == entity.getDx() && entity.getY() == entity.getDy()) {
+            if (Math.abs(entity.getX() - entity.getDx()) <= 35 && Math.abs(entity.getY() - entity.getDy()) <= 35) {
+                Entity owner = entities.get(entity.getOwner());
+                int lowerx = owner.getX() - 200;
+                int upperx = owner.getX() + 200;
+                int lowery = owner.getY() - 200;
+                int uppery = owner.getY() + 200;
+                Random rnd = new Random();
+                int newdx = rnd.nextInt((upperx - lowerx) + 1) + lowerx;
+                newdx = Math.min(newdx, GameData.getGameWidth() - 10);
+                int newdy = rnd.nextInt((uppery - lowery) + 1) + lowery;
+                newdy = Math.min(newdy, GameData.getGameHeight() - 10);
+
+                entity.setDx(newdx);
+                entity.setDy(newdy);
+            }
         }
-        
-        
-        //remove entities outside the gameworld
-        if(entity.getX() > GameData.getGameWidth()+5 || entity.getY() > GameData.getGameHeight()+5){
-            entities.remove(entity.getID());
-            System.out.println("entity out of bounds removed");
+
+        //handle entities outside the gameworld
+        if (entity.getX() > GameData.getGameWidth() + 5 || entity.getY() > GameData.getGameHeight() + 5) {
+            switch (entity.getType()) {
+                case ENEMY:
+                    Entity owner = entities.get(entity.getOwner());
+                    entity.setDx(owner.getX() - 10);
+                    entity.setDy(owner.getY() - 10);
+                    break;
+                case PLAYER:
+                    entity.setX(Math.round(entity.getVelocity().getX() * -GameData.getDt()));
+                    entity.setY(Math.round(entity.getVelocity().getY() * -GameData.getDt()));
+                    break;
+                default:
+                    entities.remove(entity.getID());
+                    System.out.println("entity out of bounds removed");
+                    break;
+            }
         }
     }
-    
-    private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus){
+
+    private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String data = "";
         data += owner.getID() + ";";
         data += owner.getMinionType() + ";";
@@ -76,8 +119,8 @@ public class UnitProcessor implements IEntityProcessingService {
         Event newEvent = new Event(CREATEMONSTER, dataArray);
         eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
     }
-    
-    private float distance(int x1, int y1, int x2, int y2){
+
+    private float distance(int x1, int y1, int x2, int y2) {
         float length = 0;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));

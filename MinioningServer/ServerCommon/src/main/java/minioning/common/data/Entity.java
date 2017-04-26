@@ -43,6 +43,24 @@ public class Entity implements Serializable {
     private float spawnTimer;
     private String minionType = "Blob";
     private int hp = 100;
+    private float skillqCD = 1.5f;
+    private float skillqCurrentCD = 0;
+
+    public float getSkillqCD() {
+        return skillqCD;
+    }
+
+    public void setSkillqCD(float skillqCD) {
+        this.skillqCD = skillqCD;
+    }
+
+    public float getSkillqCurrentCD() {
+        return skillqCurrentCD;
+    }
+
+    public void setSkillqCurrentCD(float skillqCurrentCD) {
+        this.skillqCurrentCD = skillqCurrentCD;
+    }
 
     public int getHp() {
         return hp;
