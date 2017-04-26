@@ -45,6 +45,8 @@ public class Entity implements Serializable {
     private int hp = 100;
     private float skillqCD = 1.5f;
     private float skillqCurrentCD = 0;
+    private int doorToX;
+    private int doorToY;
 
     public float getSkillqCD() {
         return skillqCD;
@@ -60,6 +62,22 @@ public class Entity implements Serializable {
 
     public void setSkillqCurrentCD(float skillqCurrentCD) {
         this.skillqCurrentCD = skillqCurrentCD;
+    }  
+        
+    public int getDoorToX() {
+        return doorToX;
+    }
+
+    public void setDoorToX(int doorToX) {
+        this.doorToX = doorToX;
+    }
+
+    public int getDoorToY() {
+        return doorToY;
+    }
+
+    public void setDoorToY(int doorToY) {
+        this.doorToY = doorToY;
     }
 
     public int getHp() {

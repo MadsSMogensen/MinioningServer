@@ -44,23 +44,21 @@ import org.openide.util.Utilities;
 public class TiledProcessor implements ITiledLoaderService {
 
     private static final String RESOURCE_ROOT = "../../../TiledLoader/src/main/resources/";
-    
+
     ConcurrentHashMap<UUID, Entity> entities;
 
-
-
-    @Override
-    public void load(ConcurrentHashMap<UUID, Entity> entities) {
-        System.out.println("load");
-        this.entities = entities;
+    
+    private void loadFromFile(ConcurrentHashMap<UUID, Entity> entities, String fileName){
+         System.out.println("load");
+        
         try {
-            Path file = Paths.get(RESOURCE_ROOT + "map/wilderness.tmx");
+            Path file = Paths.get(RESOURCE_ROOT + "map/" + fileName +".tmx");
 
             Map tiledMap = new TMXMapReader().readMap(file.toFile().getAbsolutePath());
             System.out.println(tiledMap.getLayerCount());
 
-            for(int i = 0; i < tiledMap.getLayerCount(); i++){
-            System.out.println("Layer: "+ i + "Name:" + tiledMap.getLayer(0).getName());
+            for (int i = 0; i < tiledMap.getLayerCount(); i++) {
+                System.out.println("Layer: " + i + "Name:" + tiledMap.getLayer(0).getName());
             }
             MapLayer mapLayer = tiledMap.getLayer(2);
             ObjectGroup test = (ObjectGroup) mapLayer;
@@ -72,22 +70,35 @@ public class TiledProcessor implements ITiledLoaderService {
 
                     MapObject newTile = test.getObjectAt(i * 32, j * 32);
                     try {
-                        
+
                         //String name = "Map";
                         String name = "";
                         UUID owner = UUID.randomUUID();
-                        int x = (int)Math.round(newTile.getX() + newTile.getWidth()/2); //+16
-                        int y = (int)Math.round(newTile.getY() + newTile.getWidth()/2); //+16
+                        int x = (int) Math.round(newTile.getX() + newTile.getWidth() / 2); //+16
+                        int y = (int) Math.round(newTile.getY() + newTile.getWidth() / 2); //+16
                         y = GameData.getGameHeight() - y;
-                        
-                        
+
                         Entity newEntity = new Entity(owner, name, x, y);
-                        newEntity.setLocation(Location.wilderness);
+                        newEntity.setLocation(Location.valueOf(fileName));
                         newEntity.setType(EntityType.valueOf(newTile.getType()));
+                        if (newEntity.getType() == EntityType.DOOR) {
+                            
+                            String s = newTile.getName();
+                            
+                            String[] sa = s.split(";");
+                            
+                            
+                            System.out.println(sa[0] + sa[1] + sa[2]);
+                            newEntity.setDoorTo(Location.valueOf(sa[0]));
+                            
+                            newEntity.setDoorToX(Integer.parseInt(sa[1]));
+                            newEntity.setDoorToY(GameData.getGameHeight() - Integer.parseInt(sa[2]));
+                           
+                        }
                         newEntity.setImmobile(true);
 //                        newEntity.setDoorTo((Location)newTile.getDoorTo());
                         System.out.println(newEntity.getType());
-                        
+
                         entities.putIfAbsent(newEntity.getID(), newEntity);
                     } catch (Exception e) {
                     }
@@ -96,5 +107,15 @@ public class TiledProcessor implements ITiledLoaderService {
         } catch (Exception ex) {
             Exceptions.printStackTrace(ex);
         }
+    }
+    
+    
+    @Override
+    public void load(ConcurrentHashMap<UUID, Entity> entities) {
+       
+        
+        loadFromFile(entities, "wilderness");
+        loadFromFile(entities,"wilderness_east");
+        
     }
 }
