@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" nextobjectid="1525">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" nextobjectid="1674">
  <tileset firstgid="1" name="wildtileset" tilewidth="32" tileheight="32" tilecount="24" columns="12">
   <image source="wildtileset.png" width="384" height="64"/>
  </tileset>
@@ -47,172 +47,180 @@
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
 </data>
  </layer>
- <objectgroup name="Collision" visible="0">
-  <object id="1368" name="Wall" type="WALL" x="992" y="1" width="31" height="31"/>
-  <object id="1369" name="Wall" type="WALL" x="992" y="33" width="31" height="31"/>
-  <object id="1370" name="Wall" type="WALL" x="992" y="65" width="31" height="31"/>
-  <object id="1371" name="Wall" type="WALL" x="992" y="97" width="31" height="31"/>
-  <object id="1376" name="Wall" type="WALL" x="992" y="129" width="31" height="31"/>
-  <object id="1377" name="Wall" type="WALL" x="992" y="161" width="31" height="31"/>
-  <object id="1378" name="Wall" type="WALL" x="992" y="193" width="31" height="31"/>
-  <object id="1379" name="Wall" type="WALL" x="992" y="225" width="31" height="31"/>
-  <object id="1380" name="Wall" type="WALL" x="992" y="257" width="31" height="31"/>
-  <object id="1381" name="Wall" type="WALL" x="992" y="289" width="31" height="31"/>
-  <object id="1382" name="Wall" type="WALL" x="992" y="321" width="31" height="31"/>
-  <object id="1383" name="Wall" type="WALL" x="992" y="353" width="31" height="31"/>
-  <object id="1384" name="Wall" type="WALL" x="992" y="385" width="31" height="31"/>
-  <object id="1385" name="Wall" type="WALL" x="992" y="417" width="31" height="31"/>
-  <object id="1386" name="Wall" type="WALL" x="992" y="449" width="31" height="31"/>
-  <object id="1387" name="Wall" type="WALL" x="992" y="481" width="31" height="31"/>
-  <object id="1388" name="Wall" type="WALL" x="992" y="513" width="31" height="31"/>
-  <object id="1389" name="Wall" type="WALL" x="992" y="545" width="31" height="31"/>
-  <object id="1390" name="Wall" type="WALL" x="960" y="545" width="31" height="31"/>
-  <object id="1391" name="Wall" type="WALL" x="928" y="545" width="31" height="31"/>
-  <object id="1392" name="Wall" type="WALL" x="896" y="545" width="31" height="31"/>
-  <object id="1393" name="Wall" type="WALL" x="864" y="545" width="31" height="31"/>
-  <object id="1394" name="Wall" type="WALL" x="832" y="545" width="31" height="31"/>
-  <object id="1395" name="Wall" type="WALL" x="800" y="545" width="31" height="31"/>
-  <object id="1396" name="Wall" type="WALL" x="768" y="545" width="31" height="31"/>
-  <object id="1397" name="Wall" type="WALL" x="736" y="545" width="31" height="31"/>
-  <object id="1398" name="Wall" type="WALL" x="704" y="545" width="31" height="31"/>
-  <object id="1399" name="Wall" type="WALL" x="672" y="545" width="31" height="31"/>
-  <object id="1400" name="Wall" type="WALL" x="640" y="545" width="31" height="31"/>
-  <object id="1401" name="Wall" type="WALL" x="608" y="545" width="31" height="31"/>
-  <object id="1402" name="Wall" type="WALL" x="576" y="545" width="31" height="31"/>
-  <object id="1403" name="Wall" type="WALL" x="544" y="545" width="31" height="31"/>
-  <object id="1404" name="Wall" type="WALL" x="512" y="545" width="31" height="31"/>
-  <object id="1405" name="Wall" type="WALL" x="480" y="545" width="31" height="31"/>
-  <object id="1406" name="Wall" type="WALL" x="448" y="545" width="31" height="31"/>
-  <object id="1407" name="Wall" type="WALL" x="416" y="545" width="31" height="31"/>
-  <object id="1408" name="Wall" type="WALL" x="384" y="545" width="31" height="31"/>
-  <object id="1409" name="Wall" type="WALL" x="352" y="545" width="31" height="31"/>
-  <object id="1410" name="Wall" type="WALL" x="320" y="545" width="31" height="31"/>
-  <object id="1411" name="Wall" type="WALL" x="288" y="545" width="31" height="31"/>
-  <object id="1412" name="Wall" type="WALL" x="256" y="545" width="31" height="31"/>
-  <object id="1413" name="Wall" type="WALL" x="224" y="545" width="31" height="31"/>
-  <object id="1414" name="Wall" type="WALL" x="192" y="545" width="31" height="31"/>
-  <object id="1415" name="Wall" type="WALL" x="160" y="545" width="31" height="31"/>
-  <object id="1416" name="Wall" type="WALL" x="128" y="545" width="31" height="31"/>
-  <object id="1417" name="Wall" type="WALL" x="96" y="545" width="31" height="31"/>
-  <object id="1418" name="Wall" type="WALL" x="64" y="545" width="31" height="31"/>
-  <object id="1419" name="Wall" type="WALL" x="32" y="545" width="31" height="31"/>
-  <object id="1420" name="Wall" type="WALL" x="0" y="545" width="31" height="31"/>
-  <object id="1421" name="Wall" type="WALL" x="0" y="513" width="31" height="31"/>
-  <object id="1422" name="Wall" type="WALL" x="0" y="481" width="31" height="31"/>
-  <object id="1423" name="Wall" type="WALL" x="0" y="449" width="31" height="31"/>
-  <object id="1424" name="Wall" type="WALL" x="0" y="417" width="31" height="31"/>
-  <object id="1425" name="Wall" type="WALL" x="0" y="385" width="31" height="31"/>
-  <object id="1426" name="Wall" type="WALL" x="0" y="353" width="31" height="31"/>
-  <object id="1427" name="Wall" type="WALL" x="0" y="321" width="31" height="31"/>
-  <object id="1428" name="Wall" type="WALL" x="0" y="289" width="31" height="31"/>
-  <object id="1429" name="Wall" type="WALL" x="0" y="257" width="31" height="31"/>
-  <object id="1430" name="Wall" type="WALL" x="0" y="225" width="31" height="31"/>
-  <object id="1431" name="Wall" type="WALL" x="0" y="193" width="31" height="31"/>
-  <object id="1432" name="Wall" type="WALL" x="0" y="161" width="31" height="31"/>
-  <object id="1433" name="Wall" type="WALL" x="0" y="129" width="31" height="31"/>
-  <object id="1434" name="Wall" type="WALL" x="0" y="97" width="31" height="31"/>
-  <object id="1435" name="Wall" type="WALL" x="0" y="65" width="31" height="31"/>
-  <object id="1436" name="Wall" type="WALL" x="0" y="33" width="31" height="31"/>
-  <object id="1437" name="Wall" type="WALL" x="0" y="1" width="31" height="31"/>
-  <object id="1438" name="Wall" type="WALL" x="32" y="1" width="31" height="31"/>
-  <object id="1439" name="Wall" type="WALL" x="64" y="1" width="31" height="31"/>
-  <object id="1440" name="Wall" type="WALL" x="96" y="1" width="31" height="31"/>
-  <object id="1441" name="Wall" type="WALL" x="128" y="1" width="31" height="31"/>
-  <object id="1442" name="Wall" type="WALL" x="160" y="1" width="31" height="31"/>
-  <object id="1443" name="Wall" type="WALL" x="192" y="1" width="31" height="31"/>
-  <object id="1444" name="Wall" type="WALL" x="224" y="1" width="31" height="31"/>
-  <object id="1445" name="Wall" type="WALL" x="256" y="1" width="31" height="31"/>
-  <object id="1446" name="Wall" type="WALL" x="288" y="1" width="31" height="31"/>
-  <object id="1447" name="Wall" type="WALL" x="320" y="1" width="31" height="31"/>
-  <object id="1448" name="Wall" type="WALL" x="352" y="1" width="31" height="31"/>
-  <object id="1449" name="Wall" type="WALL" x="384" y="1" width="31" height="31"/>
-  <object id="1450" name="Wall" type="WALL" x="416" y="1" width="31" height="31"/>
-  <object id="1451" name="Wall" type="WALL" x="448" y="1" width="31" height="31"/>
-  <object id="1452" name="Wall" type="WALL" x="480" y="1" width="31" height="31"/>
-  <object id="1453" name="Wall" type="WALL" x="512" y="1" width="31" height="31"/>
-  <object id="1454" name="Wall" type="WALL" x="544" y="1" width="31" height="31"/>
-  <object id="1455" name="Wall" type="WALL" x="576" y="1" width="31" height="31"/>
-  <object id="1456" name="Wall" type="WALL" x="608" y="1" width="31" height="31"/>
-  <object id="1457" name="Wall" type="WALL" x="640" y="1" width="31" height="31"/>
-  <object id="1458" name="Wall" type="WALL" x="672" y="1" width="31" height="31"/>
-  <object id="1459" name="Wall" type="WALL" x="704" y="1" width="31" height="31"/>
-  <object id="1460" name="Wall" type="WALL" x="736" y="1" width="31" height="31"/>
-  <object id="1461" name="Wall" type="WALL" x="768" y="1" width="31" height="31"/>
-  <object id="1462" name="Wall" type="WALL" x="800" y="1" width="31" height="31"/>
-  <object id="1463" name="Wall" type="WALL" x="832" y="1" width="31" height="31"/>
-  <object id="1464" name="Wall" type="WALL" x="864" y="1" width="31" height="31"/>
-  <object id="1465" name="Wall" type="WALL" x="896" y="1" width="31" height="31"/>
-  <object id="1466" name="Wall" type="WALL" x="928" y="1" width="31" height="31"/>
-  <object id="1467" name="Wall" type="WALL" x="960" y="1" width="31" height="31"/>
-  <object id="1470" name="column" type="COLUMN" x="800" y="383" width="32" height="34"/>
-  <object id="1471" name="column" type="COLUMN" x="800" y="287" width="32" height="34"/>
-  <object id="1472" name="column" type="COLUMN" x="704" y="223" width="32" height="34"/>
-  <object id="1473" name="column" type="COLUMN" x="608" y="223" width="32" height="34"/>
-  <object id="1474" name="column" type="COLUMN" x="800" y="447" width="32" height="34"/>
-  <object id="1475" name="column" type="COLUMN" x="512" y="224" width="32" height="31"/>
-  <object id="1476" name="column" type="COLUMN" x="704" y="448" width="32" height="31"/>
-  <object id="1477" name="Portal" type="PORTAL" x="895.667" y="63.667" width="32.6667" height="32">
-   <properties>
-    <property name="isImmobile" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="1478" name="Portal" type="PORTAL" x="95.667" y="63.667" width="32.6667" height="32">
-   <properties>
-    <property name="isImmobile" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="1479" name="Portal" type="PORTAL" x="95.667" y="447.667" width="32.6667" height="32">
-   <properties>
-    <property name="isImmobile" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="1481" name="Lava" type="LAVA" x="287.5" y="448" width="32" height="32"/>
-  <object id="1482" name="Lava" type="LAVA" x="319.5" y="448" width="32" height="32"/>
-  <object id="1483" name="Lava" type="LAVA" x="351.5" y="448" width="32" height="32"/>
-  <object id="1484" name="Lava" type="LAVA" x="383.5" y="448" width="32" height="32"/>
-  <object id="1485" name="Lava" type="LAVA" x="415.5" y="448" width="32" height="32"/>
-  <object id="1486" name="Lava" type="LAVA" x="447.5" y="448" width="32" height="32"/>
-  <object id="1487" name="Lava" type="LAVA" x="447.5" y="480" width="32" height="32"/>
-  <object id="1488" name="Lava" type="LAVA" x="415.5" y="480" width="32" height="32"/>
-  <object id="1489" name="Lava" type="LAVA" x="383.5" y="480" width="32" height="32"/>
-  <object id="1490" name="Lava" type="LAVA" x="351.5" y="480" width="32" height="32"/>
-  <object id="1491" name="Lava" type="LAVA" x="319.5" y="480" width="32" height="32"/>
-  <object id="1492" name="Lava" type="LAVA" x="287.5" y="480" width="32" height="32"/>
-  <object id="1493" name="Lava" type="LAVA" x="255.5" y="480" width="32" height="32"/>
-  <object id="1494" name="Gold" type="GOLD" x="129" y="223" width="32" height="32"/>
-  <object id="1495" name="Gold" type="GOLD" x="161" y="127" width="32" height="32"/>
-  <object id="1496" name="Gold" type="GOLD" x="353" y="95" width="32" height="32"/>
-  <object id="1497" name="Gold" type="GOLD" x="161" y="319" width="32" height="32"/>
-  <object id="1498" name="Gold" type="GOLD" x="865" y="319" width="32" height="32"/>
-  <object id="1499" name="Gold" type="GOLD" x="865" y="127" width="32" height="32"/>
+ <objectgroup name="Collision">
   <object id="1500" name="wilderness_east;400;300" type="DOOR" x="639" y="352" width="33" height="32"/>
-  <object id="1501" name="Wall" type="WALL" x="481" y="31" width="32" height="31"/>
-  <object id="1502" name="Wall" type="WALL" x="481" y="63" width="32" height="31"/>
-  <object id="1503" name="Wall" type="WALL" x="481" y="95" width="32" height="31"/>
-  <object id="1504" name="Wall" type="WALL" x="481" y="127" width="32" height="31"/>
-  <object id="1505" name="Wall" type="WALL" x="513" y="31" width="32" height="31"/>
-  <object id="1506" name="Wall" type="WALL" x="545" y="31" width="32" height="31"/>
-  <object id="1507" name="Wall" type="WALL" x="577" y="31" width="32" height="31"/>
-  <object id="1508" name="Wall" type="WALL" x="609" y="31" width="32" height="31"/>
-  <object id="1509" name="Wall" type="WALL" x="641" y="31" width="32" height="31"/>
-  <object id="1510" name="Wall" type="WALL" x="673" y="31" width="32" height="31"/>
-  <object id="1511" name="Wall" type="WALL" x="673" y="63" width="32" height="31"/>
-  <object id="1512" name="Wall" type="WALL" x="673" y="95" width="32" height="31"/>
-  <object id="1513" name="Wall" type="WALL" x="673" y="127" width="32" height="31"/>
-  <object id="1514" name="column" type="COLUMN" x="480" y="159" width="32" height="34"/>
-  <object id="1515" name="column" type="COLUMN" x="672" y="159" width="32" height="34"/>
-  <object id="1516" name="Portal" type="PORTAL" x="575.667" y="95.667" width="32.6667" height="32">
+  <object id="1525" name="Gold" type="GOLD" x="160.333" y="128.333" width="31" height="31.3333">
+   <properties>
+    <property name="isImmobile" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="1526" name="Gold" type="GOLD" x="160.333" y="320.333" width="31" height="31.3333">
+   <properties>
+    <property name="isImmobile" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="1527" name="Portal" type="PORTAL" x="95.667" y="63.667" width="32.6667" height="32">
    <properties>
     <property name="isImmobile" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="1517" name="Wall" type="WALL" x="33" y="255" width="32" height="31"/>
-  <object id="1518" name="Wall" type="WALL" x="65" y="255" width="32" height="31"/>
-  <object id="1519" name="Wall" type="WALL" x="97" y="255" width="32" height="31"/>
-  <object id="1520" name="Wall" type="WALL" x="129" y="255" width="32" height="31"/>
-  <object id="1521" name="Wall" type="WALL" x="545" y="415" width="32" height="31"/>
-  <object id="1522" name="Wall" type="WALL" x="545" y="447" width="32" height="31"/>
-  <object id="1523" name="Wall" type="WALL" x="577" y="447" width="32" height="31"/>
-  <object id="1524" name="Wall" type="WALL" x="577" y="415" width="32" height="31"/>
+  <object id="1528" name="Portal" type="PORTAL" x="895.667" y="63.667" width="32.6667" height="32">
+   <properties>
+    <property name="isImmobile" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="1529" name="Portal" type="PORTAL" x="575.667" y="95.667" width="32.6667" height="32">
+   <properties>
+    <property name="isImmobile" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="1530" name="Portal" type="PORTAL" x="95.667" y="447.667" width="32.6667" height="32">
+   <properties>
+    <property name="isImmobile" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="1531" name="Lava" type="LAVA" x="287.5" y="448" width="32" height="32"/>
+  <object id="1532" name="Lava" type="LAVA" x="319.5" y="448" width="32" height="32"/>
+  <object id="1533" name="Lava" type="LAVA" x="351.5" y="448" width="32" height="32"/>
+  <object id="1534" name="Lava" type="LAVA" x="383.5" y="448" width="32" height="32"/>
+  <object id="1535" name="Lava" type="LAVA" x="415.5" y="448" width="32" height="32"/>
+  <object id="1536" name="Lava" type="LAVA" x="447.5" y="448" width="32" height="32"/>
+  <object id="1537" name="Lava" type="LAVA" x="255.5" y="480" width="32" height="32"/>
+  <object id="1538" name="Lava" type="LAVA" x="287.5" y="480" width="32" height="32"/>
+  <object id="1539" name="Lava" type="LAVA" x="319.5" y="480" width="32" height="32"/>
+  <object id="1540" name="Lava" type="LAVA" x="351.5" y="480" width="32" height="32"/>
+  <object id="1541" name="Lava" type="LAVA" x="383.5" y="480" width="32" height="32"/>
+  <object id="1542" name="Lava" type="LAVA" x="415.5" y="480" width="32" height="32"/>
+  <object id="1543" name="Lava" type="LAVA" x="447.5" y="480" width="32" height="32"/>
+  <object id="1544" name="column" type="COLUMN" x="512" y="224" width="32" height="31"/>
+  <object id="1545" name="column" type="COLUMN" x="704" y="448" width="32" height="31"/>
+  <object id="1546" name="Wall" type="WALL" x="481" y="31" width="32" height="31"/>
+  <object id="1547" name="Wall" type="WALL" x="513" y="31" width="32" height="31"/>
+  <object id="1548" name="Wall" type="WALL" x="545" y="31" width="32" height="31"/>
+  <object id="1549" name="Wall" type="WALL" x="577" y="31" width="32" height="31"/>
+  <object id="1550" name="Wall" type="WALL" x="609" y="31" width="32" height="31"/>
+  <object id="1551" name="Wall" type="WALL" x="641" y="31" width="32" height="31"/>
+  <object id="1552" name="Wall" type="WALL" x="673" y="31" width="32" height="31"/>
+  <object id="1553" name="Wall" type="WALL" x="481" y="63" width="32" height="31"/>
+  <object id="1554" name="Wall" type="WALL" x="673" y="63" width="32" height="31"/>
+  <object id="1555" name="Wall" type="WALL" x="481" y="95" width="32" height="31"/>
+  <object id="1556" name="Wall" type="WALL" x="673" y="95" width="32" height="31"/>
+  <object id="1557" name="Wall" type="WALL" x="481" y="127" width="32" height="31"/>
+  <object id="1558" name="Wall" type="WALL" x="673" y="127" width="32" height="31"/>
+  <object id="1559" name="Wall" type="WALL" x="33" y="255" width="32" height="31"/>
+  <object id="1560" name="Wall" type="WALL" x="65" y="255" width="32" height="31"/>
+  <object id="1561" name="Wall" type="WALL" x="97" y="255" width="32" height="31"/>
+  <object id="1562" name="Wall" type="WALL" x="129" y="255" width="32" height="31"/>
+  <object id="1563" name="Wall" type="WALL" x="545" y="415" width="32" height="31"/>
+  <object id="1564" name="Wall" type="WALL" x="577" y="415" width="32" height="31"/>
+  <object id="1565" name="Wall" type="WALL" x="545" y="447" width="32" height="31"/>
+  <object id="1566" name="Wall" type="WALL" x="577" y="447" width="32" height="31"/>
+  <object id="1567" name="column" type="COLUMN" x="480" y="159.5" width="31.75" height="31"/>
+  <object id="1568" name="column" type="COLUMN" x="672" y="159.5" width="31.75" height="31"/>
+  <object id="1569" name="column" type="COLUMN" x="608" y="223.5" width="31.75" height="31"/>
+  <object id="1570" name="column" type="COLUMN" x="704" y="223.5" width="31.75" height="31"/>
+  <object id="1571" name="column" type="COLUMN" x="800" y="287.5" width="31.75" height="31"/>
+  <object id="1572" name="column" type="COLUMN" x="800" y="383.5" width="31.75" height="31"/>
+  <object id="1573" name="column" type="COLUMN" x="800" y="447.5" width="31.75" height="31"/>
+  <object id="1574" name="Gold" type="GOLD" x="353" y="95" width="32" height="32"/>
+  <object id="1575" name="Gold" type="GOLD" x="865" y="127" width="32" height="32"/>
+  <object id="1576" name="Gold" type="GOLD" x="129" y="223" width="32" height="32"/>
+  <object id="1577" name="Gold" type="GOLD" x="865" y="319" width="32" height="32"/>
+  <object id="1578" name="Wall" type="WALL" x="0" y="1" width="31" height="31"/>
+  <object id="1579" name="Wall" type="WALL" x="32" y="1" width="31" height="31"/>
+  <object id="1580" name="Wall" type="WALL" x="64" y="1" width="31" height="31"/>
+  <object id="1581" name="Wall" type="WALL" x="96" y="1" width="31" height="31"/>
+  <object id="1582" name="Wall" type="WALL" x="128" y="1" width="31" height="31"/>
+  <object id="1583" name="Wall" type="WALL" x="160" y="1" width="31" height="31"/>
+  <object id="1584" name="Wall" type="WALL" x="192" y="1" width="31" height="31"/>
+  <object id="1585" name="Wall" type="WALL" x="224" y="1" width="31" height="31"/>
+  <object id="1586" name="Wall" type="WALL" x="256" y="1" width="31" height="31"/>
+  <object id="1587" name="Wall" type="WALL" x="288" y="1" width="31" height="31"/>
+  <object id="1588" name="Wall" type="WALL" x="320" y="1" width="31" height="31"/>
+  <object id="1589" name="Wall" type="WALL" x="352" y="1" width="31" height="31"/>
+  <object id="1590" name="Wall" type="WALL" x="384" y="1" width="31" height="31"/>
+  <object id="1591" name="Wall" type="WALL" x="416" y="1" width="31" height="31"/>
+  <object id="1592" name="Wall" type="WALL" x="448" y="1" width="31" height="31"/>
+  <object id="1593" name="Wall" type="WALL" x="480" y="1" width="31" height="31"/>
+  <object id="1594" name="Wall" type="WALL" x="512" y="1" width="31" height="31"/>
+  <object id="1595" name="Wall" type="WALL" x="544" y="1" width="31" height="31"/>
+  <object id="1596" name="Wall" type="WALL" x="576" y="1" width="31" height="31"/>
+  <object id="1597" name="Wall" type="WALL" x="608" y="1" width="31" height="31"/>
+  <object id="1598" name="Wall" type="WALL" x="640" y="1" width="31" height="31"/>
+  <object id="1599" name="Wall" type="WALL" x="672" y="1" width="31" height="31"/>
+  <object id="1600" name="Wall" type="WALL" x="704" y="1" width="31" height="31"/>
+  <object id="1601" name="Wall" type="WALL" x="736" y="1" width="31" height="31"/>
+  <object id="1602" name="Wall" type="WALL" x="768" y="1" width="31" height="31"/>
+  <object id="1603" name="Wall" type="WALL" x="800" y="1" width="31" height="31"/>
+  <object id="1604" name="Wall" type="WALL" x="832" y="1" width="31" height="31"/>
+  <object id="1605" name="Wall" type="WALL" x="864" y="1" width="31" height="31"/>
+  <object id="1606" name="Wall" type="WALL" x="896" y="1" width="31" height="31"/>
+  <object id="1607" name="Wall" type="WALL" x="928" y="1" width="31" height="31"/>
+  <object id="1608" name="Wall" type="WALL" x="960" y="1" width="31" height="31"/>
+  <object id="1609" name="Wall" type="WALL" x="992" y="1" width="31" height="31"/>
+  <object id="1610" name="Wall" type="WALL" x="0" y="33" width="31" height="31"/>
+  <object id="1611" name="Wall" type="WALL" x="992" y="33" width="31" height="31"/>
+  <object id="1612" name="Wall" type="WALL" x="0" y="65" width="31" height="31"/>
+  <object id="1613" name="Wall" type="WALL" x="992" y="65" width="31" height="31"/>
+  <object id="1614" name="Wall" type="WALL" x="0" y="97" width="31" height="31"/>
+  <object id="1615" name="Wall" type="WALL" x="992" y="97" width="31" height="31"/>
+  <object id="1616" name="Wall" type="WALL" x="0" y="129" width="31" height="31"/>
+  <object id="1617" name="Wall" type="WALL" x="992" y="129" width="31" height="31"/>
+  <object id="1618" name="Wall" type="WALL" x="0" y="161" width="31" height="31"/>
+  <object id="1619" name="Wall" type="WALL" x="992" y="161" width="31" height="31"/>
+  <object id="1620" name="Wall" type="WALL" x="0" y="193" width="31" height="31"/>
+  <object id="1621" name="Wall" type="WALL" x="992" y="193" width="31" height="31"/>
+  <object id="1622" name="Wall" type="WALL" x="0" y="225" width="31" height="31"/>
+  <object id="1623" name="Wall" type="WALL" x="992" y="225" width="31" height="31"/>
+  <object id="1624" name="Wall" type="WALL" x="0" y="257" width="31" height="31"/>
+  <object id="1625" name="Wall" type="WALL" x="992" y="257" width="31" height="31"/>
+  <object id="1626" name="Wall" type="WALL" x="0" y="289" width="31" height="31"/>
+  <object id="1627" name="Wall" type="WALL" x="992" y="289" width="31" height="31"/>
+  <object id="1628" name="Wall" type="WALL" x="0" y="321" width="31" height="31"/>
+  <object id="1629" name="Wall" type="WALL" x="992" y="321" width="31" height="31"/>
+  <object id="1630" name="Wall" type="WALL" x="0" y="353" width="31" height="31"/>
+  <object id="1631" name="Wall" type="WALL" x="992" y="353" width="31" height="31"/>
+  <object id="1632" name="Wall" type="WALL" x="0" y="385" width="31" height="31"/>
+  <object id="1633" name="Wall" type="WALL" x="992" y="385" width="31" height="31"/>
+  <object id="1634" name="Wall" type="WALL" x="0" y="417" width="31" height="31"/>
+  <object id="1635" name="Wall" type="WALL" x="992" y="417" width="31" height="31"/>
+  <object id="1636" name="Wall" type="WALL" x="0" y="449" width="31" height="31"/>
+  <object id="1637" name="Wall" type="WALL" x="992" y="449" width="31" height="31"/>
+  <object id="1638" name="Wall" type="WALL" x="0" y="481" width="31" height="31"/>
+  <object id="1639" name="Wall" type="WALL" x="992" y="481" width="31" height="31"/>
+  <object id="1640" name="Wall" type="WALL" x="0" y="513" width="31" height="31"/>
+  <object id="1641" name="Wall" type="WALL" x="992" y="513" width="31" height="31"/>
+  <object id="1642" name="Wall" type="WALL" x="0" y="545" width="31" height="31"/>
+  <object id="1643" name="Wall" type="WALL" x="32" y="545" width="31" height="31"/>
+  <object id="1644" name="Wall" type="WALL" x="64" y="545" width="31" height="31"/>
+  <object id="1645" name="Wall" type="WALL" x="96" y="545" width="31" height="31"/>
+  <object id="1646" name="Wall" type="WALL" x="128" y="545" width="31" height="31"/>
+  <object id="1647" name="Wall" type="WALL" x="160" y="545" width="31" height="31"/>
+  <object id="1648" name="Wall" type="WALL" x="192" y="545" width="31" height="31"/>
+  <object id="1649" name="Wall" type="WALL" x="224" y="545" width="31" height="31"/>
+  <object id="1650" name="Wall" type="WALL" x="256" y="545" width="31" height="31"/>
+  <object id="1651" name="Wall" type="WALL" x="288" y="545" width="31" height="31"/>
+  <object id="1652" name="Wall" type="WALL" x="320" y="545" width="31" height="31"/>
+  <object id="1653" name="Wall" type="WALL" x="352" y="545" width="31" height="31"/>
+  <object id="1654" name="Wall" type="WALL" x="384" y="545" width="31" height="31"/>
+  <object id="1655" name="Wall" type="WALL" x="416" y="545" width="31" height="31"/>
+  <object id="1656" name="Wall" type="WALL" x="448" y="545" width="31" height="31"/>
+  <object id="1657" name="Wall" type="WALL" x="480" y="545" width="31" height="31"/>
+  <object id="1658" name="Wall" type="WALL" x="512" y="545" width="31" height="31"/>
+  <object id="1659" name="Wall" type="WALL" x="544" y="545" width="31" height="31"/>
+  <object id="1660" name="Wall" type="WALL" x="576" y="545" width="31" height="31"/>
+  <object id="1661" name="Wall" type="WALL" x="608" y="545" width="31" height="31"/>
+  <object id="1662" name="Wall" type="WALL" x="640" y="545" width="31" height="31"/>
+  <object id="1663" name="Wall" type="WALL" x="672" y="545" width="31" height="31"/>
+  <object id="1664" name="Wall" type="WALL" x="704" y="545" width="31" height="31"/>
+  <object id="1665" name="Wall" type="WALL" x="736" y="545" width="31" height="31"/>
+  <object id="1666" name="Wall" type="WALL" x="768" y="545" width="31" height="31"/>
+  <object id="1667" name="Wall" type="WALL" x="800" y="545" width="31" height="31"/>
+  <object id="1668" name="Wall" type="WALL" x="832" y="545" width="31" height="31"/>
+  <object id="1669" name="Wall" type="WALL" x="864" y="545" width="31" height="31"/>
+  <object id="1670" name="Wall" type="WALL" x="896" y="545" width="31" height="31"/>
+  <object id="1671" name="Wall" type="WALL" x="928" y="545" width="31" height="31"/>
+  <object id="1672" name="Wall" type="WALL" x="960" y="545" width="31" height="31"/>
+  <object id="1673" name="Wall" type="WALL" x="992" y="545" width="31" height="31"/>
  </objectgroup>
 </map>
