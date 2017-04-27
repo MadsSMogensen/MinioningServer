@@ -180,7 +180,8 @@ public class UnitProcessor implements IEntityProcessingService {
     private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String data = "";
         data += owner.getID().toString() + ";";
-        data += owner.getMinionType().toString() + ";";
+//        data += owner.getMinionType().toString() + ";";
+        data += "ENEMY" + ";";
         data += owner.getX() + ";";
         data += owner.getY() + ";";
         data += owner.getDx() + ";";
