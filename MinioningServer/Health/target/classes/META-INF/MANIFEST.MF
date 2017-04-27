@@ -2,11 +2,7 @@ Manifest-Version: 1.0
 OpenIDE-Module-Localizing-Bundle: minioning/health/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 OpenIDE-Module-Implementation-Version: 1.0-20170427
-<<<<<<< HEAD
-OpenIDE-Module-Build-Version: 201704270754
-=======
-OpenIDE-Module-Build-Version: 201704270949
->>>>>>> Minions
+OpenIDE-Module-Build-Version: 201704271045
 OpenIDE-Module: minioning.Health
 OpenIDE-Module-Public-Packages: -
 OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1

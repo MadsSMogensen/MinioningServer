@@ -54,24 +54,27 @@ public class UnitProcessor implements IEntityProcessingService {
             //looking for players to shoot at
             for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
                 Entity entryEntity = entry.getValue();
-                if (entryEntity.getType().equals(PLAYER)) {
-                    int entryx = entryEntity.getX();
-                    int entryy = entryEntity.getY();
-                    //checking if player is within a certain view distance
-                    if (distance(x, y, entryx, entryy) <= 300) {
-                        //Shooting at player position
-                        String[] data = new String[6];
-                        data[0] = "";
-                        data[1] = "";
-                        data[2] = entity.getID().toString();
-                        System.out.println("entityID: " + entity.getID().toString());
-                        data[3] = "ENEMYQ";
-                        data[4] = String.valueOf(entryx);
-                        data[5] = String.valueOf(entryy);
-                        Event shootQ = new Event(ENEMYQ, data);
-                        eventBus.put(UUID.randomUUID(), shootQ);
+                if (entryEntity.getLocation().equals(entity.getLocation())) {
+                    if (entryEntity.getType().equals(PLAYER) || entryEntity.getType().equals(MINION)) {
+                        int entryx = entryEntity.getX();
+                        int entryy = entryEntity.getY();
+                        //checking if player is within a certain view distance
+                        if (distance(x, y, entryx, entryy) <= 300) {
+                            //Shooting at player position
+                            String[] data = new String[6];
+                            data[0] = "";
+                            data[1] = "";
+                            data[2] = entity.getID().toString();
+                            System.out.println("entityID: " + entity.getID().toString());
+                            data[3] = "ENEMYQ";
+                            data[4] = String.valueOf(entryx);
+                            data[5] = String.valueOf(entryy);
+                            Event shootQ = new Event(ENEMYQ, data);
+                            eventBus.put(UUID.randomUUID(), shootQ);
+                        }
                     }
                 }
+
             }
             //Set movement
 //            if (entity.getX() == entity.getDx() && entity.getY() == entity.getDy()) {
@@ -107,14 +110,14 @@ public class UnitProcessor implements IEntityProcessingService {
         if (entity.getType().equals(MINION)) {
             Entity owner = entities.get(entity.getOwner());
             //check if location is correct
-            if(!entity.getLocation().equals(owner.getLocation())){
+            if (!entity.getLocation().equals(owner.getLocation())) {
                 entity.setPosition(owner.getX(), owner.getY(), owner.getLocation());
             }
             //handle movement
-            
+
             Vector2D ownerVelocity = owner.getVelocity();
-            int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt())*2f);
-            int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt())*2f);
+            int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt()) * 2f);
+            int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt()) * 2f);
             entity.setDx(dx);
             entity.setDy(dy);
             //look for targets
@@ -124,13 +127,15 @@ public class UnitProcessor implements IEntityProcessingService {
                 case MINIONMAGE:
                     for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
                         Entity entryEntity = entry.getValue();
-                        if (entryEntity.getLocation().equals(entity.getLocation())) {
-                            if (!entity.getLocation().equals(wilderness)) {
-                                if (!entity.getOwner().equals(entryEntity.getID())) {
+                        if (!entryEntity.isImmobile()) {
+                            if (entryEntity.getLocation().equals(entity.getLocation())) {
+                                if (!entity.getLocation().equals(wilderness)) {
+                                    if (!entity.getOwner().equals(entryEntity.getID())) {
+                                        minionShootQ(entity, entryEntity, eventBus);
+                                    }
+                                } else if (entryEntity.getType().equals(ENEMY)) {
                                     minionShootQ(entity, entryEntity, eventBus);
                                 }
-                            } else if (entryEntity.getType().equals(ENEMY)) {
-                                minionShootQ(entity, entryEntity, eventBus);
                             }
                         }
                     }

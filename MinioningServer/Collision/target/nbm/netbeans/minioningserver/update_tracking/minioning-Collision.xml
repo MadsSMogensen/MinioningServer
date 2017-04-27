@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="minioning.Collision">
-<<<<<<< HEAD
-    <module_version install_time="1493279641747" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1493289938640" last="true" origin="installer" specification_version="1.0">
         <file crc="3259991056" name="config/Modules/minioning-Collision.xml"/>
-        <file crc="1775447890" name="modules/minioning-Collision.jar"/>
-=======
-    <module_version install_time="1493286575464" last="true" origin="installer" specification_version="1.0">
-        <file crc="3259991056" name="config/Modules/minioning-Collision.xml"/>
-        <file crc="131795225" name="modules/minioning-Collision.jar"/>
->>>>>>> Minions
-        <file crc="377777023" name="update_tracking/minioning-Collision.xml"/>
+        <file crc="2647318428" name="modules/minioning-Collision.jar"/>
+        <file crc="2223492608" name="update_tracking/minioning-Collision.xml"/>
     </module_version>
 </module>
