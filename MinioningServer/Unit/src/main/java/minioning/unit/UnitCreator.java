@@ -188,6 +188,7 @@ public class UnitCreator implements IEntityCreatorService {
         newMonster.setDy(y);//dy
         newMonster.setLocation(Location.valueOf(data[6]));
         newMonster.setType(ENEMY);
+        newMonster.setSkillqCD(1.5f);
         entities.putIfAbsent(newMonster.getID(), newMonster);
         System.out.println("new monster created");
     }

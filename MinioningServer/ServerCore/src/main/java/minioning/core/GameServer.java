@@ -168,19 +168,19 @@ public class GameServer implements Runnable {
 //                testEntity.setImmobile(true);
 //                world.put(testEntity.getID(), testEntity);
 
-                Entity testEntity = new Entity(UUID.randomUUID(), "", 300, 300);
-                testEntity.setImmobile(true);
-                testEntity.setLocation(Location.arena);
-                testEntity.setDoorTo(Location.wilderness);
-                testEntity.setType(EntityType.DOOR);
-                world.put(testEntity.getID(), testEntity);
-
-                Entity testEntity2 = new Entity(UUID.randomUUID(), "", 400, 400);
-                testEntity2.setImmobile(true);
-                testEntity2.setLocation(Location.wilderness);
-                testEntity2.setDoorTo(Location.arena);
-                testEntity2.setType(EntityType.DOOR);
-                world.put(testEntity2.getID(), testEntity2);
+//                Entity testEntity = new Entity(UUID.randomUUID(), "", 300, 300);
+//                testEntity.setImmobile(true);
+//                testEntity.setLocation(Location.arena);
+//                testEntity.setDoorTo(Location.wilderness);
+//                testEntity.setType(EntityType.DOOR);
+//                world.put(testEntity.getID(), testEntity);
+//
+//                Entity testEntity2 = new Entity(UUID.randomUUID(), "", 400, 400);
+//                testEntity2.setImmobile(true);
+//                testEntity2.setLocation(Location.wilderness);
+//                testEntity2.setDoorTo(Location.arena);
+//                testEntity2.setType(EntityType.DOOR);
+//                world.put(testEntity2.getID(), testEntity2);
 
 //                for(int i = 0; i < 10; i++){
 //                    Entity newMonster = new Entity(UUID.randomUUID(), "", 150+(5*i), 150+(5*i));

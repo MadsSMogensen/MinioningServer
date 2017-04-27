@@ -134,7 +134,7 @@ public class UnitProcessor implements IEntityProcessingService {
                                     data[4] = String.valueOf(entryx);
                                     data[5] = String.valueOf(entryy);
                                     Event shootQ = new Event(MINIONQ, data);
-                                    eventBus.put(UUID.randomUUID(), shootQ);
+//                                    eventBus.put(UUID.randomUUID(), shootQ);
                                 }
                             }
                         }

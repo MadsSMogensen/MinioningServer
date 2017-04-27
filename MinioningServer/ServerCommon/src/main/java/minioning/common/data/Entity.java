@@ -44,7 +44,7 @@ public class Entity implements Serializable {
     private float minionSpawnTime = 10;
     private EntityType minionType;
     private int hp = 100;
-    private float skillqCD = 1.5f;
+    private float skillqCD = 0.75f;
     private float skillqCurrentCD = 0;
     private int doorToX;
     private int doorToY;
