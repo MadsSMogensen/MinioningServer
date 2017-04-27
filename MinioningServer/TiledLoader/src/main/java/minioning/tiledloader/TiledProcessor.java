@@ -104,6 +104,7 @@ public class TiledProcessor implements ITiledLoaderService {
         loadFromFile(entities, "wilderness");
         loadFromFile(entities,"wilderness_east");
         loadFromFile(entities,"wilderness_west");
-        
+        loadFromFile(entities,"arena");
+        loadFromFile(entities,"cave");
     }
 }

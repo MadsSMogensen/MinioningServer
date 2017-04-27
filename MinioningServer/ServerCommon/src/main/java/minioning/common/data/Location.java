@@ -14,5 +14,6 @@ public enum Location {
     wilderness,
     wilderness_east,
     wilderness_west,
+    cave,
     arena;
 }

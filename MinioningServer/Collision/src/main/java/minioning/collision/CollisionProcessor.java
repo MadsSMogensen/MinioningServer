@@ -81,10 +81,9 @@ public class CollisionProcessor implements IEntityProcessingService {
 
                                             int x = entryEntity.getDoorToX();
                                             int y = entryEntity.getDoorToY();
-                                            
-                                            
-                                                entity.setPosition(x, y, entryEntity.getDoorTo());
-                                            
+
+                                            entity.setPosition(x, y, entryEntity.getDoorTo());
+
                                         }
                                         break;
                                     case HOLYBOLT:
@@ -104,6 +103,21 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 }
                             }
                         }
+//                        if (entity.getType().equals(LAVA)) {
+//                            if (colliding(entryEntity, entity)) {
+//
+//                            }
+//                            String[] s = new String[2];
+//
+//                            s[0] = entry.getValue().getID().toString();
+//                            s[1] = entity.getType().toString();
+//
+//                            UUID id = UUID.randomUUID();
+//                            Event event = new Event(HPCHANGE, s);
+////                            entities.remove(ID);
+//                            eventBus.put(id, event);
+//
+//                        }
                     }
                 }
             }
