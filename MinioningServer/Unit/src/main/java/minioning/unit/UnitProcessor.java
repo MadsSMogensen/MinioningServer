@@ -105,8 +105,13 @@ public class UnitProcessor implements IEntityProcessingService {
         }
         //handle minions
         if (entity.getType().equals(MINION)) {
-            //handle movement
             Entity owner = entities.get(entity.getOwner());
+            //check if location is correct
+            if(!entity.getLocation().equals(owner.getLocation())){
+                entity.setPosition(owner.getX(), owner.getY(), owner.getLocation());
+            }
+            //handle movement
+            
             Vector2D ownerVelocity = owner.getVelocity();
             int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt())*2f);
             int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt())*2f);
