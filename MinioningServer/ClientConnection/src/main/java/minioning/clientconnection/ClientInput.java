@@ -25,7 +25,8 @@ public class ClientInput implements IConnectionService {
         for (String[] data : getTempData()) {
             if (data != null && data.length > 1) { //1 eller 4?
                 Events eventType;
-                switch (data[3].trim()) {
+                try {
+                    switch (data[3].trim()) {
                     case "CREATEPLAYER":
                         eventType = CREATEPLAYER;
                         System.out.println("putting event: " + eventType.toString());
@@ -65,6 +66,8 @@ public class ClientInput implements IConnectionService {
                         eventType = FALSEEVENT;
                         System.out.println("False Event: " + data[3].trim());
                         break;
+                }
+                } catch (Exception e) {
                 }
             }
         }
