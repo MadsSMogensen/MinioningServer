@@ -5,10 +5,13 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
+import minioning.common.data.EntityType;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
 import minioning.common.data.GameData;
+import static minioning.common.data.Location.wilderness;
+import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -24,8 +27,10 @@ public class UnitProcessor implements IEntityProcessingService {
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         //add cd timer to every entity
-        entity.setSkillqCurrentCD(entity.getSkillqCurrentCD() + GameData.getDt());
-        
+        if (entity.getSkillqCurrentCD() < 100 && !entity.isImmobile()) {
+            entity.setSkillqCurrentCD(entity.getSkillqCurrentCD() + GameData.getDt());
+        }
+
         //check monster spawners, if they should spawn new monsters
         if (entity.getType().equals(PORTAL)) {
             if (entity.getSpawnCount() < entity.getMaxMinions()) {
@@ -39,6 +44,7 @@ public class UnitProcessor implements IEntityProcessingService {
                 }
             }
         }
+        //handle enemies
         if (entity.getType().equals(ENEMY)) {
             //update skillcooldown
             entity.setSkillqCurrentCD(entity.getSkillqCurrentCD() + GameData.getDt());
@@ -86,6 +92,59 @@ public class UnitProcessor implements IEntityProcessingService {
             }
         }
 
+        //spawn minions
+        if (entity.getType().equals(PLAYER)) {
+            if (entity.getSpawnCount() < entity.getMaxMinions()) {
+                entity.setSpawnTimer(entity.getSpawnTimer() + GameData.getDt());
+                if (entity.getSpawnTimer() >= entity.getMinionSpawnTime()) {
+                    spawnNewMinion(entity, eventBus);
+                    entity.setSpawnCount(entity.getSpawnCount() + 1);
+                    entity.setSpawnTimer(0);
+                }
+            }
+        }
+        //handle minions
+        if (entity.getType().equals(MINION)) {
+            //handle movement
+            Entity owner = entities.get(entity.getOwner());
+            Vector2D ownerVelocity = owner.getVelocity();
+            int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt()));
+            int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt()));
+            entity.setDx(dx);
+            entity.setDy(dy);
+            //look for targets
+            int x = entity.getX();
+            int y = entity.getY();
+            switch (entity.getMinionType()) {
+                case MINIONMAGE:
+                    for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
+                        Entity entryEntity = entry.getValue();
+                        if (entryEntity.getLocation().equals(entity.getLocation())) {
+                            if (entryEntity.getType().equals(ENEMY) || (!entryEntity.getID().equals(owner.getID()) && entity.getLocation().equals(wilderness))) {
+                                int entryx = entryEntity.getX();
+                                int entryy = entryEntity.getY();
+                                //checking if enemy is within a certain view distance
+                                if (distance(x, y, entryx, entryy) <= 300) {
+                                    //Shooting at player position
+                                    String[] data = new String[6];
+                                    data[0] = "";
+                                    data[1] = "";
+                                    data[2] = entity.getID().toString();
+                                    data[3] = "MINIONQ";
+                                    data[4] = String.valueOf(entryx);
+                                    data[5] = String.valueOf(entryy);
+                                    Event shootQ = new Event(MINIONQ, data);
+                                    eventBus.put(UUID.randomUUID(), shootQ);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         //handle entities outside the gameworld
         if (entity.getX() > GameData.getGameWidth() + 5 || entity.getY() > GameData.getGameHeight() + 5) {
             switch (entity.getType()) {
@@ -106,10 +165,22 @@ public class UnitProcessor implements IEntityProcessingService {
         }
     }
 
+    private void spawnNewMinion(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
+        String[] data = new String[6];
+        data[0] = owner.getID().toString();//owner id
+        data[1] = "";//name
+        data[2] = String.valueOf(owner.getX());//x
+        data[3] = String.valueOf(owner.getY());//y
+        data[4] = owner.getLocation().toString();//Location
+        data[5] = owner.getMinionType().toString();//minionType
+        Event newEvent = new Event(CREATEMINION, data);
+        eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
+    }
+
     private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String data = "";
-        data += owner.getID() + ";";
-        data += owner.getMinionType() + ";";
+        data += owner.getID().toString() + ";";
+        data += owner.getMinionType().toString() + ";";
         data += owner.getX() + ";";
         data += owner.getY() + ";";
         data += owner.getDx() + ";";

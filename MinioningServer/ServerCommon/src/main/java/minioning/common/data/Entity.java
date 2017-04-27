@@ -41,12 +41,21 @@ public class Entity implements Serializable {
     private int SpawnCount = 0;
     private int maxMinions = 1;
     private float spawnTimer;
-    private String minionType = "Blob";
+    private float minionSpawnTime = 10;
+    private EntityType minionType;
     private int hp = 100;
     private float skillqCD = 1.5f;
     private float skillqCurrentCD = 0;
     private int doorToX;
     private int doorToY;
+
+    public float getMinionSpawnTime() {
+        return minionSpawnTime;
+    }
+
+    public void setMinionSpawnTime(float minionSpawnTime) {
+        this.minionSpawnTime = minionSpawnTime;
+    }
 
     public float getSkillqCD() {
         return skillqCD;
@@ -92,11 +101,11 @@ public class Entity implements Serializable {
         return spawnTimer;
     }
 
-    public String getMinionType() {
+    public EntityType getMinionType() {
         return minionType;
     }
 
-    public void setMinionType(String minionType) {
+    public void setMinionType(EntityType minionType) {
         this.minionType = minionType;
     }
 

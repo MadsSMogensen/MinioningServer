@@ -12,8 +12,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
 import minioning.common.data.EntityType;
+import static minioning.common.data.EntityType.PLAYER;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.HPCHANGE;
+import minioning.common.data.Location;
 import minioning.common.services.IHealthProcessorService;
 import org.openide.util.lookup.ServiceProvider;
 /**
@@ -50,18 +52,19 @@ public class HealthProcess implements IHealthProcessorService {
                     entity.setHp(entity.getHp()-dmg);
                     
                     if(entity.getHp() <= 0 && !entity.isImmobile()){
-                        world.remove(entityID);
+                        if(entity.getType().equals(PLAYER)){
+                            if(!entity.getLocation().equals(Location.wilderness)){
+                                entity.setPosition(100, 100, Location.wilderness);
+                            }
+                        }else{
+                            world.remove(entityID);
+                        }
                     }else{
                     
                     world.replace(entityID, entity);
                     }
                     System.out.println(entity.getHp());
                     eventBus.remove(key);
-//                event.getData()
-//                    System.out.println("LOGINSUCCESS FOUND");
-//                    loginSuccess(event);
-//                    eventBus.remove(key);
-//                    break;
                 }
             }
         }

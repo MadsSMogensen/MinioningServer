@@ -15,5 +15,8 @@ public enum EntityType {
     PORTAL,
     HOLYBOLT,
     COLUMN,
-    WALL;
+    WALL,
+    BLOB,
+    MINION,
+    MINIONMAGE;
 }

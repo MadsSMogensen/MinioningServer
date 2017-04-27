@@ -45,23 +45,26 @@ public class CollisionProcessor implements IEntityProcessingService {
                             //handle collision for holybolts
                             //don't collide with owner
                             if (!entity.getOwner().toString().equals(entryEntity.getID().toString())) {
-                                //don't collide with other holybolts
-                                if (!entryEntity.getType().equals(entity.getType())) {
-                                    //collision event for holy bolt here!
-                                    if (colliding(entryEntity, entity)) {
+                                //don't collide with owners owner
+                                if (!entity.getOwner().toString().equals(entryEntity.getOwner().toString())) {
+                                    //don't collide with other holybolts
+                                    if (!entryEntity.getType().equals(entity.getType())) {
+                                        //collision event for holy bolt here!
+                                        if (colliding(entryEntity, entity)) {
 
-                                        String[] s = new String[2];
+                                            String[] s = new String[2];
 
-                                        s[0] = entry.getValue().getID().toString();
-                                        s[1] = entity.getType().toString();
+                                            s[0] = entry.getValue().getID().toString();
+                                            s[1] = entity.getType().toString();
 
-                                        UUID id = UUID.randomUUID();
-                                        Event event = new Event(HPCHANGE, s);
-                                        entities.remove(ID);
-                                        eventBus.put(id, event);
+                                            UUID id = UUID.randomUUID();
+                                            Event event = new Event(HPCHANGE, s);
+                                            entities.remove(ID);
+                                            eventBus.put(id, event);
 
-                                        System.out.println("event");
-                                        System.out.println("A HOLYBOLT COLLIDED!");
+                                            System.out.println("event");
+                                            System.out.println("A HOLYBOLT COLLIDED!");
+                                        }
                                     }
                                 }
                             }
@@ -81,10 +84,9 @@ public class CollisionProcessor implements IEntityProcessingService {
 
                                             int x = entryEntity.getDoorToX();
                                             int y = entryEntity.getDoorToY();
-                                            
-                                            
-                                                entity.setPosition(x, y, entryEntity.getDoorTo());
-                                            
+
+                                            entity.setPosition(x, y, entryEntity.getDoorTo());
+
                                         }
                                         break;
                                     case HOLYBOLT:

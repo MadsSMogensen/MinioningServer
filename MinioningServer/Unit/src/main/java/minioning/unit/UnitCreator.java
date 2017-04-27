@@ -49,9 +49,39 @@ public class UnitCreator implements IEntityCreatorService {
                 createMonster(event, entities);
                 eventBus.remove(key);
             }
+            if(event.getType().equals(CREATEMINION)){
+                System.out.println("CREATEMINION found");
+                createMinion(event, entities);
+                eventBus.remove(key);
+            }
+            if (event.getType().equals(MINIONQ)) {
+                System.out.println("MINIONQ found");
+                createMinionSkill(event, entities);
+                eventBus.remove(key);
+            }
         }
     }
 
+    private void createMinionSkill(Event event, Map<UUID, Entity> entities){
+        String[] data = event.getData();
+        UUID minionID = UUID.fromString(data[2]);
+        Entity minion = entities.get(minionID);
+        try {
+            if (minion.getSkillqCurrentCD() >= minion.getSkillqCD()) {
+                Entity minionSkill = new Entity(minion.getID(), "", minion.getX(), minion.getY());
+                minionSkill.setLocation(minion.getLocation());
+                minionSkill.setType(EntityType.HOLYBOLT);
+                minionSkill.setSpeed(200);
+                Vector2D direction = Vector2D.getDirection(minionSkill.getX(), Integer.parseInt(data[4]), minionSkill.getY(), Integer.parseInt(data[5]));
+                Vector2D velocity = direction.times(minionSkill.getSpeed());
+                minionSkill.setVelocity(velocity);
+                entities.putIfAbsent(minionSkill.getID(), minionSkill);
+                minion.setSkillqCurrentCD(0);
+            }
+        } catch (Exception e) {
+        }
+    }
+    
     private void createEnemySkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID enemyID = UUID.fromString(data[2]);
@@ -108,6 +138,7 @@ public class UnitCreator implements IEntityCreatorService {
         String name = data[4];
         Entity newEntity = new Entity(owner, name);
         newEntity.setLocation(Location.wilderness);
+        newEntity.setMinionType(MINIONMAGE);
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
     }
@@ -127,6 +158,21 @@ public class UnitCreator implements IEntityCreatorService {
         newMonster.setType(ENEMY);
         entities.putIfAbsent(newMonster.getID(), newMonster);
         System.out.println("new monster created");
+    }
+    
+    private void createMinion(Event event, Map<UUID, Entity> entities){
+        String[] data = event.getData();
+        UUID owner = UUID.fromString(data[0]);
+        String name = data[1];
+        int x = Integer.parseInt(data[2]);
+        int y = Integer.parseInt(data[3]);
+        Entity newMinion = new Entity(owner, name, x, y);
+        newMinion.setDx(x);
+        newMinion.setDy(y);
+        newMinion.setLocation(Location.valueOf(data[4]));
+        newMinion.setType(MINION);
+        newMinion.setMinionType(EntityType.valueOf(data[5]));
+        entities.putIfAbsent(newMinion.getID(), newMinion);
     }
 
     private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world) {
