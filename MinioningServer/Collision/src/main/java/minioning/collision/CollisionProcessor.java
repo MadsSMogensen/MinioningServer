@@ -48,7 +48,7 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 //don't collide with owners owner (minion to player etc.)
                                 if (!entities.get(entity.getOwner()).getOwner().toString().equals(entryEntity.getOwner().toString())) {
                                     //don't collide with your minions
-                                    if (!childOf(entity, entities.get(entity.getOwner()), entities)) {
+                                    if(entryEntity.getOwner().toString().endsWith(entity.getOwner().toString())){
                                         //don't collide with other holybolts
                                         if (!entryEntity.getType().equals(entity.getType())) {
                                             //collision event for holy bolt here!
@@ -108,17 +108,6 @@ public class CollisionProcessor implements IEntityProcessingService {
                 }
             }
         }
-    }
-
-    private boolean childOf(Entity bolt, Entity owner, Map<UUID, Entity> entities) {
-        for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
-//            UUID key = entry.getKey();
-            Entity entryEntity = entry.getValue();
-            if (entryEntity.getOwner().equals(owner.getID())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void regularCollision(Entity entryEntity, Entity entity) {
