@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" nextobjectid="926">
- <tileset firstgid="1" name="wildtileset" tilewidth="32" tileheight="32" tilecount="12" columns="6">
-  <image source="wildtileset.png" width="192" height="64"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" nextobjectid="1115">
+ <tileset firstgid="1" name="wildtileset" tilewidth="32" tileheight="32" tilecount="26" columns="13">
+  <image source="wildtileset.png" width="429" height="65"/>
  </tileset>
  <layer name="Ground" width="32" height="18">
   <data encoding="csv">
@@ -27,24 +27,24 @@
  </layer>
  <layer name="Decoration" width="32" height="18">
   <data encoding="csv">
-9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
-4,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,
-3,0,0,0,0,0,0,0,0,0,0,0,0,3,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,
+4,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,19,0,0,0,19,0,0,0,19,0,0,0,19,0,0,0,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,3,0,0,0,16,0,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,19,0,0,0,19,0,0,0,19,0,0,0,19,0,0,0,0,0,0,0,3,
 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+4,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup name="Collision">
@@ -53,7 +53,7 @@
     <property name="isImmobile" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="670" name="arena;500;250" type="DOOR" x="416" y="256" width="31.5" height="31.5">
+  <object id="670" name="arena;1000;250" type="DOOR" x="416" y="256" width="31.5" height="31.5">
    <properties>
     <property name="isImmobile" type="bool" value="true"/>
    </properties>
@@ -63,139 +63,124 @@
     <property name="isImmobile" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="793" name="Wall" type="WALL" x="0" y="33" width="32" height="32"/>
-  <object id="794" name="Wall" type="WALL" x="0" y="65" width="32" height="32"/>
-  <object id="795" name="Wall" type="WALL" x="0" y="129" width="32" height="32"/>
-  <object id="796" name="Wall" type="WALL" x="0" y="161" width="32" height="32"/>
-  <object id="797" name="Wall" type="WALL" x="0" y="193" width="32" height="32"/>
-  <object id="798" name="Wall" type="WALL" x="0" y="225" width="32" height="32"/>
-  <object id="799" name="Wall" type="WALL" x="0" y="289" width="32" height="32"/>
-  <object id="800" name="Wall" type="WALL" x="0" y="321" width="32" height="32"/>
-  <object id="801" name="Wall" type="WALL" x="0" y="353" width="32" height="32"/>
-  <object id="802" name="Wall" type="WALL" x="0" y="385" width="32" height="32"/>
-  <object id="803" name="Wall" type="WALL" x="0" y="417" width="32" height="32"/>
-  <object id="804" name="Wall" type="WALL" x="0" y="449" width="32" height="32"/>
-  <object id="805" name="Wall" type="WALL" x="0" y="481" width="32" height="32"/>
-  <object id="806" name="Portal" type="PORTAL" x="895.667" y="127.667" width="32.6667" height="32">
+  <object id="1018" name="Wall" type="WALL" x="0" y="65" width="32" height="32"/>
+  <object id="1019" name="Wall" type="WALL" x="0" y="97" width="32" height="32"/>
+  <object id="1020" name="Wall" type="WALL" x="0" y="129" width="32" height="32"/>
+  <object id="1021" name="Wall" type="WALL" x="0" y="161" width="32" height="32"/>
+  <object id="1022" name="Wall" type="WALL" x="0" y="193" width="32" height="32"/>
+  <object id="1023" name="Wall" type="WALL" x="0" y="225" width="32" height="32"/>
+  <object id="1024" name="Wall" type="WALL" x="0" y="289" width="32" height="32"/>
+  <object id="1025" name="Wall" type="WALL" x="0" y="321" width="32" height="32"/>
+  <object id="1026" name="Wall" type="WALL" x="0" y="353" width="32" height="32"/>
+  <object id="1027" name="Wall" type="WALL" x="0" y="385" width="32" height="32"/>
+  <object id="1028" name="Wall" type="WALL" x="0" y="417" width="32" height="32"/>
+  <object id="1029" name="Wall" type="WALL" x="0" y="449" width="32" height="32"/>
+  <object id="1030" name="Wall" type="WALL" x="0" y="481" width="32" height="32"/>
+  <object id="1035" name="Tree" type="TREE" x="0" y="31" width="32" height="32"/>
+  <object id="1036" name="Tree" type="TREE" x="32" y="31" width="32" height="32"/>
+  <object id="1037" name="Tree" type="TREE" x="64" y="31" width="32" height="32"/>
+  <object id="1038" name="Tree" type="TREE" x="96" y="31" width="32" height="32"/>
+  <object id="1039" name="Tree" type="TREE" x="128" y="31" width="32" height="32"/>
+  <object id="1040" name="Tree" type="TREE" x="160" y="31" width="32" height="32"/>
+  <object id="1041" name="Tree" type="TREE" x="192" y="31" width="32" height="32"/>
+  <object id="1042" name="Tree" type="TREE" x="224" y="31" width="32" height="32"/>
+  <object id="1043" name="Tree" type="TREE" x="256" y="31" width="32" height="32"/>
+  <object id="1044" name="Tree" type="TREE" x="288" y="31" width="32" height="32"/>
+  <object id="1045" name="Tree" type="TREE" x="320" y="31" width="32" height="32"/>
+  <object id="1046" name="Tree" type="TREE" x="352" y="31" width="32" height="32"/>
+  <object id="1047" name="Tree" type="TREE" x="384" y="31" width="32" height="32"/>
+  <object id="1048" name="Tree" type="TREE" x="416" y="31" width="32" height="32"/>
+  <object id="1049" name="Tree" type="TREE" x="448" y="31" width="32" height="32"/>
+  <object id="1050" name="Tree" type="TREE" x="480" y="31" width="32" height="32"/>
+  <object id="1051" name="Tree" type="TREE" x="512" y="31" width="32" height="32"/>
+  <object id="1052" name="Tree" type="TREE" x="544" y="31" width="32" height="32"/>
+  <object id="1053" name="Tree" type="TREE" x="576" y="31" width="32" height="32"/>
+  <object id="1054" name="Tree" type="TREE" x="608" y="31" width="32" height="32"/>
+  <object id="1055" name="Tree" type="TREE" x="640" y="31" width="32" height="32"/>
+  <object id="1056" name="Tree" type="TREE" x="672" y="31" width="32" height="32"/>
+  <object id="1057" name="Tree" type="TREE" x="704" y="31" width="32" height="32"/>
+  <object id="1058" name="Tree" type="TREE" x="736" y="31" width="32" height="32"/>
+  <object id="1059" name="Tree" type="TREE" x="768" y="31" width="32" height="32"/>
+  <object id="1060" name="Tree" type="TREE" x="800" y="31" width="32" height="32"/>
+  <object id="1061" name="Tree" type="TREE" x="832" y="31" width="32" height="32"/>
+  <object id="1062" name="Tree" type="TREE" x="864" y="31" width="32" height="32"/>
+  <object id="1063" name="Tree" type="TREE" x="896" y="31" width="32" height="32"/>
+  <object id="1064" name="Tree" type="TREE" x="928" y="31" width="32" height="32"/>
+  <object id="1065" name="Tree" type="TREE" x="960" y="31" width="32" height="32"/>
+  <object id="1066" name="Tree" type="TREE" x="992" y="31" width="32" height="32"/>
+  <object id="1067" name="Tree" type="TREE" x="672" y="127" width="32" height="32"/>
+  <object id="1068" name="Tree" type="TREE" x="192" y="159" width="32" height="32"/>
+  <object id="1069" name="Tree" type="TREE" x="832" y="159" width="32" height="32"/>
+  <object id="1070" name="Tree" type="TREE" x="800" y="255" width="32" height="32"/>
+  <object id="1071" name="Tree" type="TREE" x="128" y="415" width="32" height="32"/>
+  <object id="1072" name="Tree" type="TREE" x="672" y="415" width="32" height="32"/>
+  <object id="1073" name="Tree" type="TREE" x="832" y="479" width="32" height="32"/>
+  <object id="1074" name="Tree" type="TREE" x="864" y="479" width="32" height="32"/>
+  <object id="1075" name="Tree" type="TREE" x="896" y="479" width="32" height="32"/>
+  <object id="1076" name="Tree" type="TREE" x="928" y="479" width="32" height="32"/>
+  <object id="1077" name="Tree" type="TREE" x="960" y="479" width="32" height="32"/>
+  <object id="1078" name="Tree" type="TREE" x="992" y="479" width="32" height="32"/>
+  <object id="1079" name="Tree" type="TREE" x="0" y="511" width="32" height="32"/>
+  <object id="1080" name="Tree" type="TREE" x="32" y="511" width="32" height="32"/>
+  <object id="1081" name="Tree" type="TREE" x="64" y="511" width="32" height="32"/>
+  <object id="1082" name="Tree" type="TREE" x="96" y="511" width="32" height="32"/>
+  <object id="1083" name="Tree" type="TREE" x="128" y="511" width="32" height="32"/>
+  <object id="1084" name="Tree" type="TREE" x="160" y="511" width="32" height="32"/>
+  <object id="1085" name="Tree" type="TREE" x="192" y="511" width="32" height="32"/>
+  <object id="1086" name="Tree" type="TREE" x="224" y="511" width="32" height="32"/>
+  <object id="1087" name="Tree" type="TREE" x="256" y="511" width="32" height="32"/>
+  <object id="1088" name="Tree" type="TREE" x="288" y="511" width="32" height="32"/>
+  <object id="1089" name="Tree" type="TREE" x="320" y="511" width="32" height="32"/>
+  <object id="1090" name="Tree" type="TREE" x="352" y="511" width="32" height="32"/>
+  <object id="1091" name="Tree" type="TREE" x="384" y="511" width="32" height="32"/>
+  <object id="1092" name="Tree" type="TREE" x="416" y="511" width="32" height="32"/>
+  <object id="1093" name="Tree" type="TREE" x="448" y="511" width="32" height="32"/>
+  <object id="1094" name="Tree" type="TREE" x="480" y="511" width="32" height="32"/>
+  <object id="1095" name="Tree" type="TREE" x="512" y="511" width="32" height="32"/>
+  <object id="1096" name="Tree" type="TREE" x="544" y="511" width="32" height="32"/>
+  <object id="1097" name="Tree" type="TREE" x="576" y="511" width="32" height="32"/>
+  <object id="1098" name="Tree" type="TREE" x="608" y="511" width="32" height="32"/>
+  <object id="1099" name="Tree" type="TREE" x="640" y="511" width="32" height="32"/>
+  <object id="1100" name="Tree" type="TREE" x="672" y="511" width="32" height="32"/>
+  <object id="1101" name="Tree" type="TREE" x="704" y="511" width="32" height="32"/>
+  <object id="1102" name="Tree" type="TREE" x="736" y="511" width="32" height="32"/>
+  <object id="1103" name="Tree" type="TREE" x="768" y="511" width="32" height="32"/>
+  <object id="1104" name="Tree" type="TREE" x="800" y="511" width="32" height="32"/>
+  <object id="1105" name="Tree" type="TREE" x="832" y="511" width="32" height="32"/>
+  <object id="1106" name="column" type="COLUMN" x="352" y="192" width="32" height="31"/>
+  <object id="1107" name="column" type="COLUMN" x="480" y="192" width="32" height="31"/>
+  <object id="1108" name="column" type="COLUMN" x="352" y="320" width="32" height="31"/>
+  <object id="1109" name="column" type="COLUMN" x="480" y="320" width="32" height="31"/>
+  <object id="1110" name="column" type="COLUMN" x="608" y="192" width="32" height="31"/>
+  <object id="1111" name="column" type="COLUMN" x="608" y="320" width="32" height="31"/>
+  <object id="1112" name="column" type="COLUMN" x="736" y="320" width="32" height="31"/>
+  <object id="1113" name="column" type="COLUMN" x="736" y="192" width="32" height="31"/>
+  <object id="1114" name="areana;50;250" type="DOOR" x="672" y="256" width="31.5" height="31.5">
    <properties>
     <property name="isImmobile" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="810" name="Tree" type="TREE" x="0" y="-1" width="32" height="32"/>
-  <object id="811" name="Tree" type="TREE" x="32" y="-1" width="32" height="32"/>
-  <object id="812" name="Tree" type="TREE" x="64" y="-1" width="32" height="32"/>
-  <object id="813" name="Tree" type="TREE" x="96" y="-1" width="32" height="32"/>
-  <object id="814" name="Tree" type="TREE" x="128" y="-1" width="32" height="32"/>
-  <object id="815" name="Tree" type="TREE" x="160" y="-1" width="32" height="32"/>
-  <object id="816" name="Tree" type="TREE" x="192" y="-1" width="32" height="32"/>
-  <object id="817" name="Tree" type="TREE" x="224" y="-1" width="32" height="32"/>
-  <object id="818" name="Tree" type="TREE" x="256" y="-1" width="32" height="32"/>
-  <object id="819" name="Tree" type="TREE" x="288" y="-1" width="32" height="32"/>
-  <object id="820" name="Tree" type="TREE" x="320" y="-1" width="32" height="32"/>
-  <object id="821" name="Tree" type="TREE" x="352" y="-1" width="32" height="32"/>
-  <object id="822" name="Tree" type="TREE" x="384" y="-1" width="32" height="32"/>
-  <object id="823" name="Tree" type="TREE" x="416" y="-1" width="32" height="32"/>
-  <object id="824" name="Tree" type="TREE" x="448" y="-1" width="32" height="32"/>
-  <object id="825" name="Tree" type="TREE" x="480" y="-1" width="32" height="32"/>
-  <object id="826" name="Tree" type="TREE" x="512" y="-1" width="32" height="32"/>
-  <object id="827" name="Tree" type="TREE" x="544" y="-1" width="32" height="32"/>
-  <object id="828" name="Tree" type="TREE" x="576" y="-1" width="32" height="32"/>
-  <object id="829" name="Tree" type="TREE" x="608" y="-1" width="32" height="32"/>
-  <object id="830" name="Tree" type="TREE" x="640" y="-1" width="32" height="32"/>
-  <object id="831" name="Tree" type="TREE" x="672" y="-1" width="32" height="32"/>
-  <object id="832" name="Tree" type="TREE" x="704" y="-1" width="32" height="32"/>
-  <object id="833" name="Tree" type="TREE" x="736" y="-1" width="32" height="32"/>
-  <object id="834" name="Tree" type="TREE" x="768" y="-1" width="32" height="32"/>
-  <object id="835" name="Tree" type="TREE" x="800" y="-1" width="32" height="32"/>
-  <object id="836" name="Tree" type="TREE" x="832" y="-1" width="32" height="32"/>
-  <object id="837" name="Tree" type="TREE" x="864" y="-1" width="32" height="32"/>
-  <object id="838" name="Tree" type="TREE" x="896" y="-1" width="32" height="32"/>
-  <object id="839" name="Tree" type="TREE" x="928" y="-1" width="32" height="32"/>
-  <object id="840" name="Tree" type="TREE" x="960" y="-1" width="32" height="32"/>
-  <object id="841" name="Tree" type="TREE" x="992" y="-1" width="32" height="32"/>
-  <object id="842" name="Tree" type="TREE" x="32" y="31" width="32" height="32"/>
-  <object id="843" name="Tree" type="TREE" x="64" y="31" width="32" height="32"/>
-  <object id="844" name="Tree" type="TREE" x="96" y="31" width="32" height="32"/>
-  <object id="845" name="Tree" type="TREE" x="672" y="31" width="32" height="32"/>
-  <object id="846" name="Tree" type="TREE" x="704" y="31" width="32" height="32"/>
-  <object id="847" name="Tree" type="TREE" x="736" y="31" width="32" height="32"/>
-  <object id="848" name="Tree" type="TREE" x="768" y="31" width="32" height="32"/>
-  <object id="849" name="Tree" type="TREE" x="800" y="31" width="32" height="32"/>
-  <object id="850" name="Tree" type="TREE" x="832" y="31" width="32" height="32"/>
-  <object id="851" name="Tree" type="TREE" x="864" y="31" width="32" height="32"/>
-  <object id="852" name="Tree" type="TREE" x="896" y="31" width="32" height="32"/>
-  <object id="853" name="Tree" type="TREE" x="928" y="31" width="32" height="32"/>
-  <object id="854" name="Tree" type="TREE" x="960" y="31" width="32" height="32"/>
-  <object id="855" name="Tree" type="TREE" x="992" y="31" width="32" height="32"/>
-  <object id="856" name="Tree" type="TREE" x="832" y="479" width="32" height="32"/>
-  <object id="857" name="Tree" type="TREE" x="864" y="479" width="32" height="32"/>
-  <object id="858" name="Tree" type="TREE" x="896" y="479" width="32" height="32"/>
-  <object id="859" name="Tree" type="TREE" x="928" y="479" width="32" height="32"/>
-  <object id="860" name="Tree" type="TREE" x="960" y="479" width="32" height="32"/>
-  <object id="861" name="Tree" type="TREE" x="992" y="479" width="32" height="32"/>
-  <object id="862" name="Tree" type="TREE" x="0" y="511" width="32" height="32"/>
-  <object id="863" name="Tree" type="TREE" x="32" y="511" width="32" height="32"/>
-  <object id="864" name="Tree" type="TREE" x="64" y="511" width="32" height="32"/>
-  <object id="865" name="Tree" type="TREE" x="96" y="511" width="32" height="32"/>
-  <object id="866" name="Tree" type="TREE" x="128" y="511" width="32" height="32"/>
-  <object id="867" name="Tree" type="TREE" x="160" y="511" width="32" height="32"/>
-  <object id="868" name="Tree" type="TREE" x="192" y="511" width="32" height="32"/>
-  <object id="869" name="Tree" type="TREE" x="224" y="511" width="32" height="32"/>
-  <object id="870" name="Tree" type="TREE" x="256" y="511" width="32" height="32"/>
-  <object id="871" name="Tree" type="TREE" x="288" y="511" width="32" height="32"/>
-  <object id="872" name="Tree" type="TREE" x="320" y="511" width="32" height="32"/>
-  <object id="873" name="Tree" type="TREE" x="352" y="511" width="32" height="32"/>
-  <object id="874" name="Tree" type="TREE" x="384" y="511" width="32" height="32"/>
-  <object id="875" name="Tree" type="TREE" x="416" y="511" width="32" height="32"/>
-  <object id="876" name="Tree" type="TREE" x="448" y="511" width="32" height="32"/>
-  <object id="877" name="Tree" type="TREE" x="480" y="511" width="32" height="32"/>
-  <object id="878" name="Tree" type="TREE" x="512" y="511" width="32" height="32"/>
-  <object id="879" name="Tree" type="TREE" x="544" y="511" width="32" height="32"/>
-  <object id="880" name="Tree" type="TREE" x="576" y="511" width="32" height="32"/>
-  <object id="881" name="Tree" type="TREE" x="608" y="511" width="32" height="32"/>
-  <object id="882" name="Tree" type="TREE" x="640" y="511" width="32" height="32"/>
-  <object id="883" name="Tree" type="TREE" x="672" y="511" width="32" height="32"/>
-  <object id="884" name="Tree" type="TREE" x="704" y="511" width="32" height="32"/>
-  <object id="885" name="Tree" type="TREE" x="736" y="511" width="32" height="32"/>
-  <object id="886" name="Tree" type="TREE" x="768" y="511" width="32" height="32"/>
-  <object id="887" name="Tree" type="TREE" x="800" y="511" width="32" height="32"/>
-  <object id="888" name="Tree" type="TREE" x="832" y="511" width="32" height="32"/>
-  <object id="889" name="Tree" type="TREE" x="864" y="511" width="32" height="32"/>
-  <object id="890" name="Tree" type="TREE" x="896" y="511" width="32" height="32"/>
-  <object id="891" name="Tree" type="TREE" x="928" y="511" width="32" height="32"/>
-  <object id="892" name="Tree" type="TREE" x="960" y="511" width="32" height="32"/>
-  <object id="893" name="Tree" type="TREE" x="992" y="511" width="32" height="32"/>
-  <object id="894" name="Tree" type="TREE" x="0" y="543" width="32" height="32"/>
-  <object id="895" name="Tree" type="TREE" x="32" y="543" width="32" height="32"/>
-  <object id="896" name="Tree" type="TREE" x="64" y="543" width="32" height="32"/>
-  <object id="897" name="Tree" type="TREE" x="96" y="543" width="32" height="32"/>
-  <object id="898" name="Tree" type="TREE" x="128" y="543" width="32" height="32"/>
-  <object id="899" name="Tree" type="TREE" x="160" y="543" width="32" height="32"/>
-  <object id="900" name="Tree" type="TREE" x="192" y="543" width="32" height="32"/>
-  <object id="901" name="Tree" type="TREE" x="224" y="543" width="32" height="32"/>
-  <object id="902" name="Tree" type="TREE" x="256" y="543" width="32" height="32"/>
-  <object id="903" name="Tree" type="TREE" x="288" y="543" width="32" height="32"/>
-  <object id="904" name="Tree" type="TREE" x="320" y="543" width="32" height="32"/>
-  <object id="905" name="Tree" type="TREE" x="352" y="543" width="32" height="32"/>
-  <object id="906" name="Tree" type="TREE" x="384" y="543" width="32" height="32"/>
-  <object id="907" name="Tree" type="TREE" x="416" y="543" width="32" height="32"/>
-  <object id="908" name="Tree" type="TREE" x="448" y="543" width="32" height="32"/>
-  <object id="909" name="Tree" type="TREE" x="480" y="543" width="32" height="32"/>
-  <object id="910" name="Tree" type="TREE" x="512" y="543" width="32" height="32"/>
-  <object id="911" name="Tree" type="TREE" x="544" y="543" width="32" height="32"/>
-  <object id="912" name="Tree" type="TREE" x="576" y="543" width="32" height="32"/>
-  <object id="913" name="Tree" type="TREE" x="608" y="543" width="32" height="32"/>
-  <object id="914" name="Tree" type="TREE" x="640" y="543" width="32" height="32"/>
-  <object id="915" name="Tree" type="TREE" x="672" y="543" width="32" height="32"/>
-  <object id="916" name="Tree" type="TREE" x="704" y="543" width="32" height="32"/>
-  <object id="917" name="Tree" type="TREE" x="736" y="543" width="32" height="32"/>
-  <object id="918" name="Tree" type="TREE" x="768" y="543" width="32" height="32"/>
-  <object id="919" name="Tree" type="TREE" x="800" y="543" width="32" height="32"/>
-  <object id="920" name="Tree" type="TREE" x="832" y="543" width="32" height="32"/>
-  <object id="921" name="Tree" type="TREE" x="864" y="543" width="32" height="32"/>
-  <object id="922" name="Tree" type="TREE" x="896" y="543" width="32" height="32"/>
-  <object id="923" name="Tree" type="TREE" x="928" y="543" width="32" height="32"/>
-  <object id="924" name="Tree" type="TREE" x="960" y="543" width="32" height="32"/>
-  <object id="925" name="Tree" type="TREE" x="992" y="543" width="32" height="32"/>
  </objectgroup>
+ <layer name="Misc" width="32" height="18">
+  <data encoding="csv">
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16
+</data>
+ </layer>
 </map>
