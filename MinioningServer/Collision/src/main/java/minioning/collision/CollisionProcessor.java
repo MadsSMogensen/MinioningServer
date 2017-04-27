@@ -48,7 +48,7 @@ public class CollisionProcessor implements IEntityProcessingService {
                                 //don't collide with owners owner (minion to player etc.)
                                 if (!entities.get(entity.getOwner()).getOwner().toString().equals(entryEntity.getOwner().toString())) {
                                     //don't collide with your minions
-                                    if(entryEntity.getOwner().toString().endsWith(entity.getOwner().toString())){
+                                    if(!entryEntity.getOwner().toString().endsWith(entity.getOwner().toString())){
                                         //don't collide with other holybolts
                                         if (!entryEntity.getType().equals(entity.getType())) {
                                             //collision event for holy bolt here!
