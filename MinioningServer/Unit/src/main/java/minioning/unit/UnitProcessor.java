@@ -108,8 +108,8 @@ public class UnitProcessor implements IEntityProcessingService {
             //handle movement
             Entity owner = entities.get(entity.getOwner());
             Vector2D ownerVelocity = owner.getVelocity();
-            int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt())*1.1f);
-            int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt())*1.1f);
+            int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt())*2f);
+            int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt())*2f);
             entity.setDx(dx);
             entity.setDy(dy);
             //look for targets
