@@ -90,15 +90,10 @@ public class CollisionProcessor implements IEntityProcessingService {
                                         }
                                         break;
                                     case HOLYBOLT:
-//                                        if (!entity.getType().equals(HOLYBOLT)) {
-//                                            System.out.println("player with id: " + entity.getID());
-//                                            System.out.println("and owner id  : " + entity.getOwner());
-//                                            System.out.println("collided with");
-//                                            System.out.println("entity with id: " + entryEntity.getID());
-//                                            System.out.println("and owner id  : " + entryEntity.getOwner());
-//                                            entities.remove(entryEntity.getID());
-//                                        }
-                                        System.out.println("SOMETHING ELSE COLLIDED WITH A HOLYBOLT");
+                                        //handled by holybolt specific collision
+                                        break;
+                                    case MINION:
+                                        //not colliding
                                         break;
                                     default:
                                         regularCollision(entryEntity, entity);
