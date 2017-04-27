@@ -47,23 +47,26 @@ public class CollisionProcessor implements IEntityProcessingService {
                             if (!entity.getOwner().toString().equals(entryEntity.getID().toString())) {
                                 //don't collide with owners owner (minion to player etc.)
                                 if (!entities.get(entity.getOwner()).getOwner().toString().equals(entryEntity.getOwner().toString())) {
-                                    //don't collide with other holybolts
-                                    if (!entryEntity.getType().equals(entity.getType())) {
-                                        //collision event for holy bolt here!
-                                        if (colliding(entryEntity, entity)) {
+                                    //don't collide with your minions
+                                    if (!childOf(entity, entities.get(entity.getOwner()), entities)) {
+                                        //don't collide with other holybolts
+                                        if (!entryEntity.getType().equals(entity.getType())) {
+                                            //collision event for holy bolt here!
+                                            if (colliding(entryEntity, entity)) {
 
-                                            String[] s = new String[2];
+                                                String[] s = new String[2];
 
-                                            s[0] = entry.getValue().getID().toString();
-                                            s[1] = entity.getType().toString();
+                                                s[0] = entry.getValue().getID().toString();
+                                                s[1] = entity.getType().toString();
 
-                                            UUID id = UUID.randomUUID();
-                                            Event event = new Event(HPCHANGE, s);
-                                            entities.remove(ID);
-                                            eventBus.put(id, event);
+                                                UUID id = UUID.randomUUID();
+                                                Event event = new Event(HPCHANGE, s);
+                                                entities.remove(ID);
+                                                eventBus.put(id, event);
 
-                                            System.out.println("event");
-                                            System.out.println("A HOLYBOLT COLLIDED!");
+                                                System.out.println("event");
+                                                System.out.println("A HOLYBOLT COLLIDED!");
+                                            }
                                         }
                                     }
                                 }
@@ -105,6 +108,17 @@ public class CollisionProcessor implements IEntityProcessingService {
                 }
             }
         }
+    }
+
+    private boolean childOf(Entity bolt, Entity owner, Map<UUID, Entity> entities) {
+        for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
+//            UUID key = entry.getKey();
+            Entity entryEntity = entry.getValue();
+            if (entryEntity.getOwner().equals(owner.getID())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void regularCollision(Entity entryEntity, Entity entity) {
