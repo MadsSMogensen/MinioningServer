@@ -120,22 +120,12 @@ public class UnitProcessor implements IEntityProcessingService {
                     for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
                         Entity entryEntity = entry.getValue();
                         if (entryEntity.getLocation().equals(entity.getLocation())) {
-                            if (entryEntity.getType().equals(ENEMY) || (!entryEntity.getID().equals(owner.getID()) && entity.getLocation().equals(wilderness))) {
-                                int entryx = entryEntity.getX();
-                                int entryy = entryEntity.getY();
-                                //checking if enemy is within a certain view distance
-                                if (distance(x, y, entryx, entryy) <= 300) {
-                                    //Shooting at player position
-                                    String[] data = new String[6];
-                                    data[0] = "";
-                                    data[1] = "";
-                                    data[2] = entity.getID().toString();
-                                    data[3] = "MINIONQ";
-                                    data[4] = String.valueOf(entryx);
-                                    data[5] = String.valueOf(entryy);
-                                    Event shootQ = new Event(MINIONQ, data);
-//                                    eventBus.put(UUID.randomUUID(), shootQ);
+                            if (!entity.getLocation().equals(wilderness)) {
+                                if (!entity.getOwner().equals(entryEntity.getID())) {
+                                    minionShootQ(entity, entryEntity, eventBus);
                                 }
+                            } else if (entryEntity.getType().equals(ENEMY)) {
+                                minionShootQ(entity, entryEntity, eventBus);
                             }
                         }
                     }
@@ -162,6 +152,26 @@ public class UnitProcessor implements IEntityProcessingService {
                     System.out.println("entity out of bounds removed");
                     break;
             }
+        }
+    }
+
+    private void minionShootQ(Entity entity, Entity entryEntity, ConcurrentHashMap<UUID, Event> eventBus) {
+        int entryx = entryEntity.getX();
+        int entryy = entryEntity.getY();
+        int x = entity.getX();
+        int y = entity.getY();
+        //checking if enemy is within a certain view distance
+        if (distance(x, y, entryx, entryy) <= 300) {
+            //Shooting at player position
+            String[] data = new String[6];
+            data[0] = "";
+            data[1] = "";
+            data[2] = entity.getID().toString();
+            data[3] = "MINIONQ";
+            data[4] = String.valueOf(entryx);
+            data[5] = String.valueOf(entryy);
+            Event shootQ = new Event(MINIONQ, data);
+            eventBus.put(UUID.randomUUID(), shootQ);
         }
     }
 
