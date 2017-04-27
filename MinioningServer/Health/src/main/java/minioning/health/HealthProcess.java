@@ -52,14 +52,12 @@ public class HealthProcess implements IHealthProcessorService {
                     if (entity.getHp() <= 0 && !entity.isImmobile()) {
                         switch (entity.getType()) {
                             case PLAYER:
-                                if (!entity.getLocation().equals(Location.wilderness)) {
-                                    entity.setPosition(100, 100, Location.wilderness);
-                                    entity.setxReal(100);
-                                    entity.setyReal(100);
-                                    entity.setDx(100);
-                                    entity.setDy(100);
-                                    entity.setHp(100);
-                                }
+                                entity.setPosition(100, 100, Location.wilderness);
+                                entity.setxReal(100);
+                                entity.setyReal(100);
+                                entity.setDx(100);
+                                entity.setDy(100);
+                                entity.setHp(100);
                                 break;
                             case MINION:
                             case ENEMY:
