@@ -11,6 +11,7 @@ import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
 import minioning.common.data.GameData;
 import minioning.common.data.Location;
+import static minioning.common.data.Location.wilderness;
 import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityCreatorService;
 import org.openide.util.lookup.ServiceProvider;
@@ -49,6 +50,67 @@ public class UnitCreator implements IEntityCreatorService {
                 createMonster(event, entities);
                 eventBus.remove(key);
             }
+            if (event.getType().equals(CREATEMINION)) {
+                System.out.println("CREATEMINION found");
+                createMinion(event, entities);
+                eventBus.remove(key);
+            }
+            if (event.getType().equals(MINIONQ)) {
+                System.out.println("MINIONQ found");
+                createMinionSkill(event, entities);
+                eventBus.remove(key);
+            }
+            if (event.getType().equals(MINIONSWAP)) {
+                System.out.println("MINIONSWAP found");
+                swapMinionType(event, entities);
+                eventBus.remove(key);
+            }
+        }
+    }
+
+    private void swapMinionType(Event event, Map<UUID, Entity> entities) {
+        String[] data = event.getData();
+        UUID playerID = UUID.fromString(data[2]);
+        Entity player = entities.get(playerID);
+        if (player.getLocation().equals(wilderness)) {
+            boolean success = false;
+            try {
+                player.setMinionType(EntityType.valueOf(data[3]));
+                success = true;
+            } catch (Exception e) {
+                System.out.println("incorrect minionType: " + data[3]);
+            }
+            //find and kill current minion so the new one can spawn
+            if (success) {
+                for (Map.Entry<UUID, Entity> entry : entities.entrySet()) {
+                    UUID ID = entry.getKey();
+                    Entity entity = entry.getValue();
+                    if (entity.getType().equals(MINION) && entity.getOwner().equals(playerID)) {
+                        entities.remove(ID);
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void createMinionSkill(Event event, Map<UUID, Entity> entities) {
+        String[] data = event.getData();
+        UUID minionID = UUID.fromString(data[2]);
+        Entity minion = entities.get(minionID);
+        try {
+            if (minion.getSkillqCurrentCD() >= minion.getSkillqCD()) {
+                Entity minionSkill = new Entity(minion.getID(), "", minion.getX(), minion.getY());
+                minionSkill.setLocation(minion.getLocation());
+                minionSkill.setType(EntityType.HOLYBOLT);
+                minionSkill.setSpeed(200);
+                Vector2D direction = Vector2D.getDirection(minionSkill.getX(), Integer.parseInt(data[4]), minionSkill.getY(), Integer.parseInt(data[5]));
+                Vector2D velocity = direction.times(minionSkill.getSpeed());
+                minionSkill.setVelocity(velocity);
+                entities.putIfAbsent(minionSkill.getID(), minionSkill);
+                minion.setSkillqCurrentCD(0);
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -108,6 +170,7 @@ public class UnitCreator implements IEntityCreatorService {
         String name = data[4];
         Entity newEntity = new Entity(owner, name);
         newEntity.setLocation(Location.wilderness);
+        newEntity.setMinionType(MINIONMAGE);
         entities.put(newEntity.getID(), newEntity);
         System.out.println("Player created!");
     }
@@ -125,8 +188,24 @@ public class UnitCreator implements IEntityCreatorService {
         newMonster.setDy(y);//dy
         newMonster.setLocation(Location.valueOf(data[6]));
         newMonster.setType(ENEMY);
+        newMonster.setSkillqCD(1.5f);
         entities.putIfAbsent(newMonster.getID(), newMonster);
         System.out.println("new monster created");
+    }
+
+    private void createMinion(Event event, Map<UUID, Entity> entities) {
+        String[] data = event.getData();
+        UUID owner = UUID.fromString(data[0]);
+        String name = data[1];
+        int x = Integer.parseInt(data[2]);
+        int y = Integer.parseInt(data[3]);
+        Entity newMinion = new Entity(owner, name, x, y);
+        newMinion.setDx(x);
+        newMinion.setDy(y);
+        newMinion.setLocation(Location.valueOf(data[4]));
+        newMinion.setType(MINION);
+        newMinion.setMinionType(EntityType.valueOf(data[5]));
+        entities.putIfAbsent(newMinion.getID(), newMinion);
     }
 
     private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world) {
