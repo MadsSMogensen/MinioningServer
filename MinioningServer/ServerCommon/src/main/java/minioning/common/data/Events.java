@@ -21,6 +21,7 @@ public enum Events implements Serializable{
     ENEMYQ,
     CREATEMINION,
     MINIONQ,
+    MINIONSWAP,
     FALSEEVENT
     
 }
