@@ -21,17 +21,25 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Jakob
+ * @author Jakob & Mads
  */
 @ServiceProvider(service = IHealthProcessorService.class)
 public class HealthProcess implements IHealthProcessorService {
 
     private Random ran = new Random();
 
+    
+    /**
+     *  This method can process entities based on events
+     * 
+     * @param eventBus HashMap with all events needing handling on the server
+     * @param world HashMap of every entity
+     */
+    
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
 
-        //        for (Map.Entry<UUID, Event> entry : eventBus.getBus().entrySet()) {
+        // Checks for events of the HPCHANGE type
         for (Map.Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event event = entry.getValue();
@@ -42,13 +50,12 @@ public class HealthProcess implements IHealthProcessorService {
                     UUID entityID = UUID.fromString(data[0]);
                     Entity entity = world.get(entityID);
 
-                    int min = 5;
-                    int max = 10;
+                  
+                    
+                    entity.setHp(entity.getHp() - calculateDmg(5, 10, ran));
 
-                    int dmg = ran.nextInt(max - min + 1) + min;
-
-                    entity.setHp(entity.getHp() - dmg);
-
+                    
+                    // Switch case that handles what happens to an entity with health below zero
                     if (entity.getHp() <= 0 && !entity.isImmobile()) {
                         switch (entity.getType()) {
                             case PLAYER:
@@ -69,7 +76,6 @@ public class HealthProcess implements IHealthProcessorService {
                                 break;
                         }
                     } else {
-
                         world.replace(entityID, entity);
                     }
                     System.out.println(entity.getHp());
@@ -78,4 +84,19 @@ public class HealthProcess implements IHealthProcessorService {
             }
         }
     }
+    
+    /**
+     * This method calculate the damage mased on a given min and max value
+     * 
+     * @param min Minimun damage
+     * @param max Maximum damage
+     * @param ran Java util Random object
+     * @return a int with a random value between min and max
+     */
+    
+    private int calculateDmg(int min, int max, Random ran){
+         int dmg = ran.nextInt(max - min + 1) + min;
+        return dmg;
+    }
+    
 }

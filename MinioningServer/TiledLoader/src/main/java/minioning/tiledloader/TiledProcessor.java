@@ -25,28 +25,31 @@ import org.openide.util.Exceptions;
 
 /**
  *
- * @author Jakob
+ * @author Jakob & Mads
  */
 @ServiceProvider(service = ITiledLoaderService.class)
 public class TiledProcessor implements ITiledLoaderService {
 
     private static final String RESOURCE_ROOT = "../../../TiledLoader/src/main/resources/";
 
-    ConcurrentHashMap<UUID, Entity> entities;
 
+    /**
+     * Tries to load entities and put them into the HashMap containing all entities for processing from a tmx file
+     * 
+     * @param entities HashMap of every entity
+     * @param fileName This is the name of the tmx file that will be read
+     */
+    
     
     private void loadFromFile(ConcurrentHashMap<UUID, Entity> entities, String fileName){
-         System.out.println("load");
+
         
         try {
             Path file = Paths.get(RESOURCE_ROOT + "map/" + fileName +".tmx");
 
             Map tiledMap = new TMXMapReader().readMap(file.toFile().getAbsolutePath());
-            System.out.println(tiledMap.getLayerCount());
 
-            for (int i = 0; i < tiledMap.getLayerCount(); i++) {
-                System.out.println("Layer: " + i + "Name:" + tiledMap.getLayer(0).getName());
-            }
+
             MapLayer mapLayer = tiledMap.getLayer(2);
             ObjectGroup test = (ObjectGroup) mapLayer;
             int height = tiledMap.getHeight();
@@ -57,15 +60,15 @@ public class TiledProcessor implements ITiledLoaderService {
 
                     MapObject newTile = test.getObjectAt(i * 32, j * 32);
                     try {
-
                         
                         String name = "";
                         UUID owner = UUID.randomUUID();
-                        int x = (int) Math.round(newTile.getX() + newTile.getWidth() / 2); //+16
-                        int y = (int) Math.round(newTile.getY() + newTile.getWidth() / 2); //+16
+                        int x = (int) Math.round(newTile.getX() + newTile.getWidth() / 2); 
+                        int y = (int) Math.round(newTile.getY() + newTile.getWidth() / 2); 
                         y = GameData.getGameHeight() - y;
 
                         Entity newEntity = new Entity(owner, name, x, y);
+                        
                         newEntity.setLocation(Location.valueOf(fileName));
                         newEntity.setType(EntityType.valueOf(newTile.getType()));
                         System.out.println(newEntity.getType());
@@ -88,6 +91,7 @@ public class TiledProcessor implements ITiledLoaderService {
 
                         entities.putIfAbsent(newEntity.getID(), newEntity);
                     } catch (Exception e) {
+                        System.out.println(e);
                     }
                 }
             }
@@ -96,6 +100,14 @@ public class TiledProcessor implements ITiledLoaderService {
         }
     }
     
+    
+    
+    
+    /**
+     * Loads all tmx files for the game
+     * 
+     * @param entities HashMap of every entity
+     */
     
     @Override
     public void load(ConcurrentHashMap<UUID, Entity> entities) {
