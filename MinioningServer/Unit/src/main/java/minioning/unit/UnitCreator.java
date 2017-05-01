@@ -9,7 +9,6 @@ import minioning.common.data.EntityType;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
-import minioning.common.data.GameData;
 import minioning.common.data.Location;
 import static minioning.common.data.Location.wilderness;
 import minioning.common.data.Vector2D;
@@ -137,10 +136,6 @@ public class UnitCreator implements IEntityCreatorService {
 
     private void createSkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
-//        System.out.println("creating skill with data:");
-//        for(int i = 0; i < data.length; i++){
-//            System.out.println(data[i]);
-//        }
         UUID owner = UUID.fromString(data[2]);
         Entity ownerEntity = getOwnerEntity(owner, entities);
         try {
@@ -163,9 +158,6 @@ public class UnitCreator implements IEntityCreatorService {
 
     private void createPlayer(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
-        for (String data1 : data) {
-            System.out.println(data1);
-        }
         UUID owner = UUID.fromString(data[2]);
         String name = data[4];
         Entity newEntity = new Entity(owner, name);
@@ -184,8 +176,8 @@ public class UnitCreator implements IEntityCreatorService {
         int dx = Integer.parseInt(data[4]);
         int dy = Integer.parseInt(data[5]);
         Entity newMonster = new Entity(owner, name, x, y);
-        newMonster.setDx(x);//dx
-        newMonster.setDy(y);//dy
+        newMonster.setDx(x);
+        newMonster.setDy(y);
         newMonster.setLocation(Location.valueOf(data[6]));
         newMonster.setType(ENEMY);
         newMonster.setSkillqCD(1.5f);
@@ -220,13 +212,5 @@ public class UnitCreator implements IEntityCreatorService {
             }
         }
         return null;
-    }
-
-    private Vector2D direction(Entity skillEntity, float dx, float dy) {
-        Vector2D velocity = new Vector2D();
-        /*
-        Use the on in Vector2D.class!
-         */
-        return velocity;
     }
 }

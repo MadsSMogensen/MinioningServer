@@ -7,7 +7,6 @@ package minioning.common.data;
 public class GameData {
     private static float dt;
     private static int port = 80;
-//    private static int port = 9876;
     private static int gameHeight = 576;
     private static int gameWidth = 1024;
 

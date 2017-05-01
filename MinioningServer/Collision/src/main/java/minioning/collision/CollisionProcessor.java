@@ -4,19 +4,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import minioning.common.data.Entity;
 import static minioning.common.data.EntityType.*;
-import static minioning.common.data.EntityType.PLAYER;
 import minioning.common.data.Event;
-import minioning.common.data.EventBus;
-import minioning.common.data.Events;
 import static minioning.common.data.Events.HPCHANGE;
-import minioning.common.data.GameData;
 import static minioning.common.data.GameData.getDt;
-import minioning.common.data.Location;
 import minioning.common.data.Vector2D;
 import minioning.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -34,7 +26,6 @@ public class CollisionProcessor implements IEntityProcessingService {
         try {
             //don't check immobile entities
             if (!entity.isImmobile()) {
-//        if (entity.getType().equals(PLAYER)) { //until immobile is implemented
                 for (Entry<UUID, Entity> entry : entities.entrySet()) {
                     Entity entryEntity = entry.getValue();
                     //Only look in the same world
@@ -113,22 +104,7 @@ public class CollisionProcessor implements IEntityProcessingService {
         } catch (Exception e) {
         }
     }
-
-//                        if (entity.getType().equals(LAVA)) {
-//                            if (colliding(entryEntity, entity)) {
-//
-//                            }
-//                            String[] s = new String[2];
-//
-//                            s[0] = entry.getValue().getID().toString();
-//                            s[1] = entity.getType().toString();
-//
-//                            UUID id = UUID.randomUUID();
-//                            Event event = new Event(HPCHANGE, s);
-////                            entities.remove(ID);
-//                            eventBus.put(id, event);
-//
-//                        }
+    
     private void regularCollision(Entity entryEntity, Entity entity) {
         //collision detected!
         int x = entity.getX();
@@ -167,7 +143,7 @@ public class CollisionProcessor implements IEntityProcessingService {
     }
 
     private float length(float x1, float y1, float x2, float y2) {
-        float length = 0;
+        float length;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         return length;

@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.EntityType;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
@@ -77,7 +76,6 @@ public class UnitProcessor implements IEntityProcessingService {
 
             }
             //Set movement
-//            if (entity.getX() == entity.getDx() && entity.getY() == entity.getDy()) {
             if (Math.abs(entity.getX() - entity.getDx()) <= 35 && Math.abs(entity.getY() - entity.getDy()) <= 35) {
                 Entity owner = entities.get(entity.getOwner());
                 int lowerx = owner.getX() - 200;
@@ -200,7 +198,6 @@ public class UnitProcessor implements IEntityProcessingService {
     private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String data = "";
         data += owner.getID().toString() + ";";
-//        data += owner.getMinionType().toString() + ";";
         data += "ENEMY" + ";";
         data += owner.getX() + ";";
         data += owner.getY() + ";";
@@ -213,7 +210,7 @@ public class UnitProcessor implements IEntityProcessingService {
     }
 
     private float distance(int x1, int y1, int x2, int y2) {
-        float length = 0;
+        float length;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         return length;
