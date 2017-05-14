@@ -71,15 +71,12 @@ public class TiledProcessor implements ITiledLoaderService {
                         
                         newEntity.setLocation(Location.valueOf(fileName));
                         newEntity.setType(EntityType.valueOf(newTile.getType()));
-                        System.out.println(newEntity.getType());
                         if (newEntity.getType() == EntityType.DOOR) {
                             
                             String s = newTile.getName();
                             
                             String[] sa = s.split(";");
                             
-                            
-                            System.out.println(sa[0] + sa[1] + sa[2]);
                             newEntity.setDoorTo(Location.valueOf(sa[0]));
                             
                             newEntity.setDoorToX(Integer.parseInt(sa[1]));

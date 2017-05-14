@@ -20,19 +20,19 @@ public class HealthProcessTest {
     
     public HealthProcessTest() {
     }
-
-    /**
-     * Test of process method, of class HealthProcess.
-     */
-    @org.junit.Test
-    public void testProcess() {
-        System.out.println("process");
-        ConcurrentHashMap<UUID, Event> eventBus = null;
-        ConcurrentHashMap<UUID, Entity> world = null;
-        HealthProcess instance = new HealthProcess();
-        instance.process(eventBus, world);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//
+//    /**
+//     * Test of process method, of class HealthProcess.
+//     */
+//    @org.junit.Test
+//    public void testProcess() {
+//        System.out.println("process");
+//        ConcurrentHashMap<UUID, Event> eventBus = null;
+//        ConcurrentHashMap<UUID, Entity> world = null;
+//        HealthProcess instance = new HealthProcess();
+//        instance.process(eventBus, world);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     
 }

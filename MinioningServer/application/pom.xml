@@ -25,11 +25,6 @@
             <version>${netbeans.version}</version>
             <type>pom</type>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>MinioningServer-branding</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!-- NbModuleSuite functional in RELEASE70 or later: -->
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -47,42 +42,12 @@
         -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Unit</artifactId>
+            <artifactId>MinioningServer-branding</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>ClientConnection</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Movement</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>ServerCommon</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>ServerCore</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Collision</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>TiledLoader</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Health</artifactId>
+            <artifactId>SilentUpdate</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -121,8 +86,8 @@
                                 <id>extra</id>
                                 <goals>
                                     <goal>autoupdate</goal>
-                                    <goal>webstart-app</goal>
-                                    <goal>build-installers</goal>
+                                    <!--goal>webstart-app</goal>
+                                    <goal>build-installers</goal>-->
                                 </goals>
                             </execution>
                         </executions>

@@ -67,6 +67,7 @@
         <module>ServerCommon</module>
         <module>TiledLoader</module>
         <module>Health</module>
+        <module>minioning_SilentUpdate_nbm_1.0.0</module>
     </modules>
 
     <properties>
