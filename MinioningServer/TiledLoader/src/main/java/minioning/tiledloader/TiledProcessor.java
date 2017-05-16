@@ -51,14 +51,14 @@ public class TiledProcessor implements ITiledLoaderService {
 
 
             MapLayer mapLayer = tiledMap.getLayer(2);
-            ObjectGroup test = (ObjectGroup) mapLayer;
+            ObjectGroup layer = (ObjectGroup) mapLayer;
             int height = tiledMap.getHeight();
             int width = tiledMap.getWidth();
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
 
-                    MapObject newTile = test.getObjectAt(i * 32, j * 32);
+                    MapObject newTile = layer.getObjectAt(i * 32, j * 32);
                     try {
                         
                         String name = "";

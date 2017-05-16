@@ -51,7 +51,7 @@ public class HealthProcess implements IHealthProcessorService {
                     Entity entity = world.get(entityID);
 
                   
-                    
+                    if(entity != null){
                     entity.setHp(entity.getHp() - calculateDmg(5, 10, ran));
 
                     
@@ -80,6 +80,7 @@ public class HealthProcess implements IHealthProcessorService {
                     }
                     System.out.println(entity.getHp());
                     eventBus.remove(key);
+                }
                 }
             }
         }
