@@ -28,14 +28,12 @@ public class HealthProcess implements IHealthProcessorService {
 
     private Random ran = new Random();
 
-    
     /**
-     *  This method can process entities based on events
-     * 
+     * This method can process entities based on events
+     *
      * @param eventBus HashMap with all events needing handling on the server
      * @param world HashMap of every entity
      */
-    
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
 
@@ -50,54 +48,55 @@ public class HealthProcess implements IHealthProcessorService {
                     UUID entityID = UUID.fromString(data[0]);
                     Entity entity = world.get(entityID);
 
-                  
-                    if(entity != null){
-                    entity.setHp(entity.getHp() - calculateDmg(5, 10, ran));
+                    try {
+                        if (!entity.isImmobile()) {
+                            entity.setHp(entity.getHp() - calculateDmg(5, 10, ran));
 
-                    
-                    // Switch case that handles what happens to an entity with health below zero
-                    if (entity.getHp() <= 0 && !entity.isImmobile()) {
-                        switch (entity.getType()) {
-                            case PLAYER:
-                                entity.setPosition(100, 100, Location.wilderness);
-                                entity.setxReal(100);
-                                entity.setyReal(100);
-                                entity.setDx(100);
-                                entity.setDy(100);
-                                entity.setHp(100);
-                                break;
-                            case MINION:
-                            case ENEMY:
-                                Entity owner = world.get(entity.getOwner());
-                                owner.setSpawnCount(owner.getSpawnCount() - 1);
-                                world.remove(entityID);
-                                break;
-                            default:
-                                break;
+                            // Switch case that handles what happens to an entity with health below zero
+                            if (entity.getHp() <= 0) {
+                                switch (entity.getType()) {
+                                    case PLAYER:
+                                        entity.setPosition(100, 100, Location.wilderness);
+                                        entity.setxReal(100);
+                                        entity.setyReal(100);
+                                        entity.setDx(100);
+                                        entity.setDy(100);
+                                        entity.setHp(100);
+                                        break;
+                                    case MINION:
+                                    case ENEMY:
+                                        Entity owner = world.get(entity.getOwner());
+                                        owner.setSpawnCount(owner.getSpawnCount() - 1);
+                                        world.remove(entityID);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                world.replace(entityID, entity);
+                            }
+                            System.out.println(entity.getHp());
                         }
-                    } else {
-                        world.replace(entityID, entity);
+
+                    } catch (Exception e) {
                     }
-                    System.out.println(entity.getHp());
                     eventBus.remove(key);
-                }
                 }
             }
         }
     }
-    
+
     /**
      * This method calculate the damage mased on a given min and max value
-     * 
+     *
      * @param min Minimun damage
      * @param max Maximum damage
      * @param ran Java util Random object
      * @return a int with a random value between min and max
      */
-    
-    private int calculateDmg(int min, int max, Random ran){
-         int dmg = ran.nextInt(max - min + 1) + min;
+    private int calculateDmg(int min, int max, Random ran) {
+        int dmg = ran.nextInt(max - min + 1) + min;
         return dmg;
     }
-    
+
 }
