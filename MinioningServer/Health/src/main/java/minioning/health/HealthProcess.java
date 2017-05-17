@@ -87,7 +87,7 @@ public class HealthProcess implements IHealthProcessorService {
     }
     
     /**
-     * This method calculate the damage mased on a given min and max value
+     * This method calculates the damage based on a given min and max value
      * 
      * @param min Minimun damage
      * @param max Maximum damage

@@ -9,7 +9,6 @@ import minioning.common.data.EntityType;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
-import minioning.common.data.GameData;
 import minioning.common.data.Location;
 import static minioning.common.data.Location.wilderness;
 import minioning.common.data.Vector2D;

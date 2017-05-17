@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import minioning.common.data.Entity;
-import minioning.common.data.EntityType;
 import static minioning.common.data.EntityType.*;
 import minioning.common.data.Event;
 import static minioning.common.data.Events.*;
@@ -213,7 +212,7 @@ public class UnitProcessor implements IEntityProcessingService {
     }
 
     private float distance(int x1, int y1, int x2, int y2) {
-        float length = 0;
+        float length;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         return length;
