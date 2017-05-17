@@ -14,11 +14,16 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Mads
+ * @author Jakob and Mads
  */
 @ServiceProvider(service = IConnectionService.class)
 public class ClientInput implements IConnectionService {
 
+    /**
+     *
+     * @param eventBus The map of events yet to be acted upon
+     * @param world The map representing the world as entities
+     */
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
         //Check the temporary data for errors, put into real eventbus
@@ -27,46 +32,46 @@ public class ClientInput implements IConnectionService {
                 Events eventType;
                 try {
                     switch (data[3].trim()) {
-                    case "CREATEPLAYER":
-                        eventType = CREATEPLAYER;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    case "LOGIN":
-                        eventType = LOGIN;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    case "CREATEACCOUNT":
-                        eventType = CREATEACCOUNT;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    case "MOVEMENT":
-                        eventType = MOVEMENT;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    case "PLAY":
-                        eventType = PLAY;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    case "SKILLQ":
-                        eventType = SKILLQ;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    case "MINIONSWAP":
-                        eventType = MINIONSWAP;
-                        System.out.println("putting event: " + eventType.toString());
-                        EventBus.putEvent(eventType, data);
-                        break;
-                    default:
-                        eventType = FALSEEVENT;
-                        System.out.println("False Event: " + data[3].trim());
-                        break;
-                }
+                        case "CREATEPLAYER":
+                            eventType = CREATEPLAYER;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        case "LOGIN":
+                            eventType = LOGIN;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        case "CREATEACCOUNT":
+                            eventType = CREATEACCOUNT;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        case "MOVEMENT":
+                            eventType = MOVEMENT;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        case "PLAY":
+                            eventType = PLAY;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        case "SKILLQ":
+                            eventType = SKILLQ;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        case "MINIONSWAP":
+                            eventType = MINIONSWAP;
+                            System.out.println("putting event: " + eventType.toString());
+                            EventBus.putEvent(eventType, data);
+                            break;
+                        default:
+                            eventType = FALSEEVENT;
+                            System.out.println("False Event: " + data[3].trim());
+                            break;
+                    }
                 } catch (Exception e) {
                 }
             }

@@ -16,13 +16,18 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Helle
+ * @author Jakob and Mads
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class UnitProcessor implements IEntityProcessingService {
 
     float standardSpawnDelay = 10;
-
+/**
+ * 
+ * @param eventBus The map of events yet to be acted upon
+ * @param entities The map representing the world as entities
+ * @param entity The current entity being processed
+ */
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         //add cd timer to every entity
@@ -76,7 +81,6 @@ public class UnitProcessor implements IEntityProcessingService {
 
             }
             //Set movement
-//            if (entity.getX() == entity.getDx() && entity.getY() == entity.getDy()) {
             if (Math.abs(entity.getX() - entity.getDx()) <= 35 && Math.abs(entity.getY() - entity.getDy()) <= 35) {
                 Entity owner = entities.get(entity.getOwner());
                 int lowerx = owner.getX() - 200;
@@ -112,8 +116,8 @@ public class UnitProcessor implements IEntityProcessingService {
             if (!entity.getLocation().equals(owner.getLocation())) {
                 entity.setPosition(owner.getX(), owner.getY(), owner.getLocation());
             }
+            
             //handle movement
-
             Vector2D ownerVelocity = owner.getVelocity();
             int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt()) * 2f);
             int dy = Math.round(owner.getY() + (-ownerVelocity.getY() * GameData.getDt()) * 2f);
@@ -163,7 +167,12 @@ public class UnitProcessor implements IEntityProcessingService {
             }
         }
     }
-
+/**
+ * 
+ * @param entity The current entity being processed
+ * @param entryEntity The entity target entity
+ * @param eventBus The map of events yet to be acted upon
+ */
     private void minionShootQ(Entity entity, Entity entryEntity, ConcurrentHashMap<UUID, Event> eventBus) {
         int entryx = entryEntity.getX();
         int entryy = entryEntity.getY();
@@ -183,7 +192,11 @@ public class UnitProcessor implements IEntityProcessingService {
             eventBus.put(UUID.randomUUID(), shootQ);
         }
     }
-
+/**
+ * 
+ * @param owner an object of type Entity
+ * @param eventBus The map of events yet to be acted upon
+ */
     private void spawnNewMinion(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String[] data = new String[6];
         data[0] = owner.getID().toString();//owner id
@@ -195,11 +208,14 @@ public class UnitProcessor implements IEntityProcessingService {
         Event newEvent = new Event(CREATEMINION, data);
         eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
     }
-
+/**
+ * 
+ * @param owner an object of type Entity
+ * @param eventBus The map of events yet to be acted upon
+ */
     private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String data = "";
         data += owner.getID().toString() + ";";
-//        data += owner.getMinionType().toString() + ";";
         data += "ENEMY" + ";";
         data += owner.getX() + ";";
         data += owner.getY() + ";";
@@ -210,7 +226,14 @@ public class UnitProcessor implements IEntityProcessingService {
         Event newEvent = new Event(CREATEMONSTER, dataArray);
         eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
     }
-
+/**
+ * 
+ * @param x1 x of coordinate 1
+ * @param y1 y of coordinate 1
+ * @param x2 x of coordinate 2
+ * @param y2 y of coordiante 2
+ * @return the length between coordinate 1 and coordinate 2
+ */
     private float distance(int x1, int y1, int x2, int y2) {
         float length;
         //sqrt(a^2+b^2)

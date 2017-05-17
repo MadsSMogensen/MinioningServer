@@ -2,7 +2,7 @@ package minioning.common.data;
 
 /**
  *
- * @author Mogensen
+ * @author Jakob and Mads
  */
 public class Vector2D {
 

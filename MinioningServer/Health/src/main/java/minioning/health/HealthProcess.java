@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package minioning.health;
 
 import java.util.Map;
@@ -21,7 +16,7 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Jakob & Mads
+ * @author Jakob and Mads
  */
 @ServiceProvider(service = IHealthProcessorService.class)
 public class HealthProcess implements IHealthProcessorService {

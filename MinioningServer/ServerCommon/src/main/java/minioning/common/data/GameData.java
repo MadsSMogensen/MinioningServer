@@ -2,7 +2,7 @@ package minioning.common.data;
 
 /**
  *
- * @author Helle
+ * @author Jakob and Mads
  */
 public class GameData {
     private static float dt;

@@ -17,11 +17,16 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Helle
+ * @author Jakob and Mads
  */
 @ServiceProvider(service = IEntityCreatorService.class)
 public class UnitCreator implements IEntityCreatorService {
 
+    /**
+     *
+     * @param eventBus The map of events yet to be acted upon
+     * @param entities The map representing the world as entities
+     */
     @Override
     public void createNew(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities) {
 //        System.out.println(events.getBus().size());
@@ -67,6 +72,12 @@ public class UnitCreator implements IEntityCreatorService {
         }
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void swapMinionType(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID playerID = UUID.fromString(data[2]);
@@ -93,6 +104,12 @@ public class UnitCreator implements IEntityCreatorService {
         }
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void createMinionSkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID minionID = UUID.fromString(data[2]);
@@ -113,6 +130,12 @@ public class UnitCreator implements IEntityCreatorService {
         }
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void createEnemySkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID enemyID = UUID.fromString(data[2]);
@@ -134,12 +157,14 @@ public class UnitCreator implements IEntityCreatorService {
 
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void createSkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
-//        System.out.println("creating skill with data:");
-//        for(int i = 0; i < data.length; i++){
-//            System.out.println(data[i]);
-//        }
         UUID owner = UUID.fromString(data[2]);
         Entity ownerEntity = getOwnerEntity(owner, entities);
         try {
@@ -160,6 +185,12 @@ public class UnitCreator implements IEntityCreatorService {
 
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void createPlayer(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         for (String data1 : data) {
@@ -174,6 +205,12 @@ public class UnitCreator implements IEntityCreatorService {
         System.out.println("Player created!");
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void createMonster(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID owner = UUID.fromString(data[0]);
@@ -192,6 +229,12 @@ public class UnitCreator implements IEntityCreatorService {
         System.out.println("new monster created");
     }
 
+    /**
+     *
+     * @param event An object containing an eventType enum and a String array of
+     * data
+     * @param entities The map representing the world as entities
+     */
     private void createMinion(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID owner = UUID.fromString(data[0]);
@@ -207,6 +250,12 @@ public class UnitCreator implements IEntityCreatorService {
         entities.putIfAbsent(newMinion.getID(), newMinion);
     }
 
+    /**
+     *
+     * @param ownerID UUID representing the owner of the entity
+     * @param world The map representing the world as entities
+     * @return
+     */
     private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world) {
         Entity entity;
         for (Entry<UUID, Entity> entry : world.entrySet()) {
@@ -219,13 +268,5 @@ public class UnitCreator implements IEntityCreatorService {
             }
         }
         return null;
-    }
-
-    private Vector2D direction(Entity skillEntity, float dx, float dy) {
-        Vector2D velocity = new Vector2D();
-        /*
-        Use the on in Vector2D.class!
-         */
-        return velocity;
     }
 }

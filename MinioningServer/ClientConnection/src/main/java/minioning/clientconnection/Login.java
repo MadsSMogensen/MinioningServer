@@ -24,13 +24,17 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Mogensen
+ * @author Jakob and Mads
  */
 @ServiceProvider(service = IConnectionService.class)
 public class Login implements IConnectionService {
 
     private static Path file;
-
+/**
+ * 
+ * @param eventBus The map of events yet to be acted upon
+ * @param world The map representing the world as entities
+ */
     @Override
     public synchronized void process(ConcurrentHashMap<UUID, Event> eventBus, ConcurrentHashMap<UUID, Entity> world) {
         if (file == null) {
@@ -61,7 +65,10 @@ public class Login implements IConnectionService {
             }
         }
     }
-
+/**
+ * 
+ * @param value an Event object
+ */
     private void createLogin(Event value) {
         //[0]IPAddress
         //[1]port
@@ -83,7 +90,11 @@ public class Login implements IConnectionService {
             System.out.println(e);
         }
     }
-
+/**
+ * 
+ * @param value an Event object
+ * @param eventBus The map of events yet to be acted upon
+ */
     private void login(Event value, ConcurrentHashMap<UUID, Event> eventBus) {
         //[0]IPAddress
         //[1]port
@@ -113,7 +124,6 @@ public class Login implements IConnectionService {
                     Event success = new Event(LOGINSUCCESS, data);
                     getConnectedUsers().put(data[0], username);
                     getPortList().put(data[0], Integer.parseInt(data[1]));
-//                    EventBus.getInstance().putEvent(success);
                     EventBus.putEvent(success);
                     System.out.println("putting event LOGINSUCCESS");
                     found = true;
@@ -124,8 +134,6 @@ public class Login implements IConnectionService {
                     data[0] = value.getData()[0];
                     data[1] = "Wrong Password!";
                     Event wrongPass = new Event(LOGINFAILED, data);
-//                    eventBus.put(UUID.randomUUID(), wrongPass);
-
                 }
             }
         }
@@ -136,13 +144,15 @@ public class Login implements IConnectionService {
             data[0] = value.getData()[0];
             data[1] = "Wrong Username!";
             Event wrongPass = new Event(LOGINFAILED, data);
-//            eventBus.put(UUID.randomUUID(), wrongPass);
         }
     }
-
+/**
+ * 
+ * @return a Map of connected accounts
+ */
     private Map<String, String> getAccounts() {
-
         Map<String, String> accounts = new ConcurrentHashMap<String, String>();
+        
         try {
             BufferedReader br = new BufferedReader(new FileReader(file.toString()));
             String line = br.readLine();
@@ -161,7 +171,10 @@ public class Login implements IConnectionService {
         }
         return accounts;
     }
-
+/**
+ * 
+ * @param value an Event object
+ */
     private void play(Event value) {
         //[0]IPAddress
         //[1]port
@@ -169,10 +182,6 @@ public class Login implements IConnectionService {
         //[3]eventType
         //[4]Name
         String IPAddress = value.getData()[0];
-//        IPAddress = IPAddress.replace("/", "");
-//        int port = Integer.parseInt(value.getData()[1]);
-
-//        String name = value.getData()[4];
         UUID ID = UUID.fromString(value.getData()[2]);
         String name = getConnectedUsers().get(IPAddress);
         getPlayingUsers().put(ID, name);

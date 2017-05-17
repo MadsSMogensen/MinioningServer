@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package minioning.clientconnection;
 
 import java.net.DatagramPacket;
@@ -16,23 +11,31 @@ import org.openide.modules.ModuleInstall;
 
 /**
  *
- * @author Jakob
+ * @author Jakob and Mads
  */
 public class Installer extends ModuleInstall {
-    
+
     private static DatagramSocket serverSocket;
     private static List<String[]> tempData;
 
+    /**
+     *
+     * @return a List of temporary data
+     */
     public synchronized static List<String[]> getTempData() {
         List<String[]> copyOfTempData = Collections.synchronizedList(new ArrayList<String[]>());;
-        for(String[] data : getActualTempData()){
+        for (String[] data : getActualTempData()) {
             copyOfTempData.add(data);
         }
         return copyOfTempData;
     }
-    
-    public static DatagramSocket getServerSocket(){
-        if(serverSocket == null){
+
+    /**
+     *
+     * @return a DatagramSocket representing the socket of the server
+     */
+    public static DatagramSocket getServerSocket() {
+        if (serverSocket == null) {
             try {
                 serverSocket = new DatagramSocket(GameData.getPort());
             } catch (Exception e) {
@@ -42,6 +45,10 @@ public class Installer extends ModuleInstall {
         return serverSocket;
     }
 
+    /**
+     *
+     * @return a List of temporary data
+     */
     public synchronized static List<String[]> getActualTempData() {
         if (tempData == null) {
             tempData = Collections.synchronizedList(new ArrayList<String[]>());
@@ -49,29 +56,39 @@ public class Installer extends ModuleInstall {
         return tempData;
     }
 
+    /**
+     * clears the temporary data list
+     */
     public static void clearTempData() {
         getActualTempData().clear();
     }
 
+    /**
+     * starts a new ConnectionThread
+     */
     @Override
     public void restored() {
-        //Open the connection, put everything into a tempData
-        //The temporary data is then handled for errors in ClientInput
-        
         new Thread(new ConnectionThread()).start();
-
-//        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-//        executor.scheduleAtFixedRate(gameServer.run(), initialDelay, period, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * uninstalls the module
+     */
     @Override
     public void uninstalled() {
-        super.uninstalled(); //To change body of generated methods, choose Tools | Templates.
+        super.uninstalled();
 
     }
 
+    /**
+     *
+     * @author Jakob and Mads
+     */
     public class ConnectionThread implements Runnable {
 
+        /**
+         * the ConnectionThread run() method
+         */
         @Override
         public void run() {
             try {

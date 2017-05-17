@@ -16,7 +16,7 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Jakob & Mads
+ * @author Jakob and Mads
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class MovementProcessor implements IEntityProcessingService {

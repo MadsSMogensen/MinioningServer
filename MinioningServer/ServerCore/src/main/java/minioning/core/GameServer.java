@@ -15,7 +15,7 @@ import org.openide.util.Lookup;
 
 /**
  *
- * @author Jakob & Mads
+ * @author Jakob and Mads
  */
 public class GameServer implements Runnable {
 
@@ -25,11 +25,10 @@ public class GameServer implements Runnable {
 
     // Internal & game data
     private ConcurrentHashMap<UUID, Entity> world = new ConcurrentHashMap(); //burde vi have singleton på den her liste??
-
     private final Lookup lookup = Lookup.getDefault();
 
     /**
-     *
+     * running IEntityProcessingServices
      */
     public void update() {
         for (IEntityProcessingService processor : getIEntityProcessingServices()) {
@@ -40,7 +39,7 @@ public class GameServer implements Runnable {
     }
 
     /**
-     *
+     * running IConnectionServices
      */
     public void updateConnection() {
         for (IConnectionService processor : getIConnectionServices()) {
@@ -49,7 +48,7 @@ public class GameServer implements Runnable {
     }
 
     /**
-     *
+     * running IEntityCreatorServices
      */
     private void create() {
         for (IEntityCreatorService creator : getIEntityCreatorServices()) {
@@ -58,7 +57,7 @@ public class GameServer implements Runnable {
     }
 
     /**
-     *
+     * running ITiledLoaderServices
      */
     private void loadMap() {
         for (ITiledLoaderService loader : getITiledLoaderServices()) {
@@ -67,7 +66,7 @@ public class GameServer implements Runnable {
     }
 
     /**
-     *
+     * running IHealthProcessorServices
      */
     private void updateHP() {
         for (IHealthProcessorService processor : getIHealthProcessor()) {
@@ -77,7 +76,7 @@ public class GameServer implements Runnable {
 
     /**
      *
-     * @return
+     * @return a Collection of IEntityProcessingServices
      */
     private Collection<? extends IEntityProcessingService> getIEntityProcessingServices() {
         return lookup.lookupAll(IEntityProcessingService.class);
@@ -85,7 +84,7 @@ public class GameServer implements Runnable {
 
     /**
      *
-     * @return
+     * @return a Collection of IHealthProcessorServices
      */
     private Collection<? extends IHealthProcessorService> getIHealthProcessor() {
         return lookup.lookupAll(IHealthProcessorService.class);
@@ -93,7 +92,7 @@ public class GameServer implements Runnable {
 
     /**
      *
-     * @return
+     * @return a Collection of IEntityCreatorServices
      */
     private Collection<? extends IEntityCreatorService> getIEntityCreatorServices() {
         return lookup.lookupAll(IEntityCreatorService.class);
@@ -101,7 +100,7 @@ public class GameServer implements Runnable {
 
     /**
      *
-     * @return
+     * @return a Collection of IConnectionServices
      */
     private Collection<? extends IConnectionService> getIConnectionServices() {
         return lookup.lookupAll(IConnectionService.class);
@@ -109,14 +108,14 @@ public class GameServer implements Runnable {
 
     /**
      *
-     * @return
+     * @return a Collection of ITiledLoaderServices
      */
     private Collection<? extends ITiledLoaderService> getITiledLoaderServices() {
         return lookup.lookupAll(ITiledLoaderService.class);
     }
 
     /**
-     *
+     * The main thread loop
      */
     @Override
     public void run() {
@@ -128,7 +127,7 @@ public class GameServer implements Runnable {
             GameData.setDt(elapsedTime);
             if (elapsedTime >= timeStep) {
                 lastTime = currentTime;
-                
+
                 updateConnection();
                 create();
                 update();

@@ -6,8 +6,8 @@ import javafx.scene.shape.Circle;
 import static minioning.common.data.EntityType.PLAYER;
 
 /**
- *
- * @author Jakob & Mads
+ * 
+ * @author Jakob and Mads
  */
 public class Entity implements Serializable {
 
@@ -42,7 +42,11 @@ public class Entity implements Serializable {
     private float skillqCurrentCD = 0;
     private int doorToX;
     private int doorToY;
-
+/**
+ * 
+ * @param owner UUID of the owner to the entity
+ * @param name String representing the name of the entity
+ */
     public Entity(UUID owner, String name) {
         this.owner = owner;
         this.name = name;
@@ -50,7 +54,13 @@ public class Entity implements Serializable {
         this.dx = this.x;
         this.dy = this.y;
     }
-
+/**
+ * 
+ * @param owner UUID of the owner to the entity
+ * @param name String representing the name of the entity
+ * @param x the x coordinate representing the position of the entity
+ * @param y the y coordinate representing the position of the entity
+ */
     public Entity(UUID owner, String name, int x, int y) {
         this.owner = owner;
         this.name = name;
@@ -63,6 +73,62 @@ public class Entity implements Serializable {
         this.nexty = y;
         this.nextxReal = xReal;
         this.nextyReal = yReal;
+        this.dx = x;
+        this.dy = y;
+    }
+/**
+ * 
+ * @return a String representing the entity
+ */
+    @Override
+    public String toString() {
+        String entityString;
+        entityString = ID + ";";
+        entityString += owner + ";";
+        entityString += name + ";";
+        entityString += getX() + ";";
+        entityString += getY() + ";";
+        entityString += dx + ";";
+        entityString += dy + ";";
+        entityString += direction;
+        return entityString;
+    }
+/**
+ * 
+ * @return a String representing the entity, in a manner readable to the clients
+ */
+    public String toClients() {
+        String entityString;
+        entityString = ID + ";";
+        entityString += type.toString() + ";";
+        entityString += name + ";";
+        entityString += x + ";";
+        entityString += y + ";";
+        entityString += velocity.getX() + ";";
+        entityString += velocity.getY() + ";";
+        entityString += getOwner().toString() + ";";
+        entityString += getLocation() + ";";
+        entityString += getDoorTo() + ";";
+        entityString += getHp() + ";";
+        return entityString;
+    }
+/**
+ * 
+ * @param x the new x coordinate
+ * @param y the new y coordinate
+ * @param location the new enum area
+ */
+    public void setPosition(int x, int y, Location location) {
+        this.x = x;
+        this.y = y;
+        this.location = location;
+        this.xReal = x;
+        this.yReal = y;
+        this.nextx = x;
+        this.nexty = y;
+        this.nextxReal = x;
+        this.nextyReal = y;
+        this.velocity = new Vector2D();
         this.dx = x;
         this.dy = y;
     }
@@ -145,21 +211,6 @@ public class Entity implements Serializable {
 
     public void setMaxMinions(int maxMinions) {
         this.maxMinions = maxMinions;
-    }
-
-    public void setPosition(int x, int y, Location location) {
-        this.x = x;
-        this.y = y;
-        this.location = location;
-        this.xReal = x;
-        this.yReal = y;
-        this.nextx = x;
-        this.nexty = y;
-        this.nextxReal = x;
-        this.nextyReal = y;
-        this.velocity = new Vector2D();
-        this.dx = x;
-        this.dy = y;
     }
 
     public float getSpeed() {
@@ -278,48 +329,6 @@ public class Entity implements Serializable {
         return new Circle(getX(), getY(), 12);
     }
 
-    @Override
-    public String toString() {
-
-        String entityString;
-        entityString  = ID + ";";
-        entityString += owner + ";";
-        entityString += name + ";";
-        entityString += getX() + ";";
-        entityString += getY() + ";";
-        entityString += dx + ";";
-        entityString += dy + ";";
-        entityString += direction;
-        return entityString;
-    }
-    
-//    public String toClients(){
-//        String entityString;
-//        entityString = ID + ";";
-//        entityString += type.toString() + ";";
-//        entityString += getX() + ";";
-//        entityString += getY() + ";";
-//        entityString += getOwner().toString() + ";";
-//        entityString += getLocation() + ";";
-//        entityString += getDoorTo() + ";";
-//        return entityString;
-//    }
-    public String toClients(){
-        String entityString;
-        entityString = ID + ";";                    
-        entityString += type.toString() + ";";
-        entityString += name + ";";
-        entityString += x + ";";
-        entityString += y + ";";
-        entityString += velocity.getX() + ";";
-        entityString += velocity.getY() + ";";
-        entityString += getOwner().toString() + ";";
-        entityString += getLocation() + ";";
-        entityString += getDoorTo() + ";";
-        entityString += getHp()+";";
-        return entityString;
-    }
-
     public UUID getOwner() {
         return owner;
     }
@@ -371,5 +380,4 @@ public class Entity implements Serializable {
     public UUID getID() {
         return ID;
     }
-
 }
