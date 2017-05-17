@@ -16,14 +16,19 @@ import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
- * @author Mogensen
+ * @author Jakob & Mads
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class MovementProcessor implements IEntityProcessingService {
 
-//    float lastTime = 0;
     float elapsed;
 
+    /**
+     *
+     * @param eventBus The map of events yet to be acted upon
+     * @param entities The map representing the world as entities
+     * @param entity The current entity being processed
+     */
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         elapsed = getDt();
@@ -38,6 +43,11 @@ public class MovementProcessor implements IEntityProcessingService {
         }
     }
 
+    /**
+     *
+     * @param eventBus The map of events yet to be acted upon
+     * @param entity The current entity being processed
+     */
     private void processEventBus(ConcurrentHashMap<UUID, Event> eventBus, Entity entity) {
         for (Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
@@ -58,7 +68,11 @@ public class MovementProcessor implements IEntityProcessingService {
         }
     }
 
-    //set movement til nextMovement
+    /**
+     *
+     * @param entity The current entity being processed
+     * @param elapsed The time elapsed since last game-loop
+     */
     private void processNextMovement(Entity entity, float elapsed) {
         //get the data
         float speed = entity.getSpeed();
@@ -110,17 +124,38 @@ public class MovementProcessor implements IEntityProcessingService {
         }
     }
 
+    /**
+     *
+     * @param entity The current entity being processed
+     * @param x the current x of the entity
+     * @param y the current y of the entity
+     * @param goalx the goal x of the entity
+     * @param goaly the goal y of the entity
+     * @return
+     */
     private boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
         return distance(x, y, goalx, goaly) < entity.getSize();
     }
-
+    
+    /**
+     * 
+     * @param x1 the x of coordinate 1
+     * @param y1 the y of coordinate 1
+     * @param x2 the x of coordinate 2
+     * @param y2 the y of coordinate 2
+     * @return 
+     */
     private float distance(int x1, int y1, int x2, int y2) {
         float a = (x2 - x1) * (x2 - x1);
         float b = (y2 - y1) * (y2 - y1);
         float distance = (float) Math.sqrt(a + b);
         return distance;
     }
-
+    
+    /**
+     * 
+     * @param entity The current entity being processed
+     */
     private void processMove(Entity entity) {
         //get the data
         int x = entity.getNextx();

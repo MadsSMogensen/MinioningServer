@@ -7,7 +7,7 @@ import static minioning.common.data.EntityType.PLAYER;
 
 /**
  *
- * @author Mogensen
+ * @author Jakob & Mads
  */
 public class Entity implements Serializable {
 
@@ -23,19 +23,13 @@ public class Entity implements Serializable {
     private float nextxReal = x;
     private float nextyReal = y;
     private Vector2D velocity = new Vector2D();
-//    private Vector2D nextVelocity = new Vector2D();
-//    private boolean collisionChecked = true;
-//    private boolean hasMoved = false;
     private boolean immobile;
     private float size = 16;
     private float speed = 50;
     private int dx;
     private int dy;
-//    private int previousDx;
-//    private int previousDy;
     private Vector2D direction;
     private EntityType type = PLAYER;
-//    private float deacceleration = 1;
     private Location location;
     private Location doorTo;
     private int SpawnCount = 0;
@@ -48,6 +42,30 @@ public class Entity implements Serializable {
     private float skillqCurrentCD = 0;
     private int doorToX;
     private int doorToY;
+
+    public Entity(UUID owner, String name) {
+        this.owner = owner;
+        this.name = name;
+        this.ID = UUID.randomUUID();
+        this.dx = this.x;
+        this.dy = this.y;
+    }
+
+    public Entity(UUID owner, String name, int x, int y) {
+        this.owner = owner;
+        this.name = name;
+        this.ID = UUID.randomUUID();
+        this.x = x;
+        this.y = y;
+        this.xReal = x;
+        this.yReal = y;
+        this.nextx = x;
+        this.nexty = y;
+        this.nextxReal = xReal;
+        this.nextyReal = yReal;
+        this.dx = x;
+        this.dy = y;
+    }
 
     public float getMinionSpawnTime() {
         return minionSpawnTime;
@@ -71,8 +89,8 @@ public class Entity implements Serializable {
 
     public void setSkillqCurrentCD(float skillqCurrentCD) {
         this.skillqCurrentCD = skillqCurrentCD;
-    }  
-        
+    }
+
     public int getDoorToX() {
         return doorToX;
     }
@@ -128,8 +146,8 @@ public class Entity implements Serializable {
     public void setMaxMinions(int maxMinions) {
         this.maxMinions = maxMinions;
     }
-    
-    public void setPosition(int x, int y, Location location){
+
+    public void setPosition(int x, int y, Location location) {
         this.x = x;
         this.y = y;
         this.location = location;
@@ -140,30 +158,6 @@ public class Entity implements Serializable {
         this.nextxReal = x;
         this.nextyReal = y;
         this.velocity = new Vector2D();
-        this.dx = x;
-        this.dy = y;
-    }
-    
-    public Entity(UUID owner, String name) {
-        this.owner = owner;
-        this.name = name;
-        this.ID = UUID.randomUUID();
-        this.dx = this.x;
-        this.dy = this.y;
-    }
-    
-    public Entity(UUID owner, String name, int x, int y){
-        this.owner = owner;
-        this.name = name;
-        this.ID = UUID.randomUUID();
-        this.x = x;
-        this.y = y;
-        this.xReal = x;
-        this.yReal = y;
-        this.nextx = x;
-        this.nexty = y;
-        this.nextxReal = xReal;
-        this.nextyReal = yReal;
         this.dx = x;
         this.dy = y;
     }
@@ -184,26 +178,6 @@ public class Entity implements Serializable {
         return immobile;
     }
 
-//    public void ignoreCollision(){
-//        collisionChecked = true;
-//    }
-//
-//    public int getPreviousDx() {
-//        return previousDx;
-//    }
-//
-//    public void setPreviousDx(int previousDx) {
-//        this.previousDx = previousDx;
-//    }
-//
-//    public int getPreviousDy() {
-//        return previousDy;
-//    }
-//
-//    public void setPreviousDy(int previousDy) {
-//        this.previousDy = previousDy;
-//    }
-    
     public int getNextx() {
         return nextx;
     }
@@ -236,41 +210,9 @@ public class Entity implements Serializable {
         this.nextyReal = nextyReal;
     }
 
-//    public boolean isCollisionChecked() {
-//        return collisionChecked;
-//    }
-//
-//    public void setCollisionChecked(boolean collisionChecked) {
-//        this.collisionChecked = collisionChecked;
-//    }
-//
-//    public boolean isHasMoved() {
-//        return hasMoved;
-//    }
-//
-//    public void setHasMoved(boolean hasMoved) {
-//        this.hasMoved = hasMoved;
-//    }
-//    
-//    public void hasMoved(){
-//        this.hasMoved = true;
-//    }
-    
     public void setImmobile(boolean immobile) {
         this.immobile = immobile;
     }
-    
-//    public void checkCollision(){
-//        this.collisionChecked = false;
-//    }
-//
-//    public Vector2D getNextVelocity() {
-//        return nextVelocity;
-//    }
-//
-//    public void setNextVelocity(Vector2D nextVelocity) {
-//        this.nextVelocity = nextVelocity;
-//    }
 
     public float getxReal() {
         return xReal;
@@ -324,19 +266,11 @@ public class Entity implements Serializable {
         this.location = location;
     }
 
-//    public float getDeacceleration() {
-//        return deacceleration;
-//    }
-//
-//    public void setDeacceleration(float deacceleration) {
-//        this.deacceleration = deacceleration;
-//    }
-    
-    public Vector2D getVelocity(){
+    public Vector2D getVelocity() {
         return velocity;
     }
-    
-    public void setVelocity(Vector2D newVector){
+
+    public void setVelocity(Vector2D newVector) {
         this.velocity = newVector;
     }
 

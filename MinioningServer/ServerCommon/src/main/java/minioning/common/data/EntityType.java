@@ -2,7 +2,7 @@ package minioning.common.data;
 
 /**
  *
- * @author Helle
+ * @author Jakob & Mads
  */
 public enum EntityType {
 

@@ -12,8 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import static minioning.clientconnection.Installer.getServerSocket;
 import minioning.common.data.Entity;
 import minioning.common.data.Event;
-import minioning.common.data.EventBus;
-import static minioning.common.data.Lists.getConnectedUsers;
 import static minioning.common.data.Lists.getIP;
 import static minioning.common.data.Lists.getPlayingUsers;
 import static minioning.common.data.Lists.getPort;

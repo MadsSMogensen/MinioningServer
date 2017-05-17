@@ -17,7 +17,10 @@ public class Lists {
     //UUID, name
     private static ConcurrentHashMap<UUID, String> playingUsers = new ConcurrentHashMap<UUID, String>();
 
-    //<IPAdress, name>
+    /**
+     *
+     * @return a ConcurrentHashMap of ipaddresses and usernames
+     */
     public static ConcurrentHashMap<String, String> getConnectedUsers() {
         if (connectedUsers == null) {
             connectedUsers = new ConcurrentHashMap<String, String>();
@@ -25,6 +28,11 @@ public class Lists {
         return connectedUsers;
     }
 
+    /**
+     *
+     * @param name string name of the user
+     * @return string ip of the user or null
+     */
     public static String getIP(String name) {
         for (Map.Entry<String, String> connectedUser : getConnectedUsers().entrySet()) {
             String key = connectedUser.getKey();
@@ -36,6 +44,10 @@ public class Lists {
         return null;
     }
 
+    /**
+     *
+     * @return a ConcurrentHashMap of ipaddresses and ports
+     */
     public static ConcurrentHashMap<String, Integer> getPortList() {
         if (connectedUserPorts == null) {
             connectedUserPorts = new ConcurrentHashMap<String, Integer>();
@@ -43,6 +55,10 @@ public class Lists {
         return connectedUserPorts;
     }
 
+    /**
+     *
+     * @return a ConcurrentHashMap of user id and usernames
+     */
     public static ConcurrentHashMap<UUID, String> getPlayingUsers() {
         if (playingUsers == null) {
             playingUsers = new ConcurrentHashMap<UUID, String>();
@@ -50,10 +66,20 @@ public class Lists {
         return playingUsers;
     }
 
+    /**
+     *
+     * @param ID UUID id of the user
+     * @param name the username of the user
+     */
     public static void newPlayer(UUID ID, String name) {
         getPlayingUsers().put(ID, name);
     }
 
+    /**
+     *
+     * @param IPAddress string representing the ipaddress of the user
+     * @return the port of the user
+     */
     public static int getPort(String IPAddress) {
         int port = 0;
         for (Map.Entry<String, Integer> entry : getPortList().entrySet()) {
@@ -66,7 +92,11 @@ public class Lists {
         return port;
     }
 
-    //disconnectUser by ipaddress
+    /**
+     * disconnectUser by ipaddress
+     *
+     * @param user string representing the ip of the user
+     */
     public static void disconnectUser(String user) {
         //simply try to remove user by IPAddress
         try {
@@ -86,7 +116,10 @@ public class Lists {
         }
     }
 
-    //disconnect user by UUID
+    /**
+     *
+     * @param ID uuid of the user disconnecting
+     */
     public static void disconnectUser(UUID ID) {
         try {
             String name = getPlayingUsers().get(ID);
@@ -105,6 +138,13 @@ public class Lists {
         }
     }
 
+    /**
+     *
+     * @param IPAddress string representing the ipaddress of the user
+     * @param port the port of the user
+     * @param name the username
+     * @param ID the id of the user
+     */
     public static void connectUser(String IPAddress, int port, String name, UUID ID) {
         getConnectedUsers().put(IPAddress, name);
         getPortList().put(IPAddress, port);
