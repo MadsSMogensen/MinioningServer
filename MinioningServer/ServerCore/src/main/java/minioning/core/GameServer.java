@@ -26,7 +26,18 @@ public class GameServer implements Runnable {
     // Internal & game data
     private ConcurrentHashMap<UUID, Entity> world = new ConcurrentHashMap(); //burde vi have singleton på den her liste??
     private final Lookup lookup = Lookup.getDefault();
-
+    
+    public ConcurrentHashMap<UUID, Entity> getWorld(){
+        if(world == null){
+            world = new ConcurrentHashMap();
+        }
+        return world;
+    }
+    
+    public float getDt(){
+        return GameData.getDt();
+    }
+    
     /**
      * running IEntityProcessingServices
      */

@@ -173,8 +173,7 @@ public class UnitCreator implements IEntityCreatorService {
                 skillEntity.setLocation(ownerEntity.getLocation());
                 skillEntity.setType(EntityType.HOLYBOLT);
                 skillEntity.setSpeed(200);
-
-                Vector2D direction = Vector2D.getDirection(skillEntity.getX(), Integer.parseInt(data[4]), skillEntity.getY(), Integer.parseInt(data[5]));
+                Vector2D direction = Vector2D.getDirection(skillEntity.getX(), Integer.parseInt(data[4]), skillEntity.getY(), Integer.parseInt(data[5].trim()));
                 Vector2D velocity = direction.times(skillEntity.getSpeed());
                 skillEntity.setVelocity(velocity);
                 entities.putIfAbsent(skillEntity.getID(), skillEntity);
