@@ -116,7 +116,7 @@ public class CollisionProcessor implements IEntityProcessingService {
      * @param entryEntity The entity object for collision check
      * @param entity The current entity being processed
      */
-    private void regularCollision(Entity entryEntity, Entity entity) {
+    public void regularCollision(Entity entryEntity, Entity entity) {
         //collision detected!
         int x = entity.getX();
         int y = entity.getY();
@@ -148,14 +148,14 @@ public class CollisionProcessor implements IEntityProcessingService {
      * @param entity The current entity being processed
      * @return true if the entities are colliding
      */
-    private boolean colliding(Entity entry, Entity entity) {
+    public boolean colliding(Entity entry, Entity entity) {
         int nextx = entity.getNextx();
         int nexty = entity.getNexty();
         float size = entity.getSize();
         int nextxEntry = entry.getNextx();
         int nextyEntry = entry.getNexty();
         float sizeEntry = entry.getSize();
-
+        
         return length(nextx, nexty, nextxEntry, nextyEntry) < size + sizeEntry;
     }
 
@@ -167,7 +167,7 @@ public class CollisionProcessor implements IEntityProcessingService {
      * @param y2 the y of coordinate 2
      * @return
      */
-    private float length(float x1, float y1, float x2, float y2) {
+    public float length(float x1, float y1, float x2, float y2) {
         float length;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));

@@ -48,7 +48,7 @@ public class MovementProcessor implements IEntityProcessingService {
      * @param eventBus The map of events yet to be acted upon
      * @param entity The current entity being processed
      */
-    private void processEventBus(ConcurrentHashMap<UUID, Event> eventBus, Entity entity) {
+    public void processEventBus(ConcurrentHashMap<UUID, Event> eventBus, Entity entity) {
         for (Entry<UUID, Event> entry : eventBus.entrySet()) {
             UUID key = entry.getKey();
             Event event = entry.getValue();
@@ -56,8 +56,6 @@ public class MovementProcessor implements IEntityProcessingService {
             if (event.getType().equals(MOVEMENT)) {
                 UUID owner = UUID.fromString(data[2]);
                 if (owner.equals(entity.getOwner())) {
-//                    entity.setPreviousDx(entity.getDx());
-//                    entity.setPreviousDy(entity.getDy());
                     int xGoal = Integer.parseInt(data[4]);
                     int yGoal = Integer.parseInt(data[5]);
                     entity.setDx(xGoal);
@@ -73,7 +71,7 @@ public class MovementProcessor implements IEntityProcessingService {
      * @param entity The current entity being processed
      * @param elapsed The time elapsed since last game-loop
      */
-    private void processNextMovement(Entity entity, float elapsed) {
+    public void processNextMovement(Entity entity, float elapsed) {
         //get the data
         float speed = entity.getSpeed();
         int x = entity.getX();
@@ -93,8 +91,8 @@ public class MovementProcessor implements IEntityProcessingService {
             //calculate next x & y position
             nextxReal += velocity.getX() * elapsed;
             nextyReal += velocity.getY() * elapsed;
-            nextX = Math.round(xReal);
-            nextY = Math.round(yReal);
+            nextX = Math.round(nextxReal);
+            nextY = Math.round(nextyReal);
             //set next x & y position
             entity.setNextx(nextX);
             entity.setNexty(nextY);
@@ -113,8 +111,8 @@ public class MovementProcessor implements IEntityProcessingService {
                 //calculate next x & y position
                 nextxReal += velocity.getX() * elapsed;
                 nextyReal += velocity.getY() * elapsed;
-                nextX = Math.round(xReal);
-                nextY = Math.round(yReal);
+                nextX = Math.round(nextxReal);
+                nextY = Math.round(nextyReal);
                 //set next x & y position
                 entity.setNextx(nextX);
                 entity.setNexty(nextY);
@@ -131,9 +129,9 @@ public class MovementProcessor implements IEntityProcessingService {
      * @param y the current y of the entity
      * @param goalx the goal x of the entity
      * @param goaly the goal y of the entity
-     * @return
+     * @return true if the entity has reached it's goal
      */
-    private boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
+    public boolean goalReached(Entity entity, int x, int y, int goalx, int goaly) {
         return distance(x, y, goalx, goaly) < entity.getSize();
     }
     
@@ -143,9 +141,9 @@ public class MovementProcessor implements IEntityProcessingService {
      * @param y1 the y of coordinate 1
      * @param x2 the x of coordinate 2
      * @param y2 the y of coordinate 2
-     * @return 
+     * @return the distance between the two coordinates
      */
-    private float distance(int x1, int y1, int x2, int y2) {
+    public float distance(int x1, int y1, int x2, int y2) {
         float a = (x2 - x1) * (x2 - x1);
         float b = (y2 - y1) * (y2 - y1);
         float distance = (float) Math.sqrt(a + b);
@@ -156,7 +154,7 @@ public class MovementProcessor implements IEntityProcessingService {
      * 
      * @param entity The current entity being processed
      */
-    private void processMove(Entity entity) {
+    public void processMove(Entity entity) {
         //get the data
         int x = entity.getNextx();
         int y = entity.getNexty();
