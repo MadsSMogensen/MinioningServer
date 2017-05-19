@@ -22,12 +22,13 @@ import org.openide.util.lookup.ServiceProvider;
 public class UnitProcessor implements IEntityProcessingService {
 
     float standardSpawnDelay = 10;
-/**
- * 
- * @param eventBus The map of events yet to be acted upon
- * @param entities The map representing the world as entities
- * @param entity The current entity being processed
- */
+
+    /**
+     *
+     * @param eventBus The map of events yet to be acted upon
+     * @param entities The map representing the world as entities
+     * @param entity The current entity being processed
+     */
     @Override
     public void process(ConcurrentHashMap<UUID, Event> eventBus, Map<UUID, Entity> entities, Entity entity) {
         //add cd timer to every entity
@@ -116,7 +117,7 @@ public class UnitProcessor implements IEntityProcessingService {
             if (!entity.getLocation().equals(owner.getLocation())) {
                 entity.setPosition(owner.getX(), owner.getY(), owner.getLocation());
             }
-            
+
             //handle movement
             Vector2D ownerVelocity = owner.getVelocity();
             int dx = Math.round(owner.getX() + (-ownerVelocity.getX() * GameData.getDt()) * 2f);
@@ -167,13 +168,14 @@ public class UnitProcessor implements IEntityProcessingService {
             }
         }
     }
-/**
- * 
- * @param entity The current entity being processed
- * @param entryEntity The entity target entity
- * @param eventBus The map of events yet to be acted upon
- */
-    private void minionShootQ(Entity entity, Entity entryEntity, ConcurrentHashMap<UUID, Event> eventBus) {
+
+    /**
+     *
+     * @param entity The current entity being processed
+     * @param entryEntity The entity target entity
+     * @param eventBus The map of events yet to be acted upon
+     */
+    public void minionShootQ(Entity entity, Entity entryEntity, ConcurrentHashMap<UUID, Event> eventBus) {
         int entryx = entryEntity.getX();
         int entryy = entryEntity.getY();
         int x = entity.getX();
@@ -192,12 +194,13 @@ public class UnitProcessor implements IEntityProcessingService {
             eventBus.put(UUID.randomUUID(), shootQ);
         }
     }
-/**
- * 
- * @param owner an object of type Entity
- * @param eventBus The map of events yet to be acted upon
- */
-    private void spawnNewMinion(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
+
+    /**
+     *
+     * @param owner an object of type Entity
+     * @param eventBus The map of events yet to be acted upon
+     */
+    public void spawnNewMinion(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String[] data = new String[6];
         data[0] = owner.getID().toString();//owner id
         data[1] = "";//name
@@ -208,12 +211,13 @@ public class UnitProcessor implements IEntityProcessingService {
         Event newEvent = new Event(CREATEMINION, data);
         eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
     }
-/**
- * 
- * @param owner an object of type Entity
- * @param eventBus The map of events yet to be acted upon
- */
-    private void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
+
+    /**
+     *
+     * @param owner an object of type Entity
+     * @param eventBus The map of events yet to be acted upon
+     */
+    public void spawnNewMonster(Entity owner, ConcurrentHashMap<UUID, Event> eventBus) {
         String data = "";
         data += owner.getID().toString() + ";";
         data += "ENEMY" + ";";
@@ -226,15 +230,16 @@ public class UnitProcessor implements IEntityProcessingService {
         Event newEvent = new Event(CREATEMONSTER, dataArray);
         eventBus.putIfAbsent(UUID.randomUUID(), newEvent);
     }
-/**
- * 
- * @param x1 x of coordinate 1
- * @param y1 y of coordinate 1
- * @param x2 x of coordinate 2
- * @param y2 y of coordiante 2
- * @return the length between coordinate 1 and coordinate 2
- */
-    private float distance(int x1, int y1, int x2, int y2) {
+
+    /**
+     *
+     * @param x1 x of coordinate 1
+     * @param y1 y of coordinate 1
+     * @param x2 x of coordinate 2
+     * @param y2 y of coordiante 2
+     * @return the length between coordinate 1 and coordinate 2
+     */
+    public float distance(int x1, int y1, int x2, int y2) {
         float length;
         //sqrt(a^2+b^2)
         length = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));

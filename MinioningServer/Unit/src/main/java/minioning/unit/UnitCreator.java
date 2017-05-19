@@ -78,7 +78,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void swapMinionType(Event event, Map<UUID, Entity> entities) {
+    public void swapMinionType(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID playerID = UUID.fromString(data[2]);
         Entity player = entities.get(playerID);
@@ -110,7 +110,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void createMinionSkill(Event event, Map<UUID, Entity> entities) {
+    public void createMinionSkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID minionID = UUID.fromString(data[2]);
         Entity minion = entities.get(minionID);
@@ -136,7 +136,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void createEnemySkill(Event event, Map<UUID, Entity> entities) {
+    public void createEnemySkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID enemyID = UUID.fromString(data[2]);
         Entity enemy = entities.get(enemyID);
@@ -163,7 +163,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void createSkill(Event event, Map<UUID, Entity> entities) {
+    public void createSkill(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID owner = UUID.fromString(data[2]);
         Entity ownerEntity = getOwnerEntity(owner, entities);
@@ -190,7 +190,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void createPlayer(Event event, Map<UUID, Entity> entities) {
+    public void createPlayer(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         for (String data1 : data) {
             System.out.println(data1);
@@ -210,7 +210,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void createMonster(Event event, Map<UUID, Entity> entities) {
+    public void createMonster(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID owner = UUID.fromString(data[0]);
         String name = data[1];
@@ -234,7 +234,7 @@ public class UnitCreator implements IEntityCreatorService {
      * data
      * @param entities The map representing the world as entities
      */
-    private void createMinion(Event event, Map<UUID, Entity> entities) {
+    public void createMinion(Event event, Map<UUID, Entity> entities) {
         String[] data = event.getData();
         UUID owner = UUID.fromString(data[0]);
         String name = data[1];
@@ -255,7 +255,7 @@ public class UnitCreator implements IEntityCreatorService {
      * @param world The map representing the world as entities
      * @return
      */
-    private Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world) {
+    public Entity getOwnerEntity(UUID ownerID, Map<UUID, Entity> world) {
         Entity entity;
         for (Entry<UUID, Entity> entry : world.entrySet()) {
             UUID key = entry.getKey();
