@@ -77,7 +77,6 @@ public class CollisionProcessor implements IEntityProcessingService {
                                     switch (entryEntity.getType()) {
                                         case DOOR:
                                             if (entryEntity.getDoorTo() == null) {
-
                                                 regularCollision(entryEntity, entity);
 
                                                 break;
@@ -125,13 +124,15 @@ public class CollisionProcessor implements IEntityProcessingService {
         int nextEntryx = entryEntity.getX();
         int nextEntryy = entryEntity.getY();
         Vector2D collisionDirection = Vector2D.getDirection(nextEntryx, nextx, nextEntryy, nexty);
-
+        System.out.println("cd: " + collisionDirection.getX());
         float nextxReal = entity.getNextxReal();
         float nextyReal = entity.getNextyReal();
         Vector2D velocity = entity.getVelocity();
         Vector2D collisionVector = collisionDirection.times(Vector2D.length(velocity)).times(2);
         velocity = velocity.plus(collisionVector);
+        System.out.println(velocity.getX());
         float elapsed = getDt();
+        System.out.println(nextxReal);
         nextxReal += velocity.getX() * elapsed;
         nextyReal += velocity.getY() * elapsed;
         nextx = Math.round(nextxReal);
@@ -140,6 +141,7 @@ public class CollisionProcessor implements IEntityProcessingService {
         entity.setNexty(nexty);
         entity.setNextxReal(nextx);
         entity.setNextyReal(nexty);
+        
     }
 
     /**
