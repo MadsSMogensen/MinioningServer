@@ -6,7 +6,7 @@
         <artifactId>MinioningServer-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Collision</artifactId>
+    <artifactId>ServerCollision</artifactId>
     <packaging>nbm</packaging>
     <build>
         <plugins>
@@ -55,4 +55,5 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <name>ServerCollision</name>
 </project>
