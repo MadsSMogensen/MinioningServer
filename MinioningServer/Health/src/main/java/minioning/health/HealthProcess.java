@@ -94,5 +94,4 @@ public class HealthProcess implements IHealthProcessorService {
          int dmg = ran.nextInt(max - min + 1) + min;
         return dmg;
     }
-    
 }
