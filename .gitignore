@@ -13,3 +13,8 @@
 /MinioningServer/SilentUpdate/target/
 /MinioningServer/minioning_SilentUpdate_nbm_1.0.0/target/
 /MinioningServer/target/
+/MinioningServer/ServerUnit/target/
+/MinioningServer/ServerMovement/target/
+/MinioningServer/ServerHealth/target/
+/MinioningServer/ServerCollision/target/
+/MinioningServer/ServerConnection/target/

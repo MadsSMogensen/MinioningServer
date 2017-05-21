@@ -30,7 +30,7 @@ public class ModuleTest {
     private final UUID enemyOwnerOwnerID = UUID.randomUUID();
 
     private float runTime = 0;
-    private final int maxTime = 3; //seconds
+    private final int maxTime = 5; //seconds
     private float lastTime = System.nanoTime();
 
     private GameServer gs;

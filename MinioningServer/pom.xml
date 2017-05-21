@@ -59,15 +59,15 @@
     <modules>
         <module>branding</module>
         <module>application</module>
-        <module>ClientConnection</module>
-        <module>Unit</module>
-        <module>Movement</module>
-        <module>Collision</module>
         <module>ServerCore</module>
         <module>ServerCommon</module>
         <module>TiledLoader</module>
-        <module>Health</module>
         <module>minioning_SilentUpdate_nbm_1.0.0</module>
+        <module>ServerUnit</module>
+        <module>ServerMovement</module>
+        <module>ServerHealth</module>
+        <module>ServerCollision</module>
+        <module>ServerConnection</module>
     </modules>
 
     <properties>
