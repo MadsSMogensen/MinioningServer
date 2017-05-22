@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Jakob
+ * @author Jakob and Mads
  */
 public class HealthProcessTest {
 

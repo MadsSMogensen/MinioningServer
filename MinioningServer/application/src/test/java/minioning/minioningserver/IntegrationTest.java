@@ -2,6 +2,6 @@ package minioning.minioningserver;
 
 /**
  *
- * @author Mads Mogensen & Jakob Tøth
+ * @author Jakob and Mads
  */
 public interface IntegrationTest {}
