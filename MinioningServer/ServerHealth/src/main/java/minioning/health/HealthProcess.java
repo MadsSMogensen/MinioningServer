@@ -82,13 +82,6 @@ public class HealthProcess implements IHealthProcessorService {
     }
 
     /**
-<<<<<<< HEAD:MinioningServer/Health/src/main/java/minioning/health/HealthProcess.java
-     * This method calculate the damage mased on a given min and max value
-     *
-=======
-     * This method calculates the damage based on a given min and max value
-     * 
->>>>>>> Test:MinioningServer/ServerHealth/src/main/java/minioning/health/HealthProcess.java
      * @param min Minimun damage
      * @param max Maximum damage
      * @param ran Java util Random object
