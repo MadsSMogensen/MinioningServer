@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="minioning.Health">
-    <module_version install_time="1495016375536" last="true" origin="installer" specification_version="1.0">
-        <file crc="3283155012" name="config/Modules/minioning-Health.xml"/>
-        <file crc="2464148821" name="modules/minioning-Health.jar"/>
-    </module_version>
-</module>

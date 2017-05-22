@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="minioning.Collision">
+<<<<<<< HEAD:MinioningServer/Collision/target/nbm/netbeans/minioningserver/update_tracking/minioning-Collision.xml
+    <module_version install_time="1495016358726" last="true" origin="installer" specification_version="1.0">
+        <file crc="3259991056" name="config/Modules/minioning-Collision.xml"/>
+        <file crc="945913377" name="modules/minioning-Collision.jar"/>
+=======
+    <module_version install_time="1495111491981" last="true" origin="installer" specification_version="1.0">
+        <file crc="3259991056" name="config/Modules/minioning-Collision.xml"/>
+        <file crc="2192952621" name="modules/minioning-Collision.jar"/>
+>>>>>>> Test:MinioningServer/ServerCollision/target/nbm/netbeans/minioningserver/update_tracking/minioning-Collision.xml
+    </module_version>
+</module>

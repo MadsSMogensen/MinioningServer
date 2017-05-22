@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Mogensen
+ * @author Jakob and Mads
  */
 public enum Events implements Serializable{
     CREATEPLAYER,
